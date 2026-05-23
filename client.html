@@ -109,6 +109,11 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
     <div id="assigned-list"><div style="color:var(--t4);font-size:13px;padding:8px 0;">No sessions assigned yet</div></div>
   </div>
 
+  <div class="page-section" id="tdee-section" style="display:none;">
+    <div class="sec-title">&#127793; My TDEE &amp; Nutrition</div>
+    <div id="tdee-client-content"></div>
+  </div>
+
   <div class="page-section">
     <div class="sec-title">&#128269; Exercise Lookup</div>
     <div class="field">
@@ -168,14 +173,16 @@ window.addEventListener('DOMContentLoaded', function() {
   }
   document.getElementById('p0').focus();
 
-  // Load script URL from localStorage
-  try {
-    var raw = localStorage.getItem('impact-coaching-v2');
-    if (raw) {
-      var db = JSON.parse(raw);
-      SCRIPT_URL = (db.settings && db.settings.scriptUrl) || '';
-    }
-  } catch(e) {}
+  // Load script URL — first try &su= param (works cross-device), then localStorage
+  var suParam = params.get('su');
+  if (suParam) {
+    SCRIPT_URL = decodeURIComponent(suParam);
+  } else {
+    try {
+      var raw2 = localStorage.getItem('impact-coaching-v2');
+      if (raw2) { var db2 = JSON.parse(raw2); SCRIPT_URL = (db2.settings && db2.settings.scriptUrl) || ''; }
+    } catch(e2) {}
+  }
 });
 
 function toast(msg) {
@@ -252,6 +259,7 @@ function loadClientData(db, client) {
 
   renderAssignedSessions();
   renderStatsLog();
+  renderClientTDEE();
 }
 
 function renderAssignedSessions() {
@@ -373,7 +381,8 @@ function renderStatsLog() {
   var sorted = log.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
   var html = '';
   sorted.forEach(function(e){
-    html += '<div class="stat-row"><div><div class="stat-date-lbl">'+e.date+'</div><div class="stat-notes-txt">'+e.notes+'</div></div></div>';
+    var srcTag = e.source === 'pt' ? ' <span style="font-size:9px;font-family:monospace;background:#1a0800;color:#e8923a;border:1px solid #e8923a33;padding:1px 5px;border-radius:3px;">PT</span>' : '';
+    html += '<div class="stat-row"><div><div class="stat-date-lbl">'+e.date+srcTag+'</div><div class="stat-notes-txt">'+e.notes+'</div></div></div>';
   });
   el.innerHTML = html;
 }
@@ -383,7 +392,7 @@ function addStatEntry() {
   var notes = document.getElementById('new-stat-notes').value.trim();
   if (!date || !notes) { toast('Enter a date and notes'); return; }
   if (!clientData.statsLog) clientData.statsLog = [];
-  clientData.statsLog.push({ id: Date.now().toString(36), date:date, notes:notes });
+  clientData.statsLog.push({ id: Date.now().toString(36), date:date, notes:notes, source:'client' });
   clientData.updatedAt = new Date().toISOString();
   document.getElementById('new-stat-notes').value = '';
   if (SCRIPT_URL) {
@@ -406,6 +415,35 @@ function addStatEntry() {
   }
   renderStatsLog();
 }
+function renderClientTDEE() {
+  var section = document.getElementById('tdee-section');
+  var el = document.getElementById('tdee-client-content');
+  if (!section || !el || !clientData) return;
+  var hist = clientData.tdeeHistory || [];
+  if (!hist.length) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  var t = hist[0];
+  var goalLabels = { maintain:'Maintain Weight', lose_half:'Lose 0.5kg/wk', lose_1:'Lose 1kg/wk', gain_half:'Gain 0.5kg/wk' };
+  var html = '<div style="background:var(--bg3);border-radius:10px;padding:14px;">';
+  html += '<div style="display:flex;justify-content:space-between;margin-bottom:10px;">';
+  html += '<div style="font-size:11px;color:var(--t3);font-family:monospace;text-transform:uppercase;">Latest Result</div>';
+  html += '<div style="font-size:10px;color:var(--t4);font-family:monospace;">'+t.date+'</div></div>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;">';
+  html += '<div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--red);">'+(t.tdee||'--')+'</div><div style="font-size:9px;color:var(--t3);font-family:monospace;">TDEE</div></div>';
+  html += '<div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--blue);">'+(t.protein||'--')+'g</div><div style="font-size:9px;color:var(--t3);font-family:monospace;">Protein</div></div>';
+  html += '<div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--orange);">'+(t.carbs||'--')+'g</div><div style="font-size:9px;color:var(--t3);font-family:monospace;">Carbs</div></div>';
+  html += '<div style="text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--yellow);">'+(t.fat||'--')+'g</div><div style="font-size:9px;color:var(--t3);font-family:monospace;">Fat</div></div>';
+  html += '</div>';
+  if (t.goal || t.targetCals) {
+    html += '<div style="font-size:12px;color:var(--t3);">';
+    if (t.goal) html += 'Goal: ' + (goalLabels[t.goal]||t.goal);
+    if (t.targetCals) html += ' &middot; <span style="color:var(--t2);">Target: '+t.targetCals+' kcal/day</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
 </script>
 </body>
 </html>

@@ -2023,8 +2023,9 @@ function renderProfile(clientId) {
   // ── CLIENT PORTAL SECTION ──
   var pin = c.pin || '';
   // Build portal URL dynamically — works on any repo/domain
-  var basePath = window.location.pathname.replace(/\/[^/]*$/, '');
-  var portalUrl = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name);
+  var basePath   = window.location.pathname.replace(/\/[^/]*$/, '');
+  var scriptParam = DB.settings && DB.settings.scriptUrl ? '&su=' + encodeURIComponent(DB.settings.scriptUrl) : '';
+  var portalUrl  = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name) + scriptParam;
   h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-top:14px;margin-bottom:4px;">';
   h += '<div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;font-family:monospace;margin-bottom:10px;">Client Portal</div>';
   if (!pin) {
@@ -2081,7 +2082,10 @@ function renderProfile(clientId) {
   h += '<button class="btn btn-b btn-sm" style="margin-bottom:14px;" onclick="addStatEntry(\'' + clientId + '\')">+ Add Entry</button>';
   if (statsLog.length) {
     statsLog.forEach(function(entry) {
-      h += '<div class="sl-entry"><div class="sl-date">' + entry.date + '</div>';
+      var sourceTag = entry.source === 'client'
+        ? '<span style="font-size:9px;font-family:monospace;background:#0a1a2a;color:var(--blue);border:1px solid var(--blue)33;padding:1px 5px;border-radius:3px;margin-left:6px;">CLIENT</span>'
+        : '<span style="font-size:9px;font-family:monospace;background:#1a0a00;color:var(--orange);border:1px solid var(--orange)33;padding:1px 5px;border-radius:3px;margin-left:6px;">PT</span>';
+      h += '<div class="sl-entry"><div class="sl-date">' + entry.date + sourceTag + '</div>';
       h += '<div class="sl-notes">' + entry.notes + '</div>';
       h += '<button class="sl-del" onclick="deleteStatEntry(\'' + clientId + '\',\'' + entry.id + '\')">×</button></div>';
     });
