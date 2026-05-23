@@ -3307,7 +3307,7 @@ function renderCalendar() {
   const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
   const today = new Date();
 
-  // Build session map for this month
+  // Build session map for this month (PT sessions + MenoFit sessions)
   const sessionMap = {};
   DB.sessions.forEach(s=>{
     if (!s.date) return;
@@ -3318,6 +3318,25 @@ function renderCalendar() {
       sessionMap[day].push(s);
     }
   });
+
+  // Add MenoFit sessions to map
+  const menoMap = {}; // day -> [{label, block, status}]
+  if (DB.menofit && DB.menofit.activeBlock) {
+    var mb = DB.menofit.activeBlock;
+    var addMenoSessions = function(sessions, blockLabel, colour) {
+      (sessions||[]).forEach(function(s) {
+        if (!s.date) return;
+        var d2 = new Date(s.date);
+        if (d2.getFullYear()===calYear && d2.getMonth()===calMonth) {
+          var day2 = d2.getDate();
+          if (!menoMap[day2]) menoMap[day2] = [];
+          menoMap[day2].push({ label: mb.name, block: blockLabel, status: s.status, colour: colour, week: s.week });
+        }
+      });
+    };
+    addMenoSessions(mb.sessionsA || mb.sessions || [], 'A', 'var(--meno-pink)');
+    if (mb.freq === 2) addMenoSessions(mb.sessionsB || [], 'B', 'var(--meno-purple)');
+  }
 
   // Empty cells before first day
   for(let i=0;i<firstDay;i++) html+=`<div class="cal-day empty"></div>`;
@@ -3331,16 +3350,26 @@ function renderCalendar() {
       const c=getClient(s.clientId);
       return `<div class="cal-dot" style="background:${c?c.color:"var(--t3)"}"></div>`;
     }).join("");
-    html += '<div class="cal-day' + (isToday?" today":"") + (sessions.length?" has-sessions":"") + (isSelected?" selected":"") + '" onclick="calSelectDay(' + d + ')"><div class="cal-day-num">' + d + '</div><div class="cal-day-dots">' + dots + '</div>' + (sessions.length?'<div class="cal-day-count">'+sessions.length+'</div>':'') + '</div>';
+    const menoSessions = menoMap[d] || [];
+    const menoPill = menoSessions.length
+      ? menoSessions.map(function(m2) {
+          var col = m2.colour;
+          var done = m2.status === 'completed';
+          return '<div style="font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;margin-top:2px;background:'+col+'22;color:'+col+';border:1px solid '+col+'44;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+(done?'✓ ':'')+'🌸 '+m2.block+'</div>';
+        }).join('')
+      : '';
+    var hasSomething = sessions.length || menoSessions.length;
+    html += '<div class="cal-day' + (isToday?" today":"") + (hasSomething?" has-sessions":"") + (isSelected?" selected":"") + '" onclick="calSelectDay(' + d + ')"><div class="cal-day-num">' + d + '</div><div class="cal-day-dots">' + dots + '</div>' + menoPill + (sessions.length?'<div class="cal-day-count">'+sessions.length+'</div>':'') + '</div>';
   }
   grid.innerHTML = html;
 
   // Show expanded day if selected
-  if (calSelectedDay && sessionMap[calSelectedDay]) {
-    const daySessions = sessionMap[calSelectedDay];
+  if (calSelectedDay && (sessionMap[calSelectedDay] || menoMap[calSelectedDay])) {
+    const daySessions = sessionMap[calSelectedDay] || [];
+    const dayMeno     = menoMap[calSelectedDay] || [];
     const months2=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     let exHtml=`<div class="cal-expand">
-      <div class="cal-expand-date">${calSelectedDay} ${months2[calMonth]} ${calYear} — ${daySessions.length} session${daySessions.length!==1?"s":""}</div>`;
+      <div class="cal-expand-date">${calSelectedDay} ${months2[calMonth]} ${calYear} — ${daySessions.length + dayMeno.length} item${(daySessions.length+dayMeno.length)!==1?"s":""}</div>`;
     daySessions.forEach(s=>{
       const c=getClient(s.clientId),c2=s.clientId2?getClient(s.clientId2):null;
       const ico=CAT_ICONS[s.cat]||"🏋️";
@@ -3353,6 +3382,16 @@ function renderCalendar() {
         </div>
         <span class="badge badge-${isCompleted?"completed":"planned"}">${isCompleted?"✓":"Plan"}</span>
       </div>`;
+    });
+    // Show MenoFit sessions in expanded view
+    dayMeno.forEach(function(m2) {
+      var done = m2.status === 'completed';
+      exHtml += '<div class="cal-session-row" style="border-left:3px solid '+m2.colour+';padding-left:10px;">';
+      exHtml += '<span style="font-size:18px;">&#127800;</span>';
+      exHtml += '<div style="flex:1;"><div style="font-size:14px;font-weight:600;color:'+m2.colour+';">'+m2.label+' — Block '+m2.block+'</div>';
+      exHtml += '<div style="font-size:11px;color:var(--t3);font-family:monospace;">Week '+m2.week+' &middot; MenoFit</div></div>';
+      exHtml += '<span class="badge badge-'+(done?"completed":"planned")+'">'+(done?"✓ Done":"Planned")+'</span>';
+      exHtml += '</div>';
     });
     exHtml+="</div>";
     expanded.innerHTML = exHtml;
