@@ -2197,6 +2197,7 @@ function renderProfile(clientId) {
                (r.actual ? ' → <span style="color:var(--green)">' + r.actual + "kg</span>" : "") + '</div></div>';
         });
         if (s.notes) h += '<div style="margin-top:8px;padding:8px 10px;background:var(--bg3);border-radius:6px;font-size:12px;color:var(--t3);font-style:italic">📝 ' + s.notes + '</div>';
+        if (s.clientNotes) h += '<div style="margin-top:6px;padding:8px 10px;background:#0a1a2a;border:1px solid var(--blue)33;border-radius:6px;font-size:12px;color:var(--blue);font-style:italic">💬 ' + s.clientNotes + '</div>';
         h += '<div class="hc-btns">';
         if (!isCompleted) h += '<button class="btn btn-g" style="font-size:13px;padding:10px;flex:1" onclick="openRecord(\'' + s.id + '\',\'profile\')">📝 Record</button>';
         h += '<button class="btn btn-b" style="font-size:13px;padding:10px;flex:1" onclick="reshareSession(\'' + s.id + '\')">📋 Share</button>';
@@ -2616,6 +2617,7 @@ function renderHistory() {
               <div class="hc-scheme">${r.scheme||""}${r.target?" · T:"+r.target+"kg":""}${r.actual?` → <span style="color:var(--green)">${r.actual}kg</span>`:""}${r.actualB?`/<span style="color:var(--teal)">${r.actualB}kg</span>`:""}</div>
             </div>`).join("")}
             ${s.notes?`<div style="margin-top:10px;padding:10px 12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--t3);font-style:italic">📝 ${s.notes}</div>`:""}
+            ${s.clientNotes?`<div style="margin-top:6px;padding:10px 12px;background:#0a1a2a;border:1px solid #3a8be833;border-radius:8px;font-size:13px;color:var(--blue);font-style:italic">💬 ${s.clientNotes}</div>`:""}
             <div class="hc-btns">
               ${!isCompleted?`<button class="btn btn-g" onclick="openRecord('${s.id}','history')">📝 Record Actuals</button>`:""}
               ${!isCompleted?`<button class="btn btn-b" onclick="editSession('${s.id}')">✏️ Edit</button>`:""}
