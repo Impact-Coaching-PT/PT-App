@@ -512,6 +512,21 @@ textarea.inp{resize:vertical;line-height:1.5;}
   50%       { opacity: 0.55; }
 }
 
+
+/* ── MENOFIT BLOCK A/B ───────────────────────────────── */
+.meno-block-section { background:var(--bg2);border:1.5px solid var(--bd);
+  border-radius:14px;margin-bottom:12px;overflow:hidden; }
+.meno-block-section-hdr { display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;cursor:pointer; }
+.meno-block-section-title { font-size:16px;font-weight:800; }
+.meno-block-section-meta  { font-size:11px;color:var(--t3);font-family:monospace;margin-top:2px; }
+.meno-block-section-body  { display:none;padding:0 12px 12px; }
+.meno-block-section-body.open { display:block; }
+.copy-block-btn { width:100%;background:var(--bg3);border:1.5px dashed var(--meno-purple);
+  color:var(--meno-purple);font-weight:700;font-size:13px;padding:12px;border-radius:10px;
+  cursor:pointer;font-family:inherit;margin-top:8px; }
+.copy-block-btn:active { background:var(--meno-purple)22; }
+
 </style>
 
 <script>
@@ -766,11 +781,23 @@ if ('serviceWorker' in navigator) {
     <div style="font-size:12px;color:var(--t3);margin-bottom:20px;font-family:monospace;">Create a new 6-week MenoFit course</div>
     <div class="meno-form-card">
       <div class="field"><span class="lbl">Block Name</span>
-        <input class="inp" id="mb-name" placeholder="e.g. MenoFit Spring 2026"></div>
-      <div class="field"><span class="lbl">Start Date</span>
-        <input class="inp" id="mb-date" type="date"></div>
+        <input class="inp" id="mb-name" placeholder="e.g. MenoFit 10"></div>
+      <div class="field"><span class="lbl">Start Date <span style="color:var(--t4);text-transform:none;letter-spacing:0">(Monday)</span></span>
+        <input class="inp" id="mb-date" type="date" onchange="snapToMonday(this)"></div>
       <div class="field"><span class="lbl">Number of Participants (max 8)</span>
         <input class="inp" id="mb-clients" type="number" min="1" max="8" placeholder="1-8" style="font-family:monospace;text-align:center;"></div>
+      <div class="field"><span class="lbl">Sessions Per Week</span>
+        <div style="display:flex;gap:8px;">
+          <button id="mb-freq-1" onclick="setMenoFreq(1)"
+            style="flex:1;background:var(--meno-grad);border:none;color:#fff;font-weight:700;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;">
+            1 Day<br><span style="font-size:10px;font-weight:400;opacity:.8;">Monday only</span>
+          </button>
+          <button id="mb-freq-2" onclick="setMenoFreq(2)"
+            style="flex:1;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t3);font-weight:700;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;">
+            2 Days<br><span style="font-size:10px;font-weight:400;opacity:.8;">Mon &amp; Thu</span>
+          </button>
+        </div>
+      </div>
     </div>
     <div id="mb-warning" style="display:none;background:#1a0a00;border:1.5px solid var(--meno-orange);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--meno-orange);"></div>
     <button onclick="createMenoBlock()" style="width:100%;background:var(--meno-grad);border:none;color:#fff;font-weight:800;font-size:16px;padding:16px;border-radius:12px;cursor:pointer;font-family:inherit;">
@@ -1066,26 +1093,7 @@ if ('serviceWorker' in navigator) {
     </div>
     <div class="field"><span class="lbl">Muscle Groups (comma separated)</span><input class="inp" id="ae-muscles" placeholder="e.g. Quads, Glutes"></div>
   </div>
-  <div class="ms-foot">
-    <button class="btn btn-b btn-blk" onclick="saveCustomExercise()">Add to Library</button>
-  </div>
-</div>
-
-<!-- SHARE MODAL -->
-<div class="ms" id="m-share">
-  <div class="ms-handle"></div>
-  <div class="ms-hdr"><span class="ms-title">Share Session</span><button class="ms-close" onclick="closeModal()">×</button></div>
-  <div class="ms-body">
-    <div style="font-size:12px;color:var(--t3);margin-bottom:10px;">Copy → paste into your shared Google Sheet (paste with Ctrl+V)</div>
-    <textarea class="share-ta" id="share-ta" readonly></textarea>
-  </div>
-  <div class="ms-foot">
-    <button class="btn btn-b btn-blk" id="share-copy-btn" onclick="copyShare()">📋 Copy to Clipboard</button>
-  </div>
-</div>
-
-
-<!-- MENOFIT EXERCISE PICKER -->
+  <div<!-- MENOFIT EXERCISE PICKER -->
 <div class="modal-overlay" id="meno-picker-overlay" onclick="closeMenoPicker()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;"></div>
 <div id="meno-picker-modal" style="display:none;position:fixed;left:0;right:0;bottom:0;max-height:80vh;background:var(--bg);border-radius:16px 16px 0 0;z-index:2001;overflow:hidden;flex-direction:column;">
   <div style="padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;">
@@ -1097,9 +1105,10 @@ if ('serviceWorker' in navigator) {
   </div>
   <div style="overflow-y:auto;flex:1;padding:8px 16px 24px;" id="meno-picker-list"></div>
 </div>
-
 <div id="toast"></div>
+
 <script>
+
 
 // ═══════════════════════════════════════════════════════════════════
 // CONSTANTS
@@ -3721,6 +3730,8 @@ function renderMenoBuilder() {
   } else if (warn) {
     warn.style.display = 'none';
   }
+  _menoFreq = 1;
+  setMenoFreq(1);
 }
 
 function createMenoBlock() {
@@ -3736,29 +3747,36 @@ function createMenoBlock() {
     DB.menofit.activeBlock.archivedAt = new Date().toISOString();
     DB.menofit.history.unshift(DB.menofit.activeBlock);
   }
-  var sessions = [];
+
+  var startMon = new Date(dateVal);
+  // Ensure it's a Monday
+  var day = startMon.getDay();
+  if (day !== 1) { var diff = day===0?1:(8-day); startMon.setDate(startMon.getDate()+diff); }
+
+  var sessA = [], sessB = [];
   for (var w = 1; w <= 6; w++) {
-    var d = new Date(dateVal);
-    d.setDate(d.getDate() + (w - 1) * 7);
-    sessions.push({
-      id: uid(), week: w, date: d.toISOString().slice(0, 10),
-      status: 'planned', notes: '',
-      compound:      '',
-      legs1:         ['', '', '', ''],
-      legs2:         ['', '', '', ''],
-      legsFinisher:  [],
-      upperBody1:    ['', '', '', ''],
-      upperBody2:    ['', '', '', ''],
-      upperFinisher: []
-    });
+    var monDate = new Date(startMon);
+    monDate.setDate(startMon.getDate() + (w-1)*7);
+    sessA.push(makeSessTemplate(w, monDate.toISOString().slice(0,10)));
+    if (_menoFreq === 2) {
+      var thuDate = new Date(monDate);
+      thuDate.setDate(monDate.getDate() + 3); // Thursday
+      sessB.push(makeSessTemplate(w, thuDate.toISOString().slice(0,10)));
+    }
   }
+
   DB.menofit.activeBlock = {
-    id: uid(), name: name, startDate: dateVal,
-    numClients: clients, createdAt: new Date().toISOString(), sessions: sessions
+    id: uid(), name: name,
+    startDate: startMon.toISOString().slice(0,10),
+    numClients: clients, freq: _menoFreq,
+    createdAt: new Date().toISOString(),
+    sessionsA: sessA,
+    sessionsB: _menoFreq === 2 ? sessB : []
   };
   saveDB();
   document.getElementById('mb-name').value    = '';
   document.getElementById('mb-clients').value = '';
+  _menoFreq = 1;
   toast('Block created!');
   menoNav('active');
 }
@@ -3771,77 +3789,61 @@ function renderMenoActive() {
     return;
   }
   var mb = DB.menofit.activeBlock;
-  var done = mb.sessions.filter(function(s) { return s.status === 'completed'; }).length;
-  var pct  = Math.round(done / 6 * 100);
 
-  var out = [];
-  out.push('<div class="block-card">');
-  out.push('<div class="block-title" style="background:var(--meno-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + mb.name + '</div>');
-  out.push('<div class="block-meta">Started ' + mb.startDate + ' &middot; ' + mb.numClients + ' participant' + (mb.numClients !== 1 ? 's' : '') + '</div>');
-  out.push('<div class="block-stats">');
-  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-pink)">' + done + '</span><span class="block-stat-lbl">Done</span></div>');
-  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-purple)">' + (6-done) + '</span><span class="block-stat-lbl">Left</span></div>');
-  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-orange)">' + pct + '%</span><span class="block-stat-lbl">Progress</span></div>');
-  out.push('</div>');
-  out.push('<div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;"><div style="height:100%;width:' + pct + '%;background:var(--meno-grad);border-radius:3px;"></div></div>');
-  out.push('<div style="display:flex;gap:8px;margin-top:12px;">');
-  out.push('<button class="btn btn-gh" style="flex:1;" onclick="openMenoEdit()">&#9998; Edit Name</button>');
-  out.push('<button class="btn btn-gh" style="flex:1;color:var(--red);" onclick="deleteMenoActive()">&#128465; Delete</button>');
-  out.push('</div></div>');
+  // Support legacy blocks (single sessions array)
+  if (mb.sessions && !mb.sessionsA) {
+    mb.sessionsA = mb.sessions;
+    mb.sessionsB = [];
+    mb.freq = 1;
+  }
 
-  mb.sessions.forEach(function(sess) {
-    var isDone = sess.status === 'completed';
-    out.push('<div class="sess-card' + (isDone ? ' completed' : '') + '" id="meno-sess-' + sess.id + '">');
-    out.push('<div class="sess-hdr" onclick="toggleMenoSess(&quot;' + sess.id + '&quot;)">');
-    out.push('<div class="sess-week-badge' + (isDone ? ' done' : '') + '">' + (isDone ? '&#10003;' : 'W' + sess.week) + '</div>');
-    out.push('<div class="sess-info"><div class="sess-title">Week ' + sess.week + (isDone ? ' &mdash; Completed' : '') + '</div>');
-    out.push('<div class="sess-date">' + sess.date + '</div></div>');
-    out.push('<span class="hc-chev" id="meno-chev-' + sess.id + '">&#8250;</span></div>');
-    out.push('<div class="sess-body" id="meno-body-' + sess.id + '">' + buildSessEditor(mb.id, sess) + '</div>');
-    out.push('</div>');
-  });
+  var doneA = (mb.sessionsA||[]).filter(function(s){return s.status==='completed';}).length;
+  var doneB = (mb.sessionsB||[]).filter(function(s){return s.status==='completed';}).length;
+  var totalSess = (mb.freq===2) ? 12 : 6;
+  var totalDone = doneA + doneB;
+  var pct = Math.round(totalDone / totalSess * 100);
 
-  if (done === 6) {
-    out.push('<button class="btn-finish-block" onclick="finishMenoBlock()">&#127937; Finish Block &amp; Archive</button>');
+  var h = '';
+  // Block header card
+  h += '<div class="block-card">';
+  h += '<div class="block-title" style="background:var(--meno-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + mb.name + '</div>';
+  h += '<div class="block-meta">Started ' + mb.startDate + ' &middot; ' + mb.numClients + ' participant' + (mb.numClients!==1?'s':'') + ' &middot; ' + (mb.freq===2?'Mon &amp; Thu':'Monday') + '</div>';
+  h += '<div class="block-stats">';
+  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-pink)">' + totalDone + '</span><span class="block-stat-lbl">Done</span></div>';
+  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-purple)">' + (totalSess-totalDone) + '</span><span class="block-stat-lbl">Left</span></div>';
+  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-orange)">' + pct + '%</span><span class="block-stat-lbl">Progress</span></div>';
+  h += '</div>';
+  h += '<div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:var(--meno-grad);border-radius:3px;"></div></div>';
+  h += '<div style="display:flex;gap:8px;margin-top:12px;">';
+  h += '<button class="btn btn-gh" style="flex:1;" onclick="openMenoEdit()">&#9998; Edit Name</button>';
+  h += '<button class="btn btn-gh" style="flex:1;color:var(--red);" onclick="deleteMenoActive()">&#128465; Delete</button>';
+  h += '</div></div>';
+
+  // Block A — Monday
+  h += renderMenoBlockSection(mb, 'A', mb.sessionsA||[], '&#128197; Block A — Monday', 'var(--meno-pink)', mb.freq===2);
+
+  // Block B — Thursday (only if 2 days)
+  if (mb.freq === 2) {
+    h += renderMenoBlockSection(mb, 'B', mb.sessionsB||[], '&#128197; Block B — Thursday', 'var(--meno-purple)', false);
+  }
+
+  // Finish button
+  var allDone = (mb.freq===2) ? (doneA===6 && doneB===6) : (doneA===6);
+  if (allDone) {
+    h += '<button class="btn-finish-block" onclick="finishMenoBlock()">&#127937; Finish Block &amp; Archive</button>';
   } else {
-    out.push('<button class="btn-finish-block" onclick="finishMenoBlockEarly()" style="background:var(--bg3);color:var(--t3);border:1.5px solid var(--bd);">Archive Early (' + done + '/6 done)</button>');
+    h += '<button class="btn-finish-block" onclick="finishMenoBlockEarly()" style="background:var(--bg3);color:var(--t3);border:1.5px solid var(--bd);">Archive Early (' + totalDone + '/' + totalSess + ' done)</button>';
   }
-  el.innerHTML = out.join('');
-  // Restore previously open session
+
+  el.innerHTML = h;
+
+  // Restore open session
   if (_menoOpenSessId) {
-    var openBody = document.getElementById('meno-body-' + _menoOpenSessId);
-    var openChev = document.getElementById('meno-chev-' + _menoOpenSessId);
-    if (openBody) openBody.classList.add('open');
-    if (openChev) openChev.classList.add('open');
+    var ob = document.getElementById('meno-body-' + _menoOpenSessId);
+    var oc = document.getElementById('meno-chev-' + _menoOpenSessId);
+    if (ob) ob.classList.add('open');
+    if (oc) oc.classList.add('open');
   }
-  // Wire up all data-action handlers via event delegation
-  el.addEventListener('click', function(ev) {
-    var t = ev.target;
-    // Walk up to find data-action element
-    var el2 = t;
-    while (el2 && el2 !== this && !el2.dataset.action) el2 = el2.parentElement;
-    if (!el2 || !el2.dataset.action) return;
-    var action = el2.dataset.action;
-    var bid2 = el2.dataset.bid, sid2 = el2.dataset.sid;
-    if (action === 'pick') {
-      ev.stopPropagation();
-      openMenoPicker(bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx), el2.dataset.cat);
-    } else if (action === 'clear') {
-      ev.stopPropagation();
-      clearMenoSlot(ev, bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx));
-    } else if (action === 'remove') {
-      removeMenoFinisherEx(bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx));
-    } else if (action === 'complete') {
-      markSessComplete(bid2, sid2, el2.dataset.complete === 'true');
-    } else if (action === 'attend') {
-      showAttendanceModal(bid2, sid2);
-    }
-  }, true);
-  el.addEventListener('change', function(ev) {
-    var t = ev.target;
-    if (t.dataset.action === 'date') updateSessDate(t.dataset.bid, t.dataset.sid, t.value);
-    if (t.dataset.action === 'notes') updateSessNotes(t.dataset.bid, t.dataset.sid, t.value);
-  });
 }
 
 function buildSessEditor(blockId, sess) {
@@ -3956,7 +3958,11 @@ function toggleMenoSess(id) {
 function getMenoSess(blockId, sessId) {
   var mb = DB.menofit && DB.menofit.activeBlock;
   if (!mb || mb.id !== blockId) return null;
-  return mb.sessions.find(function(s) { return s.id === sessId; });
+  // Check sessionsA
+  var s = (mb.sessionsA || mb.sessions || []).find(function(s) { return s.id === sessId; });
+  if (s) return s;
+  // Check sessionsB
+  return (mb.sessionsB || []).find(function(s) { return s.id === sessId; }) || null;
 }
 
 function updateSessDate(bId, sId, v)               { var s=getMenoSess(bId,sId); if(s){s.date=v; saveDB();} }
@@ -3981,7 +3987,7 @@ function finishMenoBlock() {
   DB.menofit.history.unshift(DB.menofit.activeBlock);
   DB.menofit.activeBlock = null;
   saveDB(); renderMenoDashboard(); menoNav('dashboard');
-  toast('Block archived &#10003;');
+  toast('Block archived ✓');
 }
 
 function finishMenoBlockEarly() {
@@ -4081,6 +4087,7 @@ var MENO_LIB = {"Compound": ["Deadlift", "Back Squat", "Sumo Deadlift"], "Travel
 
 var menoLibCat = 'All';
 var _menoOpenSessId = null;
+var _menoFreq = 1; // 1 or 2 days per week
 
 function addMenoCustomExercise() {
   var nameEl = document.getElementById('meno-custom-ex-name');
@@ -4443,14 +4450,7 @@ function buildWeightGraph(statsLog) {
 
 
 
-function clearMenoSlot(event, blockId, sessId, field, idx) {
-  if (event && event.stopPropagation) event.stopPropagation();
-  var s = getMenoSess(blockId, sessId); if (!s) return;
-  if (field === 'compound') s.compound = '';
-  else if (s[field]) s[field][idx] = '';
-  saveDB();
-  renderMenoActive();
-}
+
 
 
 
@@ -4493,6 +4493,92 @@ function assignSessionToClient(sessionId) {
 
 
 
+
+
+
+
+
+function clearMenoSlot(event, blockId, sessId, field, idx) {
+  if (event && event.stopPropagation) event.stopPropagation();
+  var s = getMenoSess(blockId, sessId); if (!s) return;
+  if (field === 'compound') s.compound = '';
+  else if (s[field]) s[field][idx] = '';
+  saveDB();
+  renderMenoActive();
+}
+
+function setMenoFreq(n) {
+  _menoFreq = n;
+  var b1 = document.getElementById('mb-freq-1');
+  var b2 = document.getElementById('mb-freq-2');
+  if (b1) { b1.style.background = n===1 ? 'var(--meno-grad)' : 'var(--bg3)'; b1.style.color = n===1 ? '#fff' : 'var(--t3)'; b1.style.border = n===1 ? 'none' : '1.5px solid var(--bd)'; }
+  if (b2) { b2.style.background = n===2 ? 'var(--meno-grad)' : 'var(--bg3)'; b2.style.color = n===2 ? '#fff' : 'var(--t3)'; b2.style.border = n===2 ? 'none' : '1.5px solid var(--bd)'; }
+}
+
+function snapToMonday(input) {
+  if (!input.value) return;
+  var d = new Date(input.value);
+  var day = d.getDay();
+  if (day !== 1) { var diff = day===0 ? 1 : (8-day); d.setDate(d.getDate()+diff); input.value = d.toISOString().slice(0,10); }
+}
+
+function makeSessTemplate(week, dateStr) {
+  return { id:uid(), week:week, date:dateStr, status:'planned', notes:'',
+    compound:'', legs1:['','','',''], legs2:['','','',''],
+    legsFinisher:[], upperBody1:['','','',''], upperBody2:['','','',''], upperFinisher:[] };
+}
+
+function copySessionToB(blockId, weekNum) {
+  var mb = DB.menofit && DB.menofit.activeBlock;
+  if (!mb || mb.id !== blockId || !mb.sessionsB) return;
+  var srcA = (mb.sessionsA||[]).find(function(s){return s.week===weekNum;});
+  var tgtB = mb.sessionsB.find(function(s){return s.week===weekNum;});
+  if (!srcA || !tgtB) return;
+  var keepId=tgtB.id, keepDate=tgtB.date, keepStatus=tgtB.status, keepNotes=tgtB.notes, keepComp=tgtB.completedAt;
+  Object.assign(tgtB, JSON.parse(JSON.stringify(srcA)));
+  tgtB.id=keepId; tgtB.date=keepDate; tgtB.status=keepStatus; tgtB.notes=keepNotes; tgtB.completedAt=keepComp;
+  saveDB(); renderMenoActive();
+  toast('Week ' + weekNum + ' copied to Block B ✓');
+}
+
+function renderMenoBlockSection(mb, blockKey, sessions, title, colour, showCopyBtn) {
+  var sectionId = 'meno-block-' + blockKey;
+  var done = sessions.filter(function(s){return s.status==='completed';}).length;
+  var pct  = Math.round(done/6*100);
+  var h = '<div class="meno-block-section">';
+  h += '<div class="meno-block-section-hdr" data-section="'+sectionId+'" onclick="toggleMenoBlockSection(this.dataset.section)">';
+  h += '<div><div class="meno-block-section-title" style="color:'+colour+';">'+title+'</div>';
+  h += '<div class="meno-block-section-meta">'+done+'/6 sessions &middot; '+pct+'% complete</div></div>';
+  h += '<span class="hc-chev" id="chev-'+sectionId+'">&#8250;</span></div>';
+  h += '<div class="meno-block-section-body" id="'+sectionId+'">';
+  sessions.forEach(function(sess) {
+    var isDone = sess.status === 'completed';
+    h += '<div class="sess-card'+(isDone?' completed':'')+'" id="meno-sess-'+sess.id+'">';
+    h += '<div class="sess-hdr" data-sessid="'+sess.id+'" onclick="toggleMenoSess(this.dataset.sessid)">';
+    h += '<div class="sess-week-badge'+(isDone?' done':'')+'>'+(isDone?'&#10003;':'W'+sess.week)+'</div>';
+    h += '<div class="sess-info"><div class="sess-title">Week '+sess.week+(isDone?' &mdash; Completed':'')+'</div>';
+    h += '<div class="sess-date">'+sess.date+'</div></div>';
+    h += '<span class="hc-chev" id="meno-chev-'+sess.id+'">&#8250;</span></div>';
+    h += '<div class="sess-body" id="meno-body-'+sess.id+'">' + buildSessEditor(mb.id, sess) + '</div></div>';
+  });
+  if (showCopyBtn) {
+    h += '<div style="padding:4px 0 8px;"><div style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:6px;font-family:monospace;">Copy week to Block B</div>';
+    h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">';
+    for (var w=1; w<=6; w++) {
+      h += '<button class="copy-block-btn" data-bid="'+mb.id+'" data-week="'+w+'" onclick="copySessionToB(this.dataset.bid,parseInt(this.dataset.week))">Copy W'+w+'</button>';
+    }
+    h += '</div></div>';
+  }
+  h += '</div></div>';
+  return h;
+}
+
+function toggleMenoBlockSection(id) {
+  var body = document.getElementById(id);
+  var chev = document.getElementById('chev-'+id);
+  if (body) body.classList.toggle('open');
+  if (chev) chev.classList.toggle('open');
+}
 
 </script>
 </body>
