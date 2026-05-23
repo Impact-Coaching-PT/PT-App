@@ -135,9 +135,10 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
 <div id="toast"></div>
 
 <script>
-var SCRIPT_URL = '';
-var clientId   = '';
-var clientData = null;
+var SCRIPT_URL  = '';
+var clientId    = '';
+var clientName  = '';
+var clientData  = null;
 var allSessions = [];
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -149,7 +150,7 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 
   // Welcome message from URL name param
-  var clientName = decodeURIComponent(params.get('name') || '');
+  clientName = decodeURIComponent(params.get('name') || '');
   var welcomeEl = document.getElementById('welcome-msg');
   if (clientName && welcomeEl) {
     welcomeEl.textContent = 'Welcome, ' + clientName + '!';
@@ -381,7 +382,12 @@ function renderStatsLog() {
   var sorted = log.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
   var html = '';
   sorted.forEach(function(e){
-    var srcTag = e.source === 'pt' ? ' <span style="font-size:9px;font-family:monospace;background:#1a0800;color:#e8923a;border:1px solid #e8923a33;padding:1px 5px;border-radius:3px;">PT</span>' : '';
+    var ptLabel = (e.ptName) ? e.ptName : 'PT';
+    var srcTag = e.source === 'pt'
+      ? ' <span style="font-size:9px;font-family:monospace;background:#1a0800;color:#e8923a;border:1px solid #e8923a33;padding:1px 5px;border-radius:3px;">'+ptLabel+'</span>'
+      : e.source === 'client'
+        ? ' <span style="font-size:9px;font-family:monospace;background:#0a1a2a;color:var(--blue);border:1px solid var(--blue)33;padding:1px 5px;border-radius:3px;">'+(clientName||'Client')+'</span>'
+        : '';
     html += '<div class="stat-row"><div><div class="stat-date-lbl">'+e.date+srcTag+'</div><div class="stat-notes-txt">'+e.notes+'</div></div></div>';
   });
   el.innerHTML = html;
