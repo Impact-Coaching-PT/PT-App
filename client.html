@@ -94,6 +94,9 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
 </div>
 
 <div id="main-content">
+  <div id="offline-banner" style="display:none;background:#1a0800;border:1.5px solid var(--orange);border-radius:10px;padding:12px 14px;margin-bottom:12px;font-size:12px;color:var(--orange);line-height:1.6;">
+    &#9888; Ask your PT to resend your portal link to enable full syncing.
+  </div>
   <div class="page-section" id="client-hero-section">
     <div class="client-hero">
       <div class="client-av" id="client-av"></div>
@@ -249,6 +252,11 @@ function loadClientData(db, client) {
   document.getElementById('pin-screen').style.display = 'none';
   document.getElementById('main-hdr').style.display = 'flex';
   document.getElementById('main-content').style.display = 'block';
+  // Show offline warning if no script URL
+  if (!SCRIPT_URL) {
+    var banner = document.getElementById('offline-banner');
+    if (banner) banner.style.display = 'block';
+  }
   document.getElementById('hdr-client-name').textContent = client.name;
 
   var av = document.getElementById('client-av');
@@ -325,14 +333,14 @@ function completeSession(sessId) {
       var raw = localStorage.getItem('impact-coaching-v2');
       if (raw) {
         var db = JSON.parse(raw);
-        var idx = db.sessions.findIndex(function(x){return x.id===sessId;});
-        if (idx > -1) db.sessions[idx] = s;
+        var sidx = db.sessions.findIndex(function(x){return x.id===sessId;});
+        if (sidx > -1) db.sessions[sidx] = s;
         localStorage.setItem('impact-coaching-v2', JSON.stringify(db));
       }
-    } catch(e) {}
+    } catch(e2) {}
   }
   renderAssignedSessions();
-  toast('Session complete! Well done! 💪');
+  toast(SCRIPT_URL ? 'Session complete! Synced to your PT! 💪' : 'Session saved! Ask your PT for your updated portal link to sync. 💪');
 }
 
 function pushSessionUpdate(session) {

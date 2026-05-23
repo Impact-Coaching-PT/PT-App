@@ -950,7 +950,10 @@ if ('serviceWorker' in navigator) {
       </div>
     <div class="field" style="margin-top:12px;">
       <span class="lbl">Your Name <span style="color:var(--t4);text-transform:none;letter-spacing:0">(shown on client notes)</span></span>
-      <input class="inp" id="st-pt-name" placeholder="e.g. Ritchie" autocomplete="off">
+      <div style="display:flex;gap:8px;">
+        <input class="inp" id="st-pt-name" placeholder="e.g. Ritchie" autocomplete="off" style="flex:1;">
+        <button class="btn btn-b" style="padding:10px 16px;white-space:nowrap;" onclick="savePtName()">Save</button>
+      </div>
     </div>
       <div style="display:flex;gap:10px;margin-bottom:12px;">
         <button class="btn btn-b btn-sm" onclick="testScriptUrl()">🧪 Test URL</button>
@@ -1097,7 +1100,6 @@ if ('serviceWorker' in navigator) {
 
 <div id="toast"></div>
 <script>
-
 
 // ═══════════════════════════════════════════════════════════════════
 // CONSTANTS
@@ -2840,6 +2842,14 @@ function renderSettings() {
   if (ptEl) ptEl.value = DB.settings.ptName||"";
 }
 
+
+function savePtName() {
+  var el = document.getElementById('st-pt-name');
+  if (!el) return;
+  DB.settings.ptName = el.value.trim();
+  saveDB();
+  toast('Name saved — ' + (DB.settings.ptName || 'cleared') + ' ✓');
+}
 function saveScriptUrl() {
   DB.settings.scriptUrl = document.getElementById("st-url").value.trim();
   const ptEl = document.getElementById("st-pt-name");
@@ -3580,6 +3590,8 @@ async function pullFromDrive() {
     saveDB();
     renderDashboard();
     renderBuildClientChips();
+    // If viewing a client profile, refresh it to pick up client-completed sessions
+    if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
     renderPage(currentPage);
 
     if (btn) { btn.innerHTML = "✅"; setTimeout(()=>{ btn.innerHTML="⬇️ Pull"; btn.style.pointerEvents=""; }, 2000); }
@@ -4420,7 +4432,6 @@ function buildWeightGraph(statsLog) {
       }).join('')
     + '</svg>'
     + '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t4);font-family:monospace;margin-top:4px;">'
-    + '<span>' + last8[0].date.slice(5) + '</span><span>' + latest + 'kg</span>'
     + '</div></div>';
 }
 
@@ -4475,6 +4486,7 @@ function assignSessionToClient(sessionId) {
   if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
   toast(s.assignedToClient ? 'Session assigned to client ✓' : 'Assignment removed');
 }
+
 
 
 
