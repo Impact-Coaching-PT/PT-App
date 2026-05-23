@@ -1085,8 +1085,15 @@ if ('serviceWorker' in navigator) {
     <div style="font-size:16px;font-weight:700;" id="meno-picker-title">Select Exercise</div>
     <button onclick="closeMenoPicker()" style="background:none;border:none;color:var(--t3);font-size:22px;cursor:pointer;">&#215;</button>
   </div>
-  <div sty
+  <div style="padding:10px 16px;border-bottom:1px solid var(--bd);">
+    <input class="inp" id="meno-picker-search" type="search" placeholder="Search exercises..." oninput="renderMenoPicker()" style="margin:0;">
+  </div>
+  <div style="overflow-y:auto;flex:1;padding:8px 16px 24px;" id="meno-picker-list"></div>
+</div>
+
+<div id="toast"></div>
 <script>
+
 
 // ═══════════════════════════════════════════════════════════════════
 // CONSTANTS
@@ -4453,6 +4460,7 @@ function assignSessionToClient(sessionId) {
   if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
   toast(s.assignedToClient ? 'Session assigned to client ✓' : 'Assignment removed');
 }
+
 
 
 </script>
