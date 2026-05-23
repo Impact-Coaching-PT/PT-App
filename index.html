@@ -2031,7 +2031,8 @@ function renderProfile(clientId) {
   // Build portal URL dynamically — works on any repo/domain
   var basePath   = window.location.pathname.replace(/\/[^/]*$/, '');
   var scriptParam = DB.settings && DB.settings.scriptUrl ? '&su=' + encodeURIComponent(DB.settings.scriptUrl) : '';
-  var portalUrl  = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name) + scriptParam;
+  var ptNameParam = DB.settings && DB.settings.ptName    ? '&pn=' + encodeURIComponent(DB.settings.ptName)    : '';
+  var portalUrl  = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name) + scriptParam + ptNameParam;
   h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-top:14px;margin-bottom:4px;">';
   h += '<div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;font-family:monospace;margin-bottom:10px;">Client Portal</div>';
   if (!pin) {
