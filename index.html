@@ -2089,7 +2089,8 @@ function renderProfile(clientId) {
   if (statsLog.length) {
     statsLog.forEach(function(entry) {
       var ptName = (DB.settings && DB.settings.ptName) ? DB.settings.ptName : 'PT';
-      var sourceTag = entry.source === 'client'
+      var effectiveSource = entry.source || 'pt';
+      var sourceTag = effectiveSource === 'client'
         ? '<span style="font-size:9px;font-family:monospace;background:#0a1a2a;color:var(--blue);border:1px solid var(--blue)33;padding:1px 5px;border-radius:3px;margin-left:6px;">' + c.name + '</span>'
         : '<span style="font-size:9px;font-family:monospace;background:#1a0a00;color:var(--orange);border:1px solid var(--orange)33;padding:1px 5px;border-radius:3px;margin-left:6px;">' + ptName + '</span>';
       h += '<div class="sl-entry"><div class="sl-date">' + entry.date + sourceTag + '</div>';
