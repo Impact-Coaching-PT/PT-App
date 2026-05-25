@@ -512,21 +512,6 @@ textarea.inp{resize:vertical;line-height:1.5;}
   50%       { opacity: 0.55; }
 }
 
-
-/* ── MENOFIT BLOCK A/B ───────────────────────────────── */
-.meno-block-section { background:var(--bg2);border:1.5px solid var(--bd);
-  border-radius:14px;margin-bottom:12px;overflow:hidden; }
-.meno-block-section-hdr { display:flex;align-items:center;justify-content:space-between;
-  padding:14px 16px;cursor:pointer; }
-.meno-block-section-title { font-size:16px;font-weight:800; }
-.meno-block-section-meta  { font-size:11px;color:var(--t3);font-family:monospace;margin-top:2px; }
-.meno-block-section-body  { display:none;padding:0 12px 12px; }
-.meno-block-section-body.open { display:block; }
-.copy-block-btn { width:100%;background:var(--bg3);border:1.5px dashed var(--meno-purple);
-  color:var(--meno-purple);font-weight:700;font-size:13px;padding:12px;border-radius:10px;
-  cursor:pointer;font-family:inherit;margin-top:8px; }
-.copy-block-btn:active { background:var(--meno-purple)22; }
-
 </style>
 
 <script>
@@ -565,6 +550,44 @@ if ('serviceWorker' in navigator) {
   if (!link) { link = document.createElement('link'); link.rel = 'manifest'; document.head.appendChild(link); }
   link.href = url;
 })();
+
+function copyMWLHubLink() {
+  var url = document.getElementById('mwl-hub-url').textContent.trim();
+  var btn = document.getElementById('mwl-hub-copy-btn');
+  var orig = btn.innerHTML;
+  function done() { btn.innerHTML = '&#10003; Copied!'; setTimeout(function(){ btn.innerHTML = orig; }, 2000); }
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ try{toast('MWL hub link copied');}catch(e){} done(); }).catch(function(){ fallbackCopy(url); done(); });
+  } else { fallbackCopy(url); done(); }
+}
+function showMWLQR() {
+  document.getElementById('mwl-qr-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function hideMWLQR() {
+  document.getElementById('mwl-qr-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+
+function copyMenoHubLink() {
+  var url = document.getElementById('meno-hub-url').textContent.trim();
+  var btn = document.getElementById('meno-hub-copy-btn');
+  var orig = btn.innerHTML;
+  function done() { btn.innerHTML = '&#10003; Copied!'; setTimeout(function(){ btn.innerHTML = orig; }, 2000); }
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(function(){ try{toast('MenoFit hub link copied');}catch(e){} done(); }).catch(function(){ fallbackCopy(url); done(); });
+  } else { fallbackCopy(url); done(); }
+}
+function showMenoHubQR() {
+  document.getElementById('meno-hub-qr-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function hideMenoHubQR() {
+  document.getElementById('meno-hub-qr-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
 </script>
 </head>
 <body>
@@ -610,15 +633,20 @@ if ('serviceWorker' in navigator) {
         <div class="dash-tile-label">Workout Builder</div>
         <div class="dash-tile-sub">Build a session</div>
       </div>
+      <div class="dash-tile" onclick="nav('tdee')">
+        <img src="data:image/jpeg;base64,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" class="dash-tile-img" alt="TDEE Calculator">
+        <div class="dash-tile-label">TDEE Calculator</div>
+        <div class="dash-tile-sub">Calorie calculator</div>
+      </div>
       <div class="dash-tile" onclick="nav('menofit')">
         <img src="data:image/jpeg;base64,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" class="dash-tile-img" alt="MenoFit">
         <div class="dash-tile-label">MenoFit</div>
         <div class="dash-tile-sub">Class manager</div>
       </div>
-      <div class="dash-tile" onclick="nav('tdee')">
-        <img src="data:image/jpeg;base64,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" class="dash-tile-img" alt="TDEE Calculator">
-        <div class="dash-tile-label">TDEE Calculator</div>
-        <div class="dash-tile-sub">Calorie calculator</div>
+      <div class="dash-tile" onclick="nav('mwl')">
+        <img src="data:image/jpeg;base64,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" class="dash-tile-img" alt="MWL">
+        <div class="dash-tile-label">MWL</div>
+        <div class="dash-tile-sub">Weight loss</div>
       </div>
       <div class="dash-tile" onclick="nav('library')">
         <img src="data:image/jpeg;base64,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" class="dash-tile-img" alt="Library">
@@ -769,18 +797,38 @@ if ('serviceWorker' in navigator) {
       </div>
     </div>
 
-    <!-- ── HUB LINK CARD ───────────────────────────── -->
-    <div style="margin:0 0 16px;background:var(--bg2);border:1.5px solid #9a3ae833;border-radius:16px;padding:16px;">
-      <div style="font-size:12px;font-weight:700;color:var(--meno-purple);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">&#127279; Client Hub Link</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6;">Share this link with clients so they can add the MenoFit Hub to their home screen.</div>
-      <div style="background:var(--bg3);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;font-size:11px;font-family:monospace;color:var(--t2);word-break:break-all;margin-bottom:12px;" id="meno-hub-url">https://impact-coaching-pt.github.io/PT-App/menofit-hub.html</div>
-      <button onclick="copyMenoHubLink()" id="meno-hub-copy-btn"
-        style="width:100%;background:var(--meno-grad);border:none;color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">
-        &#128203; Copy Hub Link
-      </button>
+    <!-- MenoFit Hub Link Card -->
+    <div style="padding:0 14px 20px;">
+      <div style="background:var(--bg2);border:1.5px solid #9a3ae833;border-radius:16px;padding:16px;">
+        <div style="font-size:12px;font-weight:700;color:var(--meno-purple);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">&#127279; Client Hub Link</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6;">Share this link with clients so they can access the MenoFit Hub.</div>
+        <div style="background:var(--bg3);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;font-size:11px;font-family:monospace;color:var(--t2);word-break:break-all;margin-bottom:12px;" id="meno-hub-url">https://impact-coaching-pt.github.io/PT-App/menofit-hub.html</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="copyMenoHubLink()" id="meno-hub-copy-btn"
+            style="flex:1;background:var(--meno-grad);border:none;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">
+            &#128203; Copy Link
+          </button>
+          <button onclick="showMenoHubQR()"
+            style="flex:1;background:var(--bg3);border:1.5px solid #9a3ae8;color:var(--meno-purple);font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">
+            &#9638; QR Code
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-
+  <!-- MenoFit Hub QR Modal -->
+  <div id="meno-hub-qr-modal" onclick="hideMenoHubQR()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;padding:24px;">
+    <div onclick="event.stopPropagation()" style="background:#12001e;border:1.5px solid #9a3ae8;border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:var(--meno-purple);text-transform:uppercase;letter-spacing:.08em;">MenoFit Hub QR</div>
+        <button onclick="hideMenoHubQR()" style="background:none;border:1px solid #9a3ae855;color:#c4a0e8;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:8px;cursor:pointer;line-height:1;font-family:inherit;">&#215;</button>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:11px;font-family:monospace;color:var(--t3);word-break:break-all;line-height:1.6;">https://impact-coaching-pt.github.io/PT-App/menofit-hub.html</div>
+      </div>
+      <div style="font-size:11px;color:var(--t4);line-height:1.5;">Clients scan this to open the MenoFit Hub directly on their phone.</div>
+    </div>
   </div>
 
   <div class="page" id="pg-meno-active">
@@ -794,23 +842,11 @@ if ('serviceWorker' in navigator) {
     <div style="font-size:12px;color:var(--t3);margin-bottom:20px;font-family:monospace;">Create a new 6-week MenoFit course</div>
     <div class="meno-form-card">
       <div class="field"><span class="lbl">Block Name</span>
-        <input class="inp" id="mb-name" placeholder="e.g. MenoFit 10"></div>
-      <div class="field"><span class="lbl">Start Date <span style="color:var(--t4);text-transform:none;letter-spacing:0">(Monday)</span></span>
-        <input class="inp" id="mb-date" type="date" onchange="snapToMonday(this)"></div>
+        <input class="inp" id="mb-name" placeholder="e.g. MenoFit Spring 2026"></div>
+      <div class="field"><span class="lbl">Start Date</span>
+        <input class="inp" id="mb-date" type="date"></div>
       <div class="field"><span class="lbl">Number of Participants (max 8)</span>
         <input class="inp" id="mb-clients" type="number" min="1" max="8" placeholder="1-8" style="font-family:monospace;text-align:center;"></div>
-      <div class="field"><span class="lbl">Sessions Per Week</span>
-        <div style="display:flex;gap:8px;">
-          <button id="mb-freq-1" onclick="setMenoFreq(1)"
-            style="flex:1;background:var(--meno-grad);border:none;color:#fff;font-weight:700;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;">
-            1 Day<br><span style="font-size:10px;font-weight:400;opacity:.8;">Monday only</span>
-          </button>
-          <button id="mb-freq-2" onclick="setMenoFreq(2)"
-            style="flex:1;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t3);font-weight:700;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:14px;">
-            2 Days<br><span style="font-size:10px;font-weight:400;opacity:.8;">Mon &amp; Thu</span>
-          </button>
-        </div>
-      </div>
     </div>
     <div id="mb-warning" style="display:none;background:#1a0a00;border:1.5px solid var(--meno-orange);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--meno-orange);"></div>
     <button onclick="createMenoBlock()" style="width:100%;background:var(--meno-grad);border:none;color:#fff;font-weight:800;font-size:16px;padding:16px;border-radius:12px;cursor:pointer;font-family:inherit;">
@@ -851,7 +887,58 @@ if ('serviceWorker' in navigator) {
     <div id="meno-history-content"></div>
   </div>
 
-<div class="page" id="pg-build">
+
+  <!-- MWL PAGE -->
+  <div class="page" id="pg-mwl">
+    <div style="background:var(--bg);border-bottom:1px solid var(--bd);padding:12px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:sticky;top:0;z-index:50;">
+      <img src="data:image/jpeg;base64,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" alt="MWL" style="width:48px;height:48px;border-radius:10px;object-fit:cover;flex-shrink:0;">
+      <div style="flex:1;">
+        <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.16em;font-family:monospace;">Impact Coaching</div>
+        <div style="font-size:17px;font-weight:700;margin-top:1px;background:linear-gradient(135deg,#e83a3a,#e8923a,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Medical Weight Loss</div>
+      </div>
+      <button class="btn-icon" onclick="nav('dashboard')" style="margin-left:auto;">&#8962;</button>
+    </div>
+    <div style="padding:14px;">
+      <div style="text-align:center;padding:16px 0 8px;">
+        <img src="data:image/jpeg;base64,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" alt="MWL" style="width:100px;height:100px;border-radius:20px;object-fit:cover;box-shadow:0 4px 20px rgba(0,180,216,.3);">
+      </div>
+
+      <div style="background:var(--bg2);border:1.5px solid #e8923a33;border-radius:16px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:700;color:#e8923a;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">&#127279; Client Hub Link</div>
+        <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6;">Share this link with clients so they can access the Medical Weight Loss Hub.</div>
+        <div style="background:var(--bg3);border:1px solid var(--bd2);border-radius:8px;padding:10px 12px;font-size:11px;font-family:monospace;color:var(--t2);word-break:break-all;margin-bottom:12px;" id="mwl-hub-url">https://impact-coaching-pt.github.io/PT-App/medical-weight-loss-hub.html</div>
+        <div style="display:flex;gap:10px;">
+          <button onclick="copyMWLHubLink()" id="mwl-hub-copy-btn"
+            style="flex:1;background:linear-gradient(135deg,#e83a3a,#e8923a);border:none;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">
+            &#128203; Copy Link
+          </button>
+          <button onclick="showMWLQR()"
+            style="flex:1;background:var(--bg3);border:1.5px solid #e8923a;color:#e8923a;font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">
+            &#9638; QR Code
+          </button>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:1.5px solid #00b4d833;border-radius:16px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:12px;font-weight:700;color:#00b4d8;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;">&#8505; About MWL</div>
+        <div style="font-size:12px;color:var(--t3);line-height:1.7;">Medical Weight Loss clients receive a tailored fitness and lifestyle programme alongside their medication. The hub gives them free access to NHS-backed guidance on exercise, nutrition, side effects and more.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MWL QR Modal -->
+  <div id="mwl-qr-modal" onclick="hideMWLQR()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;padding:24px;">
+    <div onclick="event.stopPropagation()" style="background:#1a0505;border:1.5px solid #e8923a;border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="font-size:13px;font-weight:700;color:#e8923a;text-transform:uppercase;letter-spacing:.08em;">MWL Hub QR</div>
+        <button onclick="hideMWLQR()" style="background:none;border:1px solid #e8923a55;color:#f0c090;font-size:18px;font-weight:700;width:32px;height:32px;border-radius:8px;cursor:pointer;line-height:1;font-family:inherit;">&#215;</button>
+      </div>
+      <div style="font-size:12px;color:var(--t3);line-height:1.5;">Scan to open the MWL Hub on your phone.</div>
+    </div>
+  </div>
+
+  <div class="page" id="pg-build">
     <button class="back-btn" id="build-back-btn" onclick="buildPageBack()">&#8249; Back</button>
     <div class="pg-title">Build Session</div>
     <div class="pg-sub">Plan a workout</div>
@@ -988,13 +1075,6 @@ if ('serviceWorker' in navigator) {
         <span class="lbl">Web App URL (ends with /exec)</span>
         <input class="inp" id="st-url" placeholder="https://script.google.com/macros/s/…/exec" oninput="saveScriptUrl()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       </div>
-    <div class="field" style="margin-top:12px;">
-      <span class="lbl">Your Name <span style="color:var(--t4);text-transform:none;letter-spacing:0">(shown on client notes)</span></span>
-      <div style="display:flex;gap:8px;">
-        <input class="inp" id="st-pt-name" placeholder="e.g. Ritchie" autocomplete="off" style="flex:1;">
-        <button class="btn btn-b" style="padding:10px 16px;white-space:nowrap;" onclick="savePtName()">Save</button>
-      </div>
-    </div>
       <div style="display:flex;gap:10px;margin-bottom:12px;">
         <button class="btn btn-b btn-sm" onclick="testScriptUrl()">🧪 Test URL</button>
       </div>
@@ -1081,8 +1161,6 @@ if ('serviceWorker' in navigator) {
     <div class="field"><span class="lbl">Training Partner <span style="color:var(--t4);text-transform:none;letter-spacing:0">(2:1 sessions)</span></span>
       <select class="inp" id="mc-partner"><option value="">None — solo client</option></select></div>
     <div class="field"><span class="lbl">Colour</span><div class="color-opts" id="mc-colors"></div></div>
-    <div class="field"><span class="lbl">Client Portal PIN <span style="color:var(--t4);text-transform:none;letter-spacing:0">(5 digits — share with client)</span></span>
-      <input class="inp" id="mc-pin" type="number" placeholder="e.g. 12345" min="10000" max="99999" style="font-family:monospace;letter-spacing:.2em;text-align:center;"></div>
   </div>
   <div class="ms-foot">
     <button class="btn btn-g btn-blk" onclick="saveClient()">Save Client</button>
@@ -1106,7 +1184,26 @@ if ('serviceWorker' in navigator) {
     </div>
     <div class="field"><span class="lbl">Muscle Groups (comma separated)</span><input class="inp" id="ae-muscles" placeholder="e.g. Quads, Glutes"></div>
   </div>
-  <div<!-- MENOFIT EXERCISE PICKER -->
+  <div class="ms-foot">
+    <button class="btn btn-b btn-blk" onclick="saveCustomExercise()">Add to Library</button>
+  </div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="ms" id="m-share">
+  <div class="ms-handle"></div>
+  <div class="ms-hdr"><span class="ms-title">Share Session</span><button class="ms-close" onclick="closeModal()">×</button></div>
+  <div class="ms-body">
+    <div style="font-size:12px;color:var(--t3);margin-bottom:10px;">Copy → paste into your shared Google Sheet (paste with Ctrl+V)</div>
+    <textarea class="share-ta" id="share-ta" readonly></textarea>
+  </div>
+  <div class="ms-foot">
+    <button class="btn btn-b btn-blk" id="share-copy-btn" onclick="copyShare()">📋 Copy to Clipboard</button>
+  </div>
+</div>
+
+
+<!-- MENOFIT EXERCISE PICKER -->
 <div class="modal-overlay" id="meno-picker-overlay" onclick="closeMenoPicker()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;"></div>
 <div id="meno-picker-modal" style="display:none;position:fixed;left:0;right:0;bottom:0;max-height:80vh;background:var(--bg);border-radius:16px 16px 0 0;z-index:2001;overflow:hidden;flex-direction:column;">
   <div style="padding:14px 16px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between;">
@@ -1114,14 +1211,15 @@ if ('serviceWorker' in navigator) {
     <button onclick="closeMenoPicker()" style="background:none;border:none;color:var(--t3);font-size:22px;cursor:pointer;">&#215;</button>
   </div>
   <div style="padding:10px 16px;border-bottom:1px solid var(--bd);">
-    <input class="inp" id="meno-picker-search" type="search" placeholder="Search exercises..." oninput="renderMenoPicker()" style="margin:0;">
+    <input class="inp" id="meno-picker-search" type="search" placeholder="Search exercises..."
+      oninput="renderMenoPicker()" style="margin:0;">
   </div>
   <div style="overflow-y:auto;flex:1;padding:8px 16px 24px;" id="meno-picker-list"></div>
 </div>
+
 <div id="toast"></div>
 
 <script>
-
 
 // ═══════════════════════════════════════════════════════════════════
 // CONSTANTS
@@ -1709,7 +1807,7 @@ function lastWeight(clientId, exerciseName) {
 function nav(page) {
   try {
     currentPage = page;
-    var ID_MAP = { clients: "clients-list" };
+    var ID_MAP = { clients: "clients-list", mwl: "mwl" };
     var pageId  = ID_MAP[page] || page;
     document.querySelectorAll(".page").forEach(function(p) { p.classList.remove("active"); });
     var pg = document.getElementById("pg-" + pageId);
@@ -1720,7 +1818,7 @@ function nav(page) {
       "clients-list":"Clients", clients:"Clients",
       history:"History", library:"Exercise Library", settings:"Settings",
       profile:"Client Profile", record:"Record Session",
-      calendar:"Calendar", tdee:"TDEE Calculator", menofit:"MenoFit"
+      calendar:"Calendar", tdee:"TDEE Calculator", menofit:"MenoFit", mwl:"Medical Weight Loss"
     };
     var titleEl = document.getElementById("hdr-title");
     if (titleEl) titleEl.textContent = TITLES[page] || "Impact Coaching";
@@ -2048,39 +2146,6 @@ function renderProfile(clientId) {
   // Build session button
   h += '<button class="prof-build" onclick="buildForClient(\'' + clientId + '\')" style="margin-top:14px;">&#9999; Build Session</button>';
 
-  // ── CLIENT PORTAL SECTION ──
-  var pin = c.pin || '';
-  // Build portal URL dynamically — works on any repo/domain
-  var basePath   = window.location.pathname.replace(/\/[^/]*$/, '');
-  var scriptParam = DB.settings && DB.settings.scriptUrl ? '&su=' + encodeURIComponent(DB.settings.scriptUrl) : '';
-  var ptNameParam = DB.settings && DB.settings.ptName    ? '&pn=' + encodeURIComponent(DB.settings.ptName)    : '';
-  var portalUrl  = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name) + scriptParam + ptNameParam;
-  h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-top:14px;margin-bottom:4px;">';
-  h += '<div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;font-family:monospace;margin-bottom:10px;">Client Portal</div>';
-  if (!pin) {
-    h += '<div style="font-size:13px;color:var(--t4);margin-bottom:8px;">Set a 5-digit PIN in Edit to activate the client portal.</div>';
-    h += '<button class="btn btn-gh btn-sm" onclick="openClientModal(\'' + clientId + '\')" style="width:100%;">&#9998; Add PIN</button>';
-  } else {
-    h += '<div style="display:flex;flex-direction:column;gap:10px;">';
-    // PIN row
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;">';
-    h += '<span style="font-size:12px;color:var(--t3);font-family:monospace;text-transform:uppercase;letter-spacing:.08em;">PIN</span>';
-    h += '<div style="display:flex;align-items:center;gap:8px;">';
-    h += '<span id="portal-pin-' + clientId + '" style="font-size:18px;font-weight:800;font-family:monospace;letter-spacing:.2em;filter:blur(5px);transition:filter .3s;">'+pin+'</span>';
-    h += '<button onclick="togglePortalReveal(\'pin-' + clientId + '\')" style="background:none;border:1.5px solid var(--bd);color:var(--t3);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Reveal</button>';
-    h += '</div></div>';
-    // Link row
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;">';
-    h += '<span style="font-size:12px;color:var(--t3);font-family:monospace;text-transform:uppercase;letter-spacing:.08em;">Link</span>';
-    h += '<div style="display:flex;gap:8px;">';
-    h += '<button onclick="togglePortalReveal(\'link-' + clientId + '\')" style="background:none;border:1.5px solid var(--bd);color:var(--t3);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Reveal</button>';
-    h += '<button onclick="copyPortalLink(\'' + portalUrl + '\')" style="background:var(--blue)22;border:1.5px solid var(--blue)44;color:var(--blue);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Copy</button>';
-    h += '</div></div>';
-    h += '<div id="portal-link-' + clientId + '" style="font-size:11px;color:var(--t4);font-family:monospace;word-break:break-all;filter:blur(4px);transition:filter .3s;line-height:1.5;">' + portalUrl + '</div>';
-    h += '</div>';
-  }
-  h += '</div>';
-
   // Credits
   h += '<div class="prof-sec" style="margin-top:18px;">Session Credits</div>';
   h += '<div class="credits-box">';
@@ -2111,12 +2176,7 @@ function renderProfile(clientId) {
   h += '<button class="btn btn-b btn-sm" style="margin-bottom:14px;" onclick="addStatEntry(\'' + clientId + '\')">+ Add Entry</button>';
   if (statsLog.length) {
     statsLog.forEach(function(entry) {
-      var ptName = (DB.settings && DB.settings.ptName) ? DB.settings.ptName : 'PT';
-      var effectiveSource = entry.source || 'pt';
-      var sourceTag = effectiveSource === 'client'
-        ? '<span style="font-size:9px;font-family:monospace;background:#0a1a2a;color:var(--blue);border:1px solid var(--blue)33;padding:1px 5px;border-radius:3px;margin-left:6px;">' + c.name + '</span>'
-        : '<span style="font-size:9px;font-family:monospace;background:#1a0a00;color:var(--orange);border:1px solid var(--orange)33;padding:1px 5px;border-radius:3px;margin-left:6px;">' + ptName + '</span>';
-      h += '<div class="sl-entry"><div class="sl-date">' + entry.date + sourceTag + '</div>';
+      h += '<div class="sl-entry"><div class="sl-date">' + entry.date + '</div>';
       h += '<div class="sl-notes">' + entry.notes + '</div>';
       h += '<button class="sl-del" onclick="deleteStatEntry(\'' + clientId + '\',\'' + entry.id + '\')">×</button></div>';
     });
@@ -2219,12 +2279,10 @@ function renderProfile(clientId) {
                (r.actual ? ' → <span style="color:var(--green)">' + r.actual + "kg</span>" : "") + '</div></div>';
         });
         if (s.notes) h += '<div style="margin-top:8px;padding:8px 10px;background:var(--bg3);border-radius:6px;font-size:12px;color:var(--t3);font-style:italic">📝 ' + s.notes + '</div>';
-        if (s.clientNotes) h += '<div style="margin-top:6px;padding:8px 10px;background:#0a1a2a;border:1px solid var(--blue)33;border-radius:6px;font-size:12px;color:var(--blue);font-style:italic">💬 ' + s.clientNotes + '</div>';
         h += '<div class="hc-btns">';
         if (!isCompleted) h += '<button class="btn btn-g" style="font-size:13px;padding:10px;flex:1" onclick="openRecord(\'' + s.id + '\',\'profile\')">📝 Record</button>';
         h += '<button class="btn btn-b" style="font-size:13px;padding:10px;flex:1" onclick="reshareSession(\'' + s.id + '\')">📋 Share</button>';
         h += '<button class="btn btn-gh" style="font-size:13px;padding:10px;color:var(--red)" onclick="deleteSession(\'' + s.id + '\');renderProfile(\'' + clientId + '\')">🗑</button>';
-        h += '<button class="btn btn-gh" style="font-size:13px;padding:10px;' + (s.assignedToClient ? 'color:var(--green);border-color:var(--green)33;' : '') + '" onclick="assignSessionToClient(\'' + s.id + '\');renderProfile(\'' + clientId + '\')" title="Assign to client portal">' + (s.assignedToClient ? '&#128203;Assigned' : '&#128203;') + '</button>';
         h += '</div></div></div>';
       });
       h += '</div>';
@@ -2496,7 +2554,6 @@ function openClientModal(clientId) {
   document.getElementById("mc-template").value = c ? (c.template||"strength1hr") : "strength1hr";
   document.getElementById("mc-credits").value = c ? (c.credits||0) : 0;
   document.getElementById("mc-trainingcat").value = c ? (c.trainingCat||"general") : "general";
-  document.getElementById("mc-pin").value = c ? (c.pin||"") : "";
   editingClientColor = c ? c.color : CLIENT_COLORS[0];
   const partnerSel = document.getElementById("mc-partner");
   partnerSel.innerHTML = '<option value="">None — solo client</option>' +
@@ -2536,7 +2593,6 @@ function saveClient() {
       c.credits    = credits;
       c.partnerId  = partnerId;
       c.trainingCat= trainingCat;
-      c.pin        = document.getElementById("mc-pin").value.trim() || c.pin || "";
       c.updatedAt  = now;
     }
   } else {
@@ -2550,7 +2606,6 @@ function saveClient() {
       credits,
       partnerId,
       trainingCat,
-      pin:         document.getElementById("mc-pin").value.trim() || "",
       status:      "active",
       statsLog:    [],
       updatedAt:   now,
@@ -2639,7 +2694,6 @@ function renderHistory() {
               <div class="hc-scheme">${r.scheme||""}${r.target?" · T:"+r.target+"kg":""}${r.actual?` → <span style="color:var(--green)">${r.actual}kg</span>`:""}${r.actualB?`/<span style="color:var(--teal)">${r.actualB}kg</span>`:""}</div>
             </div>`).join("")}
             ${s.notes?`<div style="margin-top:10px;padding:10px 12px;background:var(--bg3);border-radius:8px;font-size:13px;color:var(--t3);font-style:italic">📝 ${s.notes}</div>`:""}
-            ${s.clientNotes?`<div style="margin-top:6px;padding:10px 12px;background:#0a1a2a;border:1px solid #3a8be833;border-radius:8px;font-size:13px;color:var(--blue);font-style:italic">💬 ${s.clientNotes}</div>`:""}
             <div class="hc-btns">
               ${!isCompleted?`<button class="btn btn-g" onclick="openRecord('${s.id}','history')">📝 Record Actuals</button>`:""}
               ${!isCompleted?`<button class="btn btn-b" onclick="editSession('${s.id}')">✏️ Edit</button>`:""}
@@ -2864,22 +2918,10 @@ function renderSettings() {
   document.getElementById("st-url").value = DB.settings.scriptUrl||"";
   const ls = DB.settings.lastSync;
   document.getElementById("st-last-sync").textContent = ls ? "Last saved: "+fmtDate(ls.split("T")[0]) : "Never saved to Drive";
-  const ptEl = document.getElementById("st-pt-name");
-  if (ptEl) ptEl.value = DB.settings.ptName||"";
 }
 
-
-function savePtName() {
-  var el = document.getElementById('st-pt-name');
-  if (!el) return;
-  DB.settings.ptName = el.value.trim();
-  saveDB();
-  toast('Name saved — ' + (DB.settings.ptName || 'cleared') + ' ✓');
-}
 function saveScriptUrl() {
   DB.settings.scriptUrl = document.getElementById("st-url").value.trim();
-  const ptEl = document.getElementById("st-pt-name");
-  if (ptEl) DB.settings.ptName = ptEl.value.trim();
   saveDB();
   checkOnline();
 }
@@ -3320,7 +3362,7 @@ function renderCalendar() {
   const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
   const today = new Date();
 
-  // Build session map for this month (PT sessions + MenoFit sessions)
+  // Build session map for this month
   const sessionMap = {};
   DB.sessions.forEach(s=>{
     if (!s.date) return;
@@ -3331,25 +3373,6 @@ function renderCalendar() {
       sessionMap[day].push(s);
     }
   });
-
-  // Add MenoFit sessions to map
-  const menoMap = {}; // day -> [{label, block, status}]
-  if (DB.menofit && DB.menofit.activeBlock) {
-    var mb = DB.menofit.activeBlock;
-    var addMenoSessions = function(sessions, blockLabel, colour) {
-      (sessions||[]).forEach(function(s) {
-        if (!s.date) return;
-        var d2 = new Date(s.date);
-        if (d2.getFullYear()===calYear && d2.getMonth()===calMonth) {
-          var day2 = d2.getDate();
-          if (!menoMap[day2]) menoMap[day2] = [];
-          menoMap[day2].push({ label: mb.name, block: blockLabel, status: s.status, colour: colour, week: s.week });
-        }
-      });
-    };
-    addMenoSessions(mb.sessionsA || mb.sessions || [], 'A', 'var(--meno-pink)');
-    if (mb.freq === 2) addMenoSessions(mb.sessionsB || [], 'B', 'var(--meno-purple)');
-  }
 
   // Empty cells before first day
   for(let i=0;i<firstDay;i++) html+=`<div class="cal-day empty"></div>`;
@@ -3363,26 +3386,16 @@ function renderCalendar() {
       const c=getClient(s.clientId);
       return `<div class="cal-dot" style="background:${c?c.color:"var(--t3)"}"></div>`;
     }).join("");
-    const menoSessions = menoMap[d] || [];
-    const menoPill = menoSessions.length
-      ? menoSessions.map(function(m2) {
-          var col = m2.colour;
-          var done = m2.status === 'completed';
-          return '<div style="font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;margin-top:2px;background:'+col+'22;color:'+col+';border:1px solid '+col+'44;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+(done?'✓ ':'')+'🌸 '+m2.block+'</div>';
-        }).join('')
-      : '';
-    var hasSomething = sessions.length || menoSessions.length;
-    html += '<div class="cal-day' + (isToday?" today":"") + (hasSomething?" has-sessions":"") + (isSelected?" selected":"") + '" onclick="calSelectDay(' + d + ')"><div class="cal-day-num">' + d + '</div><div class="cal-day-dots">' + dots + '</div>' + menoPill + (sessions.length?'<div class="cal-day-count">'+sessions.length+'</div>':'') + '</div>';
+    html += '<div class="cal-day' + (isToday?" today":"") + (sessions.length?" has-sessions":"") + (isSelected?" selected":"") + '" onclick="calSelectDay(' + d + ')"><div class="cal-day-num">' + d + '</div><div class="cal-day-dots">' + dots + '</div>' + (sessions.length?'<div class="cal-day-count">'+sessions.length+'</div>':'') + '</div>';
   }
   grid.innerHTML = html;
 
   // Show expanded day if selected
-  if (calSelectedDay && (sessionMap[calSelectedDay] || menoMap[calSelectedDay])) {
-    const daySessions = sessionMap[calSelectedDay] || [];
-    const dayMeno     = menoMap[calSelectedDay] || [];
+  if (calSelectedDay && sessionMap[calSelectedDay]) {
+    const daySessions = sessionMap[calSelectedDay];
     const months2=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     let exHtml=`<div class="cal-expand">
-      <div class="cal-expand-date">${calSelectedDay} ${months2[calMonth]} ${calYear} — ${daySessions.length + dayMeno.length} item${(daySessions.length+dayMeno.length)!==1?"s":""}</div>`;
+      <div class="cal-expand-date">${calSelectedDay} ${months2[calMonth]} ${calYear} — ${daySessions.length} session${daySessions.length!==1?"s":""}</div>`;
     daySessions.forEach(s=>{
       const c=getClient(s.clientId),c2=s.clientId2?getClient(s.clientId2):null;
       const ico=CAT_ICONS[s.cat]||"🏋️";
@@ -3395,16 +3408,6 @@ function renderCalendar() {
         </div>
         <span class="badge badge-${isCompleted?"completed":"planned"}">${isCompleted?"✓":"Plan"}</span>
       </div>`;
-    });
-    // Show MenoFit sessions in expanded view
-    dayMeno.forEach(function(m2) {
-      var done = m2.status === 'completed';
-      exHtml += '<div class="cal-session-row" style="border-left:3px solid '+m2.colour+';padding-left:10px;">';
-      exHtml += '<span style="font-size:18px;">&#127800;</span>';
-      exHtml += '<div style="flex:1;"><div style="font-size:14px;font-weight:600;color:'+m2.colour+';">'+m2.label+' — Block '+m2.block+'</div>';
-      exHtml += '<div style="font-size:11px;color:var(--t3);font-family:monospace;">Week '+m2.week+' &middot; MenoFit</div></div>';
-      exHtml += '<span class="badge badge-'+(done?"completed":"planned")+'">'+(done?"✓ Done":"Planned")+'</span>';
-      exHtml += '</div>';
     });
     exHtml+="</div>";
     expanded.innerHTML = exHtml;
@@ -3655,8 +3658,6 @@ async function pullFromDrive() {
     saveDB();
     renderDashboard();
     renderBuildClientChips();
-    // If viewing a client profile, refresh it to pick up client-completed sessions
-    if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
     renderPage(currentPage);
 
     if (btn) { btn.innerHTML = "✅"; setTimeout(()=>{ btn.innerHTML="⬇️ Pull"; btn.style.pointerEvents=""; }, 2000); }
@@ -3782,8 +3783,6 @@ function renderMenoBuilder() {
   } else if (warn) {
     warn.style.display = 'none';
   }
-  _menoFreq = 1;
-  setMenoFreq(1);
 }
 
 function createMenoBlock() {
@@ -3799,36 +3798,29 @@ function createMenoBlock() {
     DB.menofit.activeBlock.archivedAt = new Date().toISOString();
     DB.menofit.history.unshift(DB.menofit.activeBlock);
   }
-
-  var startMon = new Date(dateVal);
-  // Ensure it's a Monday
-  var day = startMon.getDay();
-  if (day !== 1) { var diff = day===0?1:(8-day); startMon.setDate(startMon.getDate()+diff); }
-
-  var sessA = [], sessB = [];
+  var sessions = [];
   for (var w = 1; w <= 6; w++) {
-    var monDate = new Date(startMon);
-    monDate.setDate(startMon.getDate() + (w-1)*7);
-    sessA.push(makeSessTemplate(w, monDate.toISOString().slice(0,10)));
-    if (_menoFreq === 2) {
-      var thuDate = new Date(monDate);
-      thuDate.setDate(monDate.getDate() + 3); // Thursday
-      sessB.push(makeSessTemplate(w, thuDate.toISOString().slice(0,10)));
-    }
+    var d = new Date(dateVal);
+    d.setDate(d.getDate() + (w - 1) * 7);
+    sessions.push({
+      id: uid(), week: w, date: d.toISOString().slice(0, 10),
+      status: 'planned', notes: '',
+      compound:      '',
+      legs1:         ['', '', '', ''],
+      legs2:         ['', '', '', ''],
+      legsFinisher:  [],
+      upperBody1:    ['', '', '', ''],
+      upperBody2:    ['', '', '', ''],
+      upperFinisher: []
+    });
   }
-
   DB.menofit.activeBlock = {
-    id: uid(), name: name,
-    startDate: startMon.toISOString().slice(0,10),
-    numClients: clients, freq: _menoFreq,
-    createdAt: new Date().toISOString(),
-    sessionsA: sessA,
-    sessionsB: _menoFreq === 2 ? sessB : []
+    id: uid(), name: name, startDate: dateVal,
+    numClients: clients, createdAt: new Date().toISOString(), sessions: sessions
   };
   saveDB();
   document.getElementById('mb-name').value    = '';
   document.getElementById('mb-clients').value = '';
-  _menoFreq = 1;
   toast('Block created!');
   menoNav('active');
 }
@@ -3841,61 +3833,77 @@ function renderMenoActive() {
     return;
   }
   var mb = DB.menofit.activeBlock;
+  var done = mb.sessions.filter(function(s) { return s.status === 'completed'; }).length;
+  var pct  = Math.round(done / 6 * 100);
 
-  // Support legacy blocks (single sessions array)
-  if (mb.sessions && !mb.sessionsA) {
-    mb.sessionsA = mb.sessions;
-    mb.sessionsB = [];
-    mb.freq = 1;
-  }
+  var out = [];
+  out.push('<div class="block-card">');
+  out.push('<div class="block-title" style="background:var(--meno-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + mb.name + '</div>');
+  out.push('<div class="block-meta">Started ' + mb.startDate + ' &middot; ' + mb.numClients + ' participant' + (mb.numClients !== 1 ? 's' : '') + '</div>');
+  out.push('<div class="block-stats">');
+  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-pink)">' + done + '</span><span class="block-stat-lbl">Done</span></div>');
+  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-purple)">' + (6-done) + '</span><span class="block-stat-lbl">Left</span></div>');
+  out.push('<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-orange)">' + pct + '%</span><span class="block-stat-lbl">Progress</span></div>');
+  out.push('</div>');
+  out.push('<div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;"><div style="height:100%;width:' + pct + '%;background:var(--meno-grad);border-radius:3px;"></div></div>');
+  out.push('<div style="display:flex;gap:8px;margin-top:12px;">');
+  out.push('<button class="btn btn-gh" style="flex:1;" onclick="openMenoEdit()">&#9998; Edit Name</button>');
+  out.push('<button class="btn btn-gh" style="flex:1;color:var(--red);" onclick="deleteMenoActive()">&#128465; Delete</button>');
+  out.push('</div></div>');
 
-  var doneA = (mb.sessionsA||[]).filter(function(s){return s.status==='completed';}).length;
-  var doneB = (mb.sessionsB||[]).filter(function(s){return s.status==='completed';}).length;
-  var totalSess = (mb.freq===2) ? 12 : 6;
-  var totalDone = doneA + doneB;
-  var pct = Math.round(totalDone / totalSess * 100);
+  mb.sessions.forEach(function(sess) {
+    var isDone = sess.status === 'completed';
+    out.push('<div class="sess-card' + (isDone ? ' completed' : '') + '" id="meno-sess-' + sess.id + '">');
+    out.push('<div class="sess-hdr" onclick="toggleMenoSess(&quot;' + sess.id + '&quot;)">');
+    out.push('<div class="sess-week-badge' + (isDone ? ' done' : '') + '">' + (isDone ? '&#10003;' : 'W' + sess.week) + '</div>');
+    out.push('<div class="sess-info"><div class="sess-title">Week ' + sess.week + (isDone ? ' &mdash; Completed' : '') + '</div>');
+    out.push('<div class="sess-date">' + sess.date + '</div></div>');
+    out.push('<span class="hc-chev" id="meno-chev-' + sess.id + '">&#8250;</span></div>');
+    out.push('<div class="sess-body" id="meno-body-' + sess.id + '">' + buildSessEditor(mb.id, sess) + '</div>');
+    out.push('</div>');
+  });
 
-  var h = '';
-  // Block header card
-  h += '<div class="block-card">';
-  h += '<div class="block-title" style="background:var(--meno-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">' + mb.name + '</div>';
-  h += '<div class="block-meta">Started ' + mb.startDate + ' &middot; ' + mb.numClients + ' participant' + (mb.numClients!==1?'s':'') + ' &middot; ' + (mb.freq===2?'Mon &amp; Thu':'Monday') + '</div>';
-  h += '<div class="block-stats">';
-  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-pink)">' + totalDone + '</span><span class="block-stat-lbl">Done</span></div>';
-  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-purple)">' + (totalSess-totalDone) + '</span><span class="block-stat-lbl">Left</span></div>';
-  h += '<div class="block-stat"><span class="block-stat-val" style="color:var(--meno-orange)">' + pct + '%</span><span class="block-stat-lbl">Progress</span></div>';
-  h += '</div>';
-  h += '<div style="height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;"><div style="height:100%;width:'+pct+'%;background:var(--meno-grad);border-radius:3px;"></div></div>';
-  h += '<div style="display:flex;gap:8px;margin-top:12px;">';
-  h += '<button class="btn btn-gh" style="flex:1;" onclick="openMenoEdit()">&#9998; Edit Name</button>';
-  h += '<button class="btn btn-gh" style="flex:1;color:var(--red);" onclick="deleteMenoActive()">&#128465; Delete</button>';
-  h += '</div></div>';
-
-  // Block A — Monday
-  h += renderMenoBlockSection(mb, 'A', mb.sessionsA||[], '&#128197; Block A — Monday', 'var(--meno-pink)', mb.freq===2);
-
-  // Block B — Thursday (only if 2 days)
-  if (mb.freq === 2) {
-    h += renderMenoBlockSection(mb, 'B', mb.sessionsB||[], '&#128197; Block B — Thursday', 'var(--meno-purple)', false);
-  }
-
-  // Finish button
-  var allDone = (mb.freq===2) ? (doneA===6 && doneB===6) : (doneA===6);
-  if (allDone) {
-    h += '<button class="btn-finish-block" onclick="finishMenoBlock()">&#127937; Finish Block &amp; Archive</button>';
+  if (done === 6) {
+    out.push('<button class="btn-finish-block" onclick="finishMenoBlock()">&#127937; Finish Block &amp; Archive</button>');
   } else {
-    h += '<button class="btn-finish-block" onclick="finishMenoBlockEarly()" style="background:var(--bg3);color:var(--t3);border:1.5px solid var(--bd);">Archive Early (' + totalDone + '/' + totalSess + ' done)</button>';
+    out.push('<button class="btn-finish-block" onclick="finishMenoBlockEarly()" style="background:var(--bg3);color:var(--t3);border:1.5px solid var(--bd);">Archive Early (' + done + '/6 done)</button>');
   }
-
-  el.innerHTML = h;
-
-  // Restore open session
+  el.innerHTML = out.join('');
+  // Restore previously open session
   if (_menoOpenSessId) {
-    var ob = document.getElementById('meno-body-' + _menoOpenSessId);
-    var oc = document.getElementById('meno-chev-' + _menoOpenSessId);
-    if (ob) ob.classList.add('open');
-    if (oc) oc.classList.add('open');
+    var openBody = document.getElementById('meno-body-' + _menoOpenSessId);
+    var openChev = document.getElementById('meno-chev-' + _menoOpenSessId);
+    if (openBody) openBody.classList.add('open');
+    if (openChev) openChev.classList.add('open');
   }
+  // Wire up all data-action handlers via event delegation
+  el.addEventListener('click', function(ev) {
+    var t = ev.target;
+    // Walk up to find data-action element
+    var el2 = t;
+    while (el2 && el2 !== this && !el2.dataset.action) el2 = el2.parentElement;
+    if (!el2 || !el2.dataset.action) return;
+    var action = el2.dataset.action;
+    var bid2 = el2.dataset.bid, sid2 = el2.dataset.sid;
+    if (action === 'pick') {
+      ev.stopPropagation();
+      openMenoPicker(bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx), el2.dataset.cat);
+    } else if (action === 'clear') {
+      ev.stopPropagation();
+      clearMenoSlot(ev, bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx));
+    } else if (action === 'remove') {
+      removeMenoFinisherEx(bid2, sid2, el2.dataset.field, parseInt(el2.dataset.idx));
+    } else if (action === 'complete') {
+      markSessComplete(bid2, sid2, el2.dataset.complete === 'true');
+    } else if (action === 'attend') {
+      showAttendanceModal(bid2, sid2);
+    }
+  }, true);
+  el.addEventListener('change', function(ev) {
+    var t = ev.target;
+    if (t.dataset.action === 'date') updateSessDate(t.dataset.bid, t.dataset.sid, t.value);
+    if (t.dataset.action === 'notes') updateSessNotes(t.dataset.bid, t.dataset.sid, t.value);
+  });
 }
 
 function buildSessEditor(blockId, sess) {
@@ -4010,11 +4018,7 @@ function toggleMenoSess(id) {
 function getMenoSess(blockId, sessId) {
   var mb = DB.menofit && DB.menofit.activeBlock;
   if (!mb || mb.id !== blockId) return null;
-  // Check sessionsA
-  var s = (mb.sessionsA || mb.sessions || []).find(function(s) { return s.id === sessId; });
-  if (s) return s;
-  // Check sessionsB
-  return (mb.sessionsB || []).find(function(s) { return s.id === sessId; }) || null;
+  return mb.sessions.find(function(s) { return s.id === sessId; });
 }
 
 function updateSessDate(bId, sId, v)               { var s=getMenoSess(bId,sId); if(s){s.date=v; saveDB();} }
@@ -4039,7 +4043,7 @@ function finishMenoBlock() {
   DB.menofit.history.unshift(DB.menofit.activeBlock);
   DB.menofit.activeBlock = null;
   saveDB(); renderMenoDashboard(); menoNav('dashboard');
-  toast('Block archived ✓');
+  toast('Block archived &#10003;');
 }
 
 function finishMenoBlockEarly() {
@@ -4139,7 +4143,6 @@ var MENO_LIB = {"Compound": ["Deadlift", "Back Squat", "Sumo Deadlift"], "Travel
 
 var menoLibCat = 'All';
 var _menoOpenSessId = null;
-var _menoFreq = 1; // 1 or 2 days per week
 
 function addMenoCustomExercise() {
   var nameEl = document.getElementById('meno-custom-ex-name');
@@ -4495,152 +4498,21 @@ function buildWeightGraph(statsLog) {
       }).join('')
     + '</svg>'
     + '<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--t4);font-family:monospace;margin-top:4px;">'
+    + '<span>' + last8[0].date.slice(5) + '</span><span>' + latest + 'kg</span>'
     + '</div></div>';
 }
 
-
-
-
-
-
-
-
-
-
-
-function togglePortalReveal(type) {
-  var parts = type.split('-');
-  var kind = parts[0]; // 'pin' or 'link'
-  var clientId = parts.slice(1).join('-');
-  var el = document.getElementById('portal-' + type);
-  if (!el) return;
-  var isBlurred = el.style.filter !== 'none' && el.style.filter !== '';
-  el.style.filter = isBlurred ? 'none' : (kind === 'pin' ? 'blur(5px)' : 'blur(4px)');
-  // Update button text
-  var btns = el.parentElement ? el.parentElement.querySelectorAll('button') : [];
-  btns.forEach(function(btn) {
-    if (btn.textContent === 'Reveal' || btn.textContent === 'Hide') {
-      btn.textContent = isBlurred ? 'Hide' : 'Reveal';
-    }
-  });
-}
-
-function copyMenoHubLink() {
-  var url = document.getElementById('meno-hub-url').textContent.trim();
-  var btn = document.getElementById('meno-hub-copy-btn');
-  var orig = btn.textContent;
-  function confirm() { btn.textContent = '✓ Copied!'; setTimeout(function(){ btn.textContent = orig; }, 2000); }
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(function(){ toast('Hub link copied ✓'); confirm(); }).catch(function(){ fallbackCopy(url); confirm(); });
-  } else { fallbackCopy(url); confirm(); }
-}
-
-function copyPortalLink(url) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(function() { toast('Link copied ✓'); });
-  } else {
-    toast('Copy: ' + url);
-  }
-}
-
-function assignSessionToClient(sessionId) {
-  var s = DB.sessions.find(function(x) { return x.id === sessionId; });
-  if (!s) return;
-  s.assignedToClient = !s.assignedToClient;
-  s.updatedAt = new Date().toISOString();
-  saveDB();
-  if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
-  toast(s.assignedToClient ? 'Session assigned to client ✓' : 'Assignment removed');
-}
-
-
-
-
-
-
-
-
 function clearMenoSlot(event, blockId, sessId, field, idx) {
   if (event && event.stopPropagation) event.stopPropagation();
-  var s = getMenoSess(blockId, sessId); if (!s) return;
+  var s = getMenoSess(blockId, sessId); if (!s) ret
   if (field === 'compound') s.compound = '';
   else if (s[field]) s[field][idx] = '';
   saveDB();
   renderMenoActive();
 }
 
-function setMenoFreq(n) {
-  _menoFreq = n;
-  var b1 = document.getElementById('mb-freq-1');
-  var b2 = document.getElementById('mb-freq-2');
-  if (b1) { b1.style.background = n===1 ? 'var(--meno-grad)' : 'var(--bg3)'; b1.style.color = n===1 ? '#fff' : 'var(--t3)'; b1.style.border = n===1 ? 'none' : '1.5px solid var(--bd)'; }
-  if (b2) { b2.style.background = n===2 ? 'var(--meno-grad)' : 'var(--bg3)'; b2.style.color = n===2 ? '#fff' : 'var(--t3)'; b2.style.border = n===2 ? 'none' : '1.5px solid var(--bd)'; }
-}
 
-function snapToMonday(input) {
-  if (!input.value) return;
-  var d = new Date(input.value);
-  var day = d.getDay();
-  if (day !== 1) { var diff = day===0 ? 1 : (8-day); d.setDate(d.getDate()+diff); input.value = d.toISOString().slice(0,10); }
-}
 
-function makeSessTemplate(week, dateStr) {
-  return { id:uid(), week:week, date:dateStr, status:'planned', notes:'',
-    compound:'', legs1:['','','',''], legs2:['','','',''],
-    legsFinisher:[], upperBody1:['','','',''], upperBody2:['','','',''], upperFinisher:[] };
-}
-
-function copySessionToB(blockId, weekNum) {
-  var mb = DB.menofit && DB.menofit.activeBlock;
-  if (!mb || mb.id !== blockId || !mb.sessionsB) return;
-  var srcA = (mb.sessionsA||[]).find(function(s){return s.week===weekNum;});
-  var tgtB = mb.sessionsB.find(function(s){return s.week===weekNum;});
-  if (!srcA || !tgtB) return;
-  var keepId=tgtB.id, keepDate=tgtB.date, keepStatus=tgtB.status, keepNotes=tgtB.notes, keepComp=tgtB.completedAt;
-  Object.assign(tgtB, JSON.parse(JSON.stringify(srcA)));
-  tgtB.id=keepId; tgtB.date=keepDate; tgtB.status=keepStatus; tgtB.notes=keepNotes; tgtB.completedAt=keepComp;
-  saveDB(); renderMenoActive();
-  toast('Week ' + weekNum + ' copied to Block B ✓');
-}
-
-function renderMenoBlockSection(mb, blockKey, sessions, title, colour, showCopyBtn) {
-  var sectionId = 'meno-block-' + blockKey;
-  var done = sessions.filter(function(s){return s.status==='completed';}).length;
-  var pct  = Math.round(done/6*100);
-  var h = '<div class="meno-block-section">';
-  h += '<div class="meno-block-section-hdr" data-section="'+sectionId+'" onclick="toggleMenoBlockSection(this.dataset.section)">';
-  h += '<div><div class="meno-block-section-title" style="color:'+colour+';">'+title+'</div>';
-  h += '<div class="meno-block-section-meta">'+done+'/6 sessions &middot; '+pct+'% complete</div></div>';
-  h += '<span class="hc-chev" id="chev-'+sectionId+'">&#8250;</span></div>';
-  h += '<div class="meno-block-section-body" id="'+sectionId+'">';
-  sessions.forEach(function(sess) {
-    var isDone = sess.status === 'completed';
-    h += '<div class="sess-card'+(isDone?' completed':'')+'" id="meno-sess-'+sess.id+'">';
-    h += '<div class="sess-hdr" data-sessid="'+sess.id+'" onclick="toggleMenoSess(this.dataset.sessid)">';
-    h += '<div class="sess-week-badge'+(isDone?' done':'')+'>'+(isDone?'&#10003;':'W'+sess.week)+'</div>';
-    h += '<div class="sess-info"><div class="sess-title">Week '+sess.week+(isDone?' &mdash; Completed':'')+'</div>';
-    h += '<div class="sess-date">'+sess.date+'</div></div>';
-    h += '<span class="hc-chev" id="meno-chev-'+sess.id+'">&#8250;</span></div>';
-    h += '<div class="sess-body" id="meno-body-'+sess.id+'">' + buildSessEditor(mb.id, sess) + '</div></div>';
-  });
-  if (showCopyBtn) {
-    h += '<div style="padding:4px 0 8px;"><div style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:6px;font-family:monospace;">Copy week to Block B</div>';
-    h += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">';
-    for (var w=1; w<=6; w++) {
-      h += '<button class="copy-block-btn" data-bid="'+mb.id+'" data-week="'+w+'" onclick="copySessionToB(this.dataset.bid,parseInt(this.dataset.week))">Copy W'+w+'</button>';
-    }
-    h += '</div></div>';
-  }
-  h += '</div></div>';
-  return h;
-}
-
-function toggleMenoBlockSection(id) {
-  var body = document.getElementById(id);
-  var chev = document.getElementById('chev-'+id);
-  if (body) body.classList.toggle('open');
-  if (chev) chev.classList.toggle('open');
-}
 
 </script>
 </body>
