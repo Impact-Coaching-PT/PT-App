@@ -552,6 +552,16 @@ if ('serviceWorker' in navigator) {
 })();
 
 var _portalQRUrl = '';
+function toggleAssignPortal(sessionId) {
+  var s = DB.sessions.find(function(x){ return x.id === sessionId; });
+  if (!s) return;
+  s.assignedToClient = !s.assignedToClient;
+  saveDB();
+  try { toast(s.assignedToClient ? 'Assigned to client portal ✓' : 'Removed from portal'); } catch(e) {}
+  renderHistory();
+  if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
+}
+
 function togglePortalReveal(type) {
   var parts = type.split('-'); var kind = parts[0]; var cid = parts.slice(1).join('-');
   var el = document.getElementById('portal-' + type); if (!el) return;
@@ -2334,6 +2344,7 @@ function renderProfile(clientId) {
         h += '<div class="hc-btns">';
         if (!isCompleted) h += '<button class="btn btn-g" style="font-size:13px;padding:10px;flex:1" onclick="openRecord(\'' + s.id + '\',\'profile\')">📝 Record</button>';
         h += '<button class="btn btn-b" style="font-size:13px;padding:10px;flex:1" onclick="reshareSession(\'' + s.id + '\')">📋 Share</button>';
+        h += '<button class="btn btn-b" style="font-size:13px;padding:10px;flex:1;' + (s.assignedToClient ? 'color:var(--green);border-color:var(--green)33' : '') + '" onclick="toggleAssignPortal(\'' + s.id + '\')">&#128241; ' + (s.assignedToClient ? 'Assigned &#10003;' : 'Assign') + '</button>';
         h += '<button class="btn btn-gh" style="font-size:13px;padding:10px;color:var(--red)" onclick="deleteSession(\'' + s.id + '\');renderProfile(\'' + clientId + '\')">🗑</button>';
         h += '</div></div></div>';
       });
@@ -2859,6 +2870,7 @@ function renderHistory() {
               ${!isCompleted?`<button class="btn btn-g" onclick="openRecord('${s.id}','history')">📝 Record Actuals</button>`:""}
               ${!isCompleted?`<button class="btn btn-b" onclick="editSession('${s.id}')">✏️ Edit</button>`:""}
               <button class="btn btn-b" onclick="reshareSession('${s.id}')">📋 Share</button>
+              <button class="btn btn-b" onclick="toggleAssignPortal('${s.id}')" style="${s.assignedToClient ? 'color:var(--green);border-color:var(--green)33' : ''}">📲 ${s.assignedToClient ? 'Assigned ✓' : 'Assign'}</button>
               <button class="btn btn-gh" onclick="reuseSession('${s.id}')">🔁 Reuse</button>
               <button class="btn btn-gh" onclick="duplicateSession('${s.id}')">📑 Dup</button>
               <button class="btn btn-gh" style="color:var(--red)" onclick="deleteSession('${s.id}')">🗑</button>
