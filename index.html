@@ -1142,7 +1142,19 @@ if ('serviceWorker' in navigator) {
   <div class="ms-hdr"><span class="ms-title" id="mc-title">Add Client</span><button class="ms-close" onclick="closeModal()">×</button></div>
   <div class="ms-body">
     <div class="field"><span class="lbl">Name</span><input class="inp" id="mc-name" placeholder="e.g. Suzanne" autocomplete="off"></div>
-    <div class="field"><span class="lbl">PT Type / Notes</span><input class="inp" id="mc-type" placeholder="e.g. Medical Weight Loss, Strength Training…"></div>
+    <div style="display:flex;gap:10px;">
+      <div class="field" style="flex:1;"><span class="lbl">Client Type</span>
+        <select class="inp" id="mc-clienttype">
+          <option value="standard">Standard PT</option>
+          <option value="menofit">MenoFit PT</option>
+          <option value="mwl">MWL PT</option>
+        </select></div>
+      <div class="field" style="flex:1;"><span class="lbl">Location</span>
+        <select class="inp" id="mc-location">
+          <option value="gym">Gym</option>
+          <option value="online">Online</option>
+        </select></div>
+    </div>
     <div class="field"><span class="lbl">Default Template</span><select class="inp" id="mc-template"></select></div>
     <div class="field"><span class="lbl">Sessions Purchased (Credits)</span>
       <input class="inp" id="mc-credits" type="number" placeholder="e.g. 10" min="0" style="font-family:monospace;"></div>
@@ -2100,7 +2112,15 @@ function renderProfile(clientId) {
   h += '<div class="prof-hero">';
   h += '<div class="prof-av" style="background:' + c.color + ';box-shadow:0 3px 14px ' + c.color + '66">' + initials(c.name) + '</div>';
   h += '<div><div class="prof-name">' + c.name + '</div>';
-  h += '<div class="prof-type">' + (c.ptType || "General Fitness") + '</div>';
+  var _ct = c.clientType || 'standard';
+  var _ctCol = _ct === 'menofit' ? '#9a3ae8' : _ct === 'mwl' ? '#00b4d8' : '#e83a3a';
+  var _locCol = c.location === 'online' ? '#00b4d8' : '#e8923a';
+  var _locTxt = c.location === 'online' ? 'ONLINE' : 'GYM';
+  h += '<div class="prof-type" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">'
+     + (c.ptType || 'Standard PT')
+     + ' <span style="font-size:10px;background:' + _ctCol + '22;color:' + _ctCol + ';padding:2px 7px;border-radius:6px;font-family:monospace;">' + _ct.toUpperCase() + '</span>'
+     + ' <span style="font-size:10px;background:' + _locCol + '22;color:' + _locCol + ';padding:2px 7px;border-radius:6px;font-family:monospace;">' + _locTxt + '</span>'
+     + '</div>';
   h += '<div class="prof-tpl">' + (catInfo ? catInfo.icon + " " + catInfo.label + " · " : "") + (tDef ? tDef.name : "—") + (partner ? " · 👫 " + partner.name : "") + '</div>';
   h += '</div></div>';
 
@@ -2130,7 +2150,10 @@ function renderProfile(clientId) {
   var basePath   = window.location.pathname.replace(/\/[^/]*$/, '');
   var scriptParam = DB.settings && DB.settings.scriptUrl ? '&su=' + encodeURIComponent(DB.settings.scriptUrl) : '';
   var ptNameParam = DB.settings && DB.settings.ptName    ? '&pn=' + encodeURIComponent(DB.settings.ptName)    : '';
-  var portalUrl  = window.location.origin + basePath + '/client.html?id=' + clientId + '&name=' + encodeURIComponent(c.name) + scriptParam + ptNameParam;
+  var _pf = {standard:'client.html', menofit:'client-menofit.html', mwl:'client-mwl.html'};
+  var portalFile = _pf[c.clientType] || 'client.html';
+  var locParam   = c.location === 'online' ? '&loc=online' : '';
+  var portalUrl  = window.location.origin + basePath + '/' + portalFile + '?id=' + clientId + '&name=' + encodeURIComponent(c.name) + locParam + scriptParam + ptNameParam;
   h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-top:14px;margin-bottom:4px;">';
   h += '<div style="font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;font-family:monospace;margin-bottom:10px;">Client Portal</div>';
   if (!pin) {
@@ -2568,7 +2591,8 @@ function openClientModal(clientId) {
   const c = clientId ? getClient(clientId) : null;
   document.getElementById("mc-title").textContent = c ? "Edit Client" : "Add Client";
   document.getElementById("mc-name").value = c ? c.name : "";
-  document.getElementById("mc-type").value = c ? (c.ptType||"") : "";
+  document.getElementById("mc-clienttype").value = c ? (c.clientType||"standard") : "standard";
+  document.getElementById("mc-location").value   = c ? (c.location||"gym") : "gym";
   document.getElementById("mc-template").value = c ? (c.template||"strength1hr") : "strength1hr";
   document.getElementById("mc-credits").value = c ? (c.credits||0) : 0;
   document.getElementById("mc-trainingcat").value = c ? (c.trainingCat||"general") : "general";
@@ -2606,7 +2630,9 @@ function saveClient() {
     const c = getClient(editClientId);
     if (c) {
       c.name       = name;
-      c.ptType     = document.getElementById("mc-type").value;
+      c.clientType  = document.getElementById("mc-clienttype").value;
+      c.location    = document.getElementById("mc-location").value;
+      c.ptType      = {"standard":"Standard PT","menofit":"MenoFit PT","mwl":"MWL PT"}[c.clientType] || c.clientType;
       c.template   = document.getElementById("mc-template").value;
       c.color      = editingClientColor;
       c.credits    = credits;
@@ -2620,7 +2646,9 @@ function saveClient() {
     DB.clients.push({
       id:          uid(),
       name,
-      ptType:      document.getElementById("mc-type").value,
+      clientType:  document.getElementById("mc-clienttype").value,
+      location:    document.getElementById("mc-location").value,
+      ptType:      {"standard":"Standard PT","menofit":"MenoFit PT","mwl":"MWL PT"}[document.getElementById("mc-clienttype").value] || "Standard PT",
       template:    document.getElementById("mc-template").value,
       color:       editingClientColor,
       credits,
