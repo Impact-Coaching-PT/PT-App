@@ -1671,7 +1671,10 @@ function doPost(e) {
 let DB = {
   clients:[], sessions:[], customExercises:[],
   customSchemes:{}, deletedIds:[], deletedClientIds:[], tdeeHistory:[],
-  settings:{scriptUrl:"", lastSync:null}
+  checkins:[], programmes:[], symptoms:[], proteinLogs:[], sideEffects:[], progress:[],
+  menofit:{activeBlock:null,history:[]}, menoCustomExercises:{},
+  lastViewed:{},
+  settings:{scriptUrl:"", lastSync:null, ptName:""}
 };
 
 // Current build
@@ -1715,6 +1718,8 @@ function loadDB() {
       DB.symptoms            = [...(d.symptoms    || [])];
       DB.proteinLogs         = [...(d.proteinLogs || [])];
       DB.sideEffects         = [...(d.sideEffects || [])];
+      DB.progress            = [...(d.progress    || [])];
+      DB.lastViewed          = {...(d.lastViewed   || {})};
     }
   } catch(e) { /* fresh start — DB stays at defaults */ }
 }
@@ -2058,6 +2063,7 @@ function viewProfile(clientId, fromPage) {
   profileClientId = clientId;
   profileFromPage = fromPage || currentPage || "clients-list";
   currentPage = "profile";
+  DB.lastViewed[clientId] = new Date().toISOString(); saveDB();
   document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
   const pg = document.getElementById("pg-profile");
   if (!pg) { console.error("pg-profile not found"); return; }
@@ -2354,7 +2360,7 @@ function renderProfile(clientId) {
         if (s.flushes !== null && s.flushes !== undefined && s.flushes !== '')
           h += '<span style="color:#e8923a;">&#x1F525; ' + (_fLbl[s.flushes]||s.flushes) + '</span>';
         h += '</div>';
-        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + (s.date||'') + '</span>';
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + fmtDate2(s.date) + '</span>';
         h += '</div>';
         if (s.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;">' + s.notes + '</div>';
         h += '</div>';
@@ -2391,7 +2397,7 @@ function renderProfile(clientId) {
         var _lbl = _hit ? '&#10003; Hit target' : '&#10007; Missed';
         h += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd);">';
         h += '<span style="font-size:13px;font-weight:700;color:' + _col + ';">' + _lbl + '</span>';
-        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + (p.date||'') + '</span>';
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + fmtDate2(p.date) + '</span>';
         h += '</div>';
         if (p.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;padding:2px 0 6px;">' + p.notes + '</div>';
       });
@@ -2412,7 +2418,7 @@ function renderProfile(clientId) {
         (_efx||[]).forEach(function(ef) {
           h += '<span style="background:#e8923a22;color:#e8923a;border-radius:12px;padding:2px 8px;font-size:11px;font-family:monospace;">' + ef + '</span>';
         });
-        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;margin-left:auto;">' + (s.date||'') + '</span>';
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;margin-left:auto;">' + fmtDate2(s.date) + '</span>';
         h += '</div>';
         if (s.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;">' + s.notes + '</div>';
         h += '</div>';
@@ -2420,6 +2426,26 @@ function renderProfile(clientId) {
     }
     h += '</div>';
   }
+
+  // ── PROGRESS viewer (all client types) ──
+  var _progress = (DB.progress||[]).filter(function(p){ return p.clientId === clientId; })
+    .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+  h += '<div class="prof-sec" style="margin-top:18px;">&#128200; Progress</div>';
+  h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px;">';
+  if (!_progress.length) {
+    h += '<div style="font-size:13px;color:var(--t4);">No progress entries yet.</div>';
+  } else {
+    _progress.slice(0,10).forEach(function(p) {
+      h += '<div style="padding:10px 0;border-bottom:1px solid var(--bd);">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
+      h += '<span style="font-size:13px;font-weight:700;color:var(--t);">' + fmtDate2(p.date) + '</span>';
+      if (p.weight) h += '<span style="font-size:13px;color:var(--blue);font-weight:800;">' + p.weight + 'kg</span>';
+      h += '</div>';
+      if (p.notes) h += '<div style="font-size:12px;color:var(--t3);line-height:1.6;">' + p.notes + '</div>';
+      h += '</div>';
+    });
+  }
+  h += '</div>';
 
   // Set everything at once — single DOM write, no surgery
   contentEl.innerHTML = h;
@@ -3428,12 +3454,16 @@ function renderClientsList() {
       : credits <= 2
         ? `<span class="dc-pill" style="background:#1a0800;color:var(--orange);border:1px solid var(--orange)66;">🔔 ${credits} left — renew soon</span>`
         : `<span class="dc-pill" style="background:${creditColor}22;color:${creditColor};border:1px solid ${creditColor}44;">${credits} left</span>`;
+    var _lv2 = (DB.lastViewed||{})[c.id] || '2000-01-01';
+    var _hasNew = [...(DB.symptoms||[]),...(DB.proteinLogs||[]),...(DB.sideEffects||[]),...(DB.progress||[])]
+      .some(function(en){ return en.clientId===c.id && (en.savedAt||en.submittedAt||'') > _lv2; });
+    var _notifDot = _hasNew ? '<span style="width:9px;height:9px;border-radius:50%;background:#e83a3a;display:inline-block;flex-shrink:0;box-shadow:0 0 6px #e83a3a88;margin-left:4px;"></span>' : '';
     return `<div class="dc-card" onclick="viewProfile('${c.id}','clients')">
       <div class="dc-banner" style="background:linear-gradient(90deg,${c.color},${c.color}88,transparent)"></div>
       <div class="dc-inner">
         <div class="dc-av" style="background:${c.color};box-shadow:0 3px 12px ${c.color}66">${initials(c.name)}</div>
         <div class="dc-info">
-          <div class="dc-name">${c.name}</div>
+          <div class="dc-name" style="display:flex;align-items:center;gap:8px;">${c.name}${_notifDot}</div>
           <div class="dc-meta">${c.ptType||"General Fitness"}</div>
           <div class="dc-pills" style="margin-top:6px">
             <span class="dc-pill" style="background:${c.color}22;color:${c.color};border:1px solid ${c.color}44">${tDef?tDef.icon+" "+tDef.name:"—"}</span>
@@ -3801,6 +3831,7 @@ async function pullFromDrive() {
     DB.programmes  = remote.programmes  || [];
     DB.proteinLogs = remote.proteinLogs || [];
     DB.sideEffects = remote.sideEffects || [];
+    DB.progress    = remote.progress    || [];
 
     // Merge menofit data
     if (remote.menofit) {
@@ -4687,6 +4718,14 @@ function buildWeightGraph(statsLog) {
 
 
 
+
+function fmtDate2(d) {
+  if (!d) return '';
+  var s = String(d);
+  // Google Sheets returns dates as ISO timestamps — extract just the date part
+  if (s.length > 10 && s.includes('T')) return s.slice(0, 10);
+  return s;
+}
 
 function saveProteinTarget(clientId) {
   var input = document.getElementById('protein-target-input');
