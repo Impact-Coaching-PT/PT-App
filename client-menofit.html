@@ -660,11 +660,18 @@ function saveSymptomEntry() {
       + '&flushes='    + encodeURIComponent(entry.flushes !== null ? entry.flushes : '')
       + '&notes='      + encodeURIComponent(entry.notes||'')
       + '&savedAt='    + encodeURIComponent(entry.savedAt);
-    fetch(url).catch(function(){});
+    var conf = document.getElementById('sym-confirm');
+    fetch(url)
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (conf) conf.textContent = data.ok ? '\u2713 Logged & synced to PT!' : '\u2713 Logged locally';
+      })
+      .catch(function(){ if (conf) conf.textContent = '\u2713 Logged locally (sync failed)'; });
   }
   var conf = document.getElementById('sym-confirm');
   conf.style.display = 'block';
-  setTimeout(function(){ conf.style.display = 'none'; }, 2000);
+  conf.textContent = '\u2713 Logged!';
+  setTimeout(function(){ conf.style.display = 'none'; conf.textContent = '\u2713 Logged!'; }, 4000);
   renderSymptomHistory();
 }
 
