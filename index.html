@@ -1903,8 +1903,13 @@ function loadDB() {
       DB.deletedIds        = [...(d.deletedIds        || [])];
       DB.deletedClientIds  = [...(d.deletedClientIds  || [])];
       DB.tdeeHistory       = [...(d.tdeeHistory       || [])];
-      DB.menofit           = d.menofit           || { activeBlock: null, history: [] };
+      DB.menofit             = d.menofit             || { activeBlock: null, history: [] };
       DB.menoCustomExercises = d.menoCustomExercises || {};
+      DB.checkins            = [...(d.checkins    || [])];
+      DB.programmes          = [...(d.programmes  || [])];
+      DB.symptoms            = [...(d.symptoms    || [])];
+      DB.proteinLogs         = [...(d.proteinLogs || [])];
+      DB.sideEffects         = [...(d.sideEffects || [])];
     }
   } catch(e) { /* fresh start — DB stays at defaults */ }
 }
