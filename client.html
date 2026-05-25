@@ -92,45 +92,29 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
   link.href = url;
 })();
 
-function submitCheckin() {
-  var rating = document.getElementById('checkin-rating').value;
-  var notes  = document.getElementById('checkin-notes').value.trim();
-  if (!rating) { alert('Please select a rating first.'); return; }
-  var entry = {
-    clientId: clientId,
-    date: new Date().toISOString().slice(0,10),
-    rating: rating,
-    notes: notes,
-    submittedAt: new Date().toISOString()
+function renderCheckinDay() {
+  var section = document.getElementById('checkin-day-section');
+  var el      = document.getElementById('checkin-day-display');
+  if (!section || !el || !clientData) return;
+  var day = clientData.checkinDay || '';
+  if (!day) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  var dayColors = {
+    Monday:'#e83a3a', Tuesday:'#e8923a', Wednesday:'#e8d03a',
+    Thursday:'#3ae87a', Friday:'#3ab4e8', Saturday:'#9a3ae8', Sunday:'#e8389a'
   };
-  // Save locally
-  try {
-    var raw = localStorage.getItem('impact-coaching-v2');
-    if (raw) {
-      var db = JSON.parse(raw);
-      if (!db.checkins) db.checkins = [];
-      db.checkins.push(entry);
-      localStorage.setItem('impact-coaching-v2', JSON.stringify(db));
-    }
-  } catch(e) {}
-  // If Drive sync available, push up
-  if (SCRIPT_URL) {
-    fetch(SCRIPT_URL + '?action=saveCheckin', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify(entry)
-    }).catch(function(){});
-  }
-  document.getElementById('checkin-confirm').style.display = 'block';
-  document.getElementById('checkin-rating').value = '';
-  document.getElementById('checkin-notes').value = '';
-  setTimeout(function(){ document.getElementById('checkin-confirm').style.display = 'none'; }, 3000);
+  var col = dayColors[day] || '#e83a3a';
+  el.innerHTML = '<div style="background:' + col + '18;border:2px solid ' + col + '44;border-radius:12px;padding:16px;text-align:center;">'
+    + '<div style="font-size:28px;margin-bottom:8px;">&#128242;</div>'
+    + '<div style="font-size:15px;font-weight:800;color:' + col + ';margin-bottom:6px;">' + day + ' is your check-in day</div>'
+    + '<div style="font-size:12px;color:var(--t3);line-height:1.6;">Your PT will reach out to you on ' + day + ' for your weekly check-in.<br>Keep an eye on your messages!</div>'
+    + '</div>';
 }
 
 function loadProgramme() {
   var el = document.getElementById('programme-list');
   if (!el) return;
-  // First check local DB
+  // Check local cache first (populated on login from getClientData)
   try {
     var raw = localStorage.getItem('impact-coaching-v2');
     if (raw) {
@@ -139,7 +123,7 @@ function loadProgramme() {
       if (prog && prog.weeks && prog.weeks.length) { renderProgramme(prog); return; }
     }
   } catch(e) {}
-  // Try Drive if available
+  // Fallback: fetch directly if not in cache
   if (SCRIPT_URL) {
     fetch(SCRIPT_URL + '?action=getProgramme&clientId=' + encodeURIComponent(clientId))
       .then(function(r){ return r.json(); })
@@ -247,22 +231,9 @@ function renderProgramme(prog) {
       <div id="programme-list" style="color:var(--t4);font-size:13px;padding:8px 0;">Loading...</div>
     </div>
 
-    <div class="page-section">
-      <div class="sec-title">&#9989; Weekly Check-In</div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6;">Let your PT know how you got on this week.</div>
-      <div class="field"><span class="lbl">How did training go?</span>
-        <select class="inp" id="checkin-rating">
-          <option value="">Select...</option>
-          <option value="great">&#128513; Great — smashed it</option>
-          <option value="good">&#128512; Good — completed everything</option>
-          <option value="ok">&#128528; OK — managed most of it</option>
-          <option value="tough">&#128547; Tough — struggled this week</option>
-          <option value="missed">&#10060; Missed — didn't train</option>
-        </select></div>
-      <div class="field"><span class="lbl">Notes for your PT</span>
-        <textarea class="inp" id="checkin-notes" rows="3" placeholder="Anything to report — soreness, energy, life stuff..."></textarea></div>
-      <button class="btn-main" onclick="submitCheckin()">&#128232; Send Check-In</button>
-      <div id="checkin-confirm" style="display:none;margin-top:10px;font-size:13px;color:var(--green);font-weight:600;">&#10003; Check-in sent!</div>
+    <div class="page-section" id="checkin-day-section" style="display:none;">
+      <div class="sec-title">&#128197; Weekly Check-In</div>
+      <div id="checkin-day-display"></div>
     </div>
 
     <div class="page-section">
@@ -359,19 +330,22 @@ function verifyPinLocal(pin) {
     var client = (db.clients||[]).find(function(c){return c.id===clientId;});
     if (!client) { showPinError('Client not found.'); return; }
     if (String(client.pin) !== String(pin)) { showPinError('Incorrect PIN. Try again.'); return; }
-    loadClientData(db, client);
+    // Build a data object matching the new API shape
+    var sessions = (db.sessions||[]).filter(function(s){return s.clientId===clientId||s.clientId2===clientId;});
+    var programme = (db.programmes||[]).find(function(p){return p.clientId===clientId;})||null;
+    var checkins  = (db.checkins||[]).filter(function(ci){return ci.clientId===clientId;});
+    loadClientData({client:client, sessions:sessions, programme:programme, checkins:checkins});
   } catch(e) { showPinError('Error loading data.'); }
 }
 
 function verifyPinFromDrive(pin) {
   document.getElementById('pin-error').textContent = 'Checking...';
-  fetch(SCRIPT_URL)
+  var url = SCRIPT_URL + '?action=getClientData&clientId=' + encodeURIComponent(clientId) + '&pin=' + encodeURIComponent(pin);
+  fetch(url)
     .then(function(r){return r.json();})
-    .then(function(db){
-      var client = (db.clients||[]).find(function(c){return c.id===clientId;});
-      if (!client) { showPinError('Client not found.'); return; }
-      if (String(client.pin) !== String(pin)) { showPinError('Incorrect PIN. Try again.'); return; }
-      loadClientData(db, client);
+    .then(function(data){
+      if (data.error) { showPinError(data.error === 'Incorrect PIN' ? 'Incorrect PIN. Try again.' : 'Client not found.'); return; }
+      loadClientData(data);
     })
     .catch(function(){ showPinError('Could not connect. Check connection.'); });
 }
@@ -385,11 +359,38 @@ function showPinError(msg) {
   document.getElementById('p0').focus();
 }
 
-function loadClientData(db, client) {
+function loadClientData(data) {
+  // Accepts new API shape {client, sessions, programme, checkins}
+  // OR legacy shape (full db) for localStorage fallback
+  var client, db;
+  if (data.client) {
+    // New API response
+    client = data.client;
+    allSessions = (data.sessions||[]).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+    // Cache programme + checkins locally for offline use
+    try {
+      var raw = localStorage.getItem('impact-coaching-v2');
+      var localDb = raw ? JSON.parse(raw) : {};
+      if (!localDb.programmes) localDb.programmes = [];
+      if (!localDb.checkins)   localDb.checkins   = [];
+      // Upsert programme
+      if (data.programme) {
+        var pi = localDb.programmes.findIndex(function(p){return p.clientId===clientId;});
+        if (pi >= 0) localDb.programmes[pi] = data.programme;
+        else localDb.programmes.push(data.programme);
+      }
+      // Merge checkins
+      var existingIds = localDb.checkins.map(function(c){return c.id;});
+      (data.checkins||[]).forEach(function(ci){
+        if (!existingIds.includes(ci.id)) localDb.checkins.push(ci);
+      });
+      localStorage.setItem('impact-coaching-v2', JSON.stringify(localDb));
+    } catch(e) {}
+  } else {
+    // Legacy: full DB passed (localStorage fallback path)
+    client = data;  // called as loadClientData(db, client) from local path — handled below
+  }
   clientData = client;
-  allSessions = (db.sessions||[]).filter(function(s){
-    return s.clientId===clientId || s.clientId2===clientId;
-  }).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
 
   document.getElementById('pin-screen').style.display = 'none';
   document.getElementById('main-hdr').style.display = 'flex';
@@ -398,6 +399,7 @@ function loadClientData(db, client) {
     var onlineSec = document.getElementById('online-sections');
     if (onlineSec) onlineSec.style.display = 'block';
     loadProgramme();
+    renderCheckinDay();
   }
   // Show offline warning if no script URL
   if (!SCRIPT_URL) {
