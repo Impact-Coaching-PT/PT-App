@@ -551,6 +551,19 @@ if ('serviceWorker' in navigator) {
   link.href = url;
 })();
 
+function saveProteinTarget(clientId) {
+  var input = document.getElementById('protein-target-input');
+  if (!input) return;
+  var val = parseInt(input.value);
+  if (!val || val < 50 || val > 300) { alert('Enter a value between 50 and 300g.'); return; }
+  var c = getClient(clientId);
+  if (!c) return;
+  c.proteinTarget = val;
+  saveDB();
+  try { toast('Protein target set to ' + val + 'g'); } catch(e) {}
+  if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
+}
+
 function setCheckinDay(clientId, day) {
   var c = getClient(clientId);
   if (!c) return;
@@ -575,6 +588,55 @@ function togglePortalReveal(type) {
     }
   });
 }
+var _portalQRUrl = '';
+
+function showPortalQR(clientId, encodedUrl) {
+  var url = decodeURIComponent(encodedUrl);
+  _portalQRUrl = url;
+  var c = getClient(clientId);
+  var title = document.getElementById('portal-qr-title');
+  if (title && c) title.textContent = (c.name || 'Client') + ' — Portal QR';
+
+  // Clear previous QR
+  var canvas = document.getElementById('portal-qr-canvas');
+  canvas.innerHTML = '';
+
+  // Show URL
+  var urlEl = document.getElementById('portal-qr-url');
+  if (urlEl) urlEl.textContent = url;
+
+  // Generate QR
+  try {
+    var qr = new QRCode(canvas, {
+      text:         url,
+      width:        240,
+      height:       240,
+      colorDark:    '#e83a3a',
+      colorLight:   '#0d0d14',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  } catch(err) {
+    canvas.innerHTML = '<div style="color:var(--t4);font-size:12px;padding:20px;">QR generation failed — use Copy Link instead.</div>';
+  }
+
+  var modal = document.getElementById('portal-qr-modal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function hidePortalQR() {
+  document.getElementById('portal-qr-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function copyPortalQRLink() {
+  if (!_portalQRUrl) return;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(_portalQRUrl).then(function(){ try{toast('Portal link copied ✓');}catch(e){} });
+  }
+  hidePortalQR();
+}
+
 function copyPortalLink(url) {
   if (navigator.clipboard) {
     navigator.clipboard.writeText(url).then(function() { try{toast('Link copied ✓');}catch(e){} });
@@ -686,6 +748,7 @@ function saveProgramme() {
 }
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
 
@@ -1802,7 +1865,7 @@ function doPost(e) {
 let DB = {
   clients:[], sessions:[], customExercises:[],
   customSchemes:{}, deletedIds:[], deletedClientIds:[], tdeeHistory:[],
-  checkins:[], programmes:[],
+  checkins:[], programmes:[], symptoms:[], proteinLogs:[], sideEffects:[],
   settings:{scriptUrl:"", lastSync:null, ptName:""}
 };
 
@@ -2292,6 +2355,7 @@ function renderProfile(clientId) {
     h += '<div style="display:flex;gap:8px;">';
     h += '<button onclick="togglePortalReveal(\'link-' + clientId + '\')" style="background:none;border:1.5px solid var(--bd);color:var(--t3);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Reveal</button>';
     h += '<button onclick="copyPortalLink(\'' + portalUrl + '\')" style="background:var(--blue)22;border:1.5px solid var(--blue)44;color:var(--blue);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Copy</button>';
+    h += '<button onclick="showPortalQR(\'' + clientId + '\',\'' + encodeURIComponent(portalUrl) + '\')" style="background:#9a3ae822;border:1.5px solid #9a3ae844;color:#9a3ae8;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">&#9638; QR</button>';
     h += '</div></div>';
     h += '<div id="portal-link-' + clientId + '" style="font-size:11px;color:var(--t4);font-family:monospace;word-break:break-all;filter:blur(4px);transition:filter .3s;line-height:1.5;">' + portalUrl + '</div>';
     h += '</div>';
@@ -2481,6 +2545,91 @@ function renderProfile(clientId) {
     h += '<div style="margin-top:12px;padding:10px 12px;background:' + _dc + '18;border-radius:8px;border:1px solid ' + _dc + '44;font-size:12px;color:' + _dc + ';font-weight:700;">&#10003; ' + _checkinDay + ' — client will be notified in their portal</div>';
   }
   h += '</div>';
+
+  // ── MENOFIT: Symptom viewer ──
+  if (_ct === 'menofit') {
+    var symptoms = (DB.symptoms||[]).filter(function(s){ return s.clientId === clientId; })
+      .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+    h += '<div class="prof-sec" style="margin-top:18px;">&#127801; Symptom Log</div>';
+    h += '<div style="background:var(--bg2);border:1.5px solid #9a3ae833;border-radius:12px;padding:14px;margin-bottom:14px;">';
+    if (!symptoms.length) {
+      h += '<div style="font-size:13px;color:var(--t4);">No symptom entries yet.</div>';
+    } else {
+      var sleepEmoji = ['','&#128564;','&#128543;','&#128528;','&#128578;','&#128522;'];
+      var moodEmoji  = ['','&#128546;','&#128543;','&#128528;','&#128578;','&#128522;'];
+      var flushLbl   = ['None','1-2','3-5','5+'];
+      symptoms.slice(0,10).forEach(function(s) {
+        h += '<div style="padding:10px 0;border-bottom:1px solid var(--bd);">';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
+        h += '<div style="display:flex;gap:10px;">';
+        if (s.sleep)   h += '<span title="Sleep">'  + (sleepEmoji[s.sleep]||s.sleep)  + ' Sleep</span>';
+        if (s.mood)    h += '<span title="Mood">'   + (moodEmoji[s.mood]||s.mood)    + ' Mood</span>';
+        if (s.flushes !== null && s.flushes !== undefined && s.flushes !== '')
+                       h += '<span style="color:#e8923a;">&#x1F525; ' + (flushLbl[s.flushes]||s.flushes) + '</span>';
+        h += '</div>';
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + (s.date||'') + '</span>';
+        h += '</div>';
+        if (s.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;">' + s.notes + '</div>';
+        h += '</div>';
+      });
+    }
+    h += '</div>';
+  }
+
+  // ── MWL: Protein + side effects viewer ──
+  if (_ct === 'mwl') {
+    var proteinLogs = (DB.proteinLogs||[]).filter(function(p){ return p.clientId === clientId; })
+      .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+    var seLogs = (DB.sideEffects||[]).filter(function(s){ return s.clientId === clientId; })
+      .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+
+    // Protein target setter
+    h += '<div class="prof-sec" style="margin-top:18px;">&#127859; Protein Target</div>';
+    h += '<div style="background:var(--bg2);border:1.5px solid #00b4d833;border-radius:12px;padding:14px;margin-bottom:14px;">';
+    h += '<div style="font-size:12px;color:var(--t3);margin-bottom:10px;">Set daily protein target — client sees this in their portal.</div>';
+    h += '<div style="display:flex;gap:10px;align-items:center;">';
+    h += '<input type="number" id="protein-target-input" value="' + (c.proteinTarget||'') + '" placeholder="e.g. 120" min="50" max="300" style="flex:1;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t);border-radius:8px;padding:10px;font-size:16px;font-weight:800;font-family:monospace;text-align:center;">';
+    h += '<button onclick="saveProteinTarget(\'' + clientId + '\')" style="background:linear-gradient(135deg,#e83a3a,#e8923a,#00b4d8);border:none;color:#fff;font-weight:700;padding:10px 16px;border-radius:8px;cursor:pointer;font-family:inherit;">Set</button>';
+    h += '</div></div>';
+
+    // Protein log viewer
+    h += '<div class="prof-sec" style="margin-top:4px;">&#127859; Protein Log</div>';
+    h += '<div style="background:var(--bg2);border:1.5px solid #00b4d833;border-radius:12px;padding:14px;margin-bottom:14px;">';
+    if (!proteinLogs.length) {
+      h += '<div style="font-size:13px;color:var(--t4);">No protein entries yet.</div>';
+    } else {
+      proteinLogs.slice(0,10).forEach(function(p) {
+        var col = p.hit === true || p.hit === 'true' ? '#3ae87a' : '#e83a3a';
+        var lbl = p.hit === true || p.hit === 'true' ? '&#10003; Hit target' : '&#10007; Missed';
+        h += '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd);">';
+        h += '<span style="font-size:13px;font-weight:700;color:' + col + ';">' + lbl + '</span>';
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + (p.date||'') + '</span>';
+        h += '</div>';
+        if (p.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;padding:2px 0 6px;">' + p.notes + '</div>';
+      });
+    }
+    h += '</div>';
+
+    // Side effects viewer
+    h += '<div class="prof-sec" style="margin-top:4px;">&#128203; Side Effects</div>';
+    h += '<div style="background:var(--bg2);border:1.5px solid #e8923a33;border-radius:12px;padding:14px;margin-bottom:14px;">';
+    if (!seLogs.length) {
+      h += '<div style="font-size:13px;color:var(--t4);">No side effect entries yet.</div>';
+    } else {
+      seLogs.slice(0,10).forEach(function(s) {
+        h += '<div style="padding:10px 0;border-bottom:1px solid var(--bd);">';
+        h += '<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:4px;">';
+        (s.effects||[]).forEach(function(ef) {
+          h += '<span style="background:#e8923a22;color:#e8923a;border-radius:12px;padding:2px 8px;font-size:11px;font-family:monospace;">' + ef + '</span>';
+        });
+        h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;margin-left:auto;">' + (s.date||'') + '</span>';
+        h += '</div>';
+        if (s.notes) h += '<div style="font-size:12px;color:var(--t3);font-style:italic;">' + s.notes + '</div>';
+        h += '</div>';
+      });
+    }
+    h += '</div>';
+  }
 
   // ── WEEKLY PROGRAMME (assign to client) ──
   var clientProg = (DB.programmes||[]).find(function(p){ return p.clientId === clientId; }) || null;
@@ -4718,5 +4867,19 @@ function clearMenoSlot(event, blockId, sessId, field, idx) {
 
 
 </script>
+
+<!-- PORTAL QR MODAL -->
+<div id="portal-qr-modal" onclick="hidePortalQR()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;padding:24px;">
+  <div onclick="event.stopPropagation()" style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:700;color:var(--t);text-transform:uppercase;letter-spacing:.08em;" id="portal-qr-title">Client Portal QR</div>
+      <button onclick="hidePortalQR()" style="background:none;border:1.5px solid var(--bd);color:var(--t3);font-size:18px;font-weight:700;width:32px;height:32px;border-radius:8px;cursor:pointer;line-height:1;font-family:inherit;">&#215;</button>
+    </div>
+    <div id="portal-qr-canvas" style="margin:0 auto 14px;display:flex;justify-content:center;"></div>
+    <div id="portal-qr-url" style="font-size:10px;color:var(--t4);font-family:monospace;word-break:break-all;line-height:1.5;margin-bottom:14px;"></div>
+    <button onclick="copyPortalQRLink()" style="width:100%;background:var(--grad);border:none;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">&#128203; Copy Link</button>
+  </div>
+</div>
+
 </body>
 </html>
