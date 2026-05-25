@@ -242,6 +242,71 @@ function _syncMWLEntry(action, entry) {
   fetch(url).catch(function(){});
 }
 
+function saveProgressEntry() {
+  var dateEl   = document.getElementById('prog-date');
+  var weightEl = document.getElementById('prog-weight');
+  var notesEl  = document.getElementById('prog-notes');
+  var weight   = weightEl ? weightEl.value.trim() : '';
+  var notes    = notesEl  ? notesEl.value.trim()  : '';
+  if (!weight && !notes) { alert('Add at least a weight or a note.'); return; }
+  var entry = {
+    id:       'pr_' + Date.now(),
+    clientId: clientId,
+    date:     dateEl && dateEl.value ? dateEl.value : new Date().toISOString().slice(0,10),
+    weight:   weight,
+    notes:    notes,
+    savedAt:  new Date().toISOString()
+  };
+  // Save locally
+  try {
+    var raw = localStorage.getItem('impact-coaching-v2');
+    if (raw) {
+      var db = JSON.parse(raw);
+      if (!db.progress) db.progress = [];
+      db.progress.unshift(entry);
+      localStorage.setItem('impact-coaching-v2', JSON.stringify(db));
+    }
+  } catch(e) {}
+  // Sync to Drive
+  if (SCRIPT_URL) {
+    var url = SCRIPT_URL
+      + '?action=saveProgress'
+      + '&clientId=' + encodeURIComponent(entry.clientId)
+      + '&date='      + encodeURIComponent(entry.date)
+      + '&weight='    + encodeURIComponent(entry.weight)
+      + '&notes='     + encodeURIComponent(entry.notes)
+      + '&savedAt='   + encodeURIComponent(entry.savedAt);
+    fetch(url).catch(function(){});
+  }
+  if (weightEl) weightEl.value = '';
+  if (notesEl)  notesEl.value  = '';
+  var conf = document.getElementById('prog-confirm');
+  conf.style.display = 'block';
+  setTimeout(function(){ conf.style.display = 'none'; }, 2500);
+  renderProgressLog();
+}
+
+function renderProgressLog() {
+  var el = document.getElementById('progress-list');
+  if (!el) return;
+  try {
+    var raw = localStorage.getItem('impact-coaching-v2');
+    var log = raw ? (JSON.parse(raw).progress || []).filter(function(p){ return p.clientId === clientId; }) : [];
+    if (!log.length) { el.innerHTML = '<div style="color:var(--t4);font-size:13px;">No entries yet.</div>'; return; }
+    var h = '';
+    log.slice(0,10).forEach(function(p) {
+      h += '<div style="background:var(--bg3);border-radius:8px;padding:12px;margin-bottom:8px;">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">';
+      h += '<span style="font-size:12px;font-family:monospace;color:var(--t3);">' + (p.date||'') + '</span>';
+      if (p.weight) h += '<span style="font-size:16px;font-weight:800;color:#00b4d8;">' + p.weight + 'kg</span>';
+      h += '</div>';
+      if (p.notes) h += '<div style="font-size:13px;color:var(--t);line-height:1.6;">' + p.notes + '</div>';
+      h += '</div>';
+    });
+    el.innerHTML = h;
+  } catch(e) { el.innerHTML = ''; }
+}
+
 function renderCheckinDay() {
   var section = document.getElementById('checkin-day-section');
   var el      = document.getElementById('checkin-day-display');
@@ -439,8 +504,22 @@ function renderProgramme(prog) {
     </div>
 
     <div class="page-section">
-      <div class="sec-title">&#128248; Progress</div>
-      <div id="progress-list" style="color:var(--t4);font-size:13px;padding:8px 0;">No progress entries yet.</div>
+      <div class="sec-title" style="color:#00b4d8;">&#128200; Progress</div>
+      <div style="font-size:12px;color:var(--t3);margin-bottom:12px;line-height:1.6;">Log your progress — weight, measurements, or how you feel. Your PT can see these entries.</div>
+      <div style="display:flex;gap:10px;margin-bottom:10px;">
+        <div style="flex:1;"><span class="lbl">Date</span>
+          <input class="inp" id="prog-date" type="date" style="font-family:monospace;">
+        </div>
+        <div style="flex:1;"><span class="lbl">Weight (kg)</span>
+          <input class="inp" id="prog-weight" type="number" step="0.1" placeholder="e.g. 72.5" style="font-family:monospace;">
+        </div>
+      </div>
+      <div class="field"><span class="lbl">Notes</span>
+        <textarea class="inp" id="prog-notes" rows="2" placeholder="e.g. Feeling stronger, clothes fitting better..."></textarea>
+      </div>
+      <button class="btn-main" onclick="saveProgressEntry()" style="background:linear-gradient(135deg,#e83a3a,#e8923a,#00b4d8);">+ Log Progress</button>
+      <div id="prog-confirm" style="display:none;margin-top:8px;font-size:13px;color:#00b4d8;font-weight:700;">&#10003; Progress logged!</div>
+      <div id="progress-list" style="margin-top:14px;"></div>
     </div>
 
   </div>
@@ -597,11 +676,14 @@ function loadClientData(data) {
   document.getElementById('pin-screen').style.display = 'none';
   document.getElementById('main-hdr').style.display = 'flex';
   document.getElementById('main-content').style.display = 'block';
+  var _pd = document.getElementById('prog-date');
+  if (_pd) _pd.value = new Date().toISOString().slice(0,10);
   if (window._isOnline) {
     var onlineSec = document.getElementById('online-sections');
     if (onlineSec) onlineSec.style.display = 'block';
     loadProgramme();
     renderCheckinDay();
+    renderProgressLog();
     renderProteinTarget();
     renderProteinHistory();
     renderSEHistory();
