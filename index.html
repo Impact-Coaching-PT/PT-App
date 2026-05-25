@@ -1193,6 +1193,8 @@ function hideMenoHubQR() {
     <div class="field"><span class="lbl">Training Partner <span style="color:var(--t4);text-transform:none;letter-spacing:0">(2:1 sessions)</span></span>
       <select class="inp" id="mc-partner"><option value="">None — solo client</option></select></div>
     <div class="field"><span class="lbl">Colour</span><div class="color-opts" id="mc-colors"></div></div>
+    <div class="field"><span class="lbl">Client Portal PIN <span style="color:var(--t4);text-transform:none;letter-spacing:0">(5 digits — share with client)</span></span>
+      <input class="inp" id="mc-pin" type="number" placeholder="e.g. 12345" min="10000" max="99999" style="font-family:monospace;letter-spacing:.2em;text-align:center;"></div>
   </div>
   <div class="ms-foot">
     <button class="btn btn-g btn-blk" onclick="saveClient()">Save Client</button>
@@ -2624,6 +2626,7 @@ function openClientModal(clientId) {
   document.getElementById("mc-title").textContent = c ? "Edit Client" : "Add Client";
   document.getElementById("mc-name").value = c ? c.name : "";
   document.getElementById("mc-clienttype").value = c ? (c.clientType||"standard") : "standard";
+  document.getElementById("mc-pin").value = c ? (c.pin||"") : "";
   document.getElementById("mc-location").value   = c ? (c.location||"gym") : "gym";
   document.getElementById("mc-template").value = c ? (c.template||"strength1hr") : "strength1hr";
   document.getElementById("mc-credits").value = c ? (c.credits||0) : 0;
@@ -2662,6 +2665,7 @@ function saveClient() {
     if (c) {
       c.name       = name;
       c.clientType  = document.getElementById("mc-clienttype").value;
+      c.pin         = document.getElementById("mc-pin").value.trim() || c.pin || "";
       c.location    = document.getElementById("mc-location").value;
       c.ptType      = {"standard":"Standard PT","menofit":"MenoFit PT","mwl":"MWL PT"}[c.clientType] || c.clientType;
       c.template   = document.getElementById("mc-template").value;
@@ -2677,6 +2681,7 @@ function saveClient() {
       id:          uid(),
       name,
       clientType:  document.getElementById("mc-clienttype").value,
+      pin:         document.getElementById("mc-pin").value.trim() || "",
       location:    document.getElementById("mc-location").value,
       ptType:      {"standard":"Standard PT","menofit":"MenoFit PT","mwl":"MWL PT"}[document.getElementById("mc-clienttype").value] || "Standard PT",
       template:    document.getElementById("mc-template").value,
