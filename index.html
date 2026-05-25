@@ -3977,6 +3977,14 @@ async function pullFromDrive() {
     DB.deletedClientIds = allDeletedClients;
     if (remote.settings && remote.settings.scriptUrl) DB.settings.scriptUrl = remote.settings.scriptUrl;
 
+    // Merge Drive-only collections (symptoms, checkins, programmes, MWL logs)
+    // Remote is authoritative — these are written directly to Sheet tabs, not blob
+    if (remote.symptoms    && remote.symptoms.length)    DB.symptoms    = remote.symptoms;
+    if (remote.checkins    && remote.checkins.length)    DB.checkins    = remote.checkins;
+    if (remote.programmes  && remote.programmes.length)  DB.programmes  = remote.programmes;
+    if (remote.proteinLogs && remote.proteinLogs.length) DB.proteinLogs = remote.proteinLogs;
+    if (remote.sideEffects && remote.sideEffects.length) DB.sideEffects = remote.sideEffects;
+
     // Merge menofit data
     if (remote.menofit) {
       var lm = DB.menofit || { activeBlock: null, history: [] };
