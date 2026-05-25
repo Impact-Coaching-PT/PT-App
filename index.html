@@ -609,6 +609,73 @@ function hideMenoHubQR() {
   document.body.style.overflow = '';
 }
 
+
+// ── PROGRAMME MODAL ──
+var _progClientId = null;
+
+function openProgrammeModal(clientId) {
+  _progClientId = clientId;
+  var existing = (DB.programmes||[]).find(function(p){return p.clientId===clientId;}) || null;
+  var weeks = existing ? existing.weeks : [{content:''},{content:''},{content:''},{content:''}];
+
+  var modal = document.createElement('div');
+  modal.id = 'prog-modal-overlay';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;';
+  var inner = '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:20px;padding:20px;width:100%;max-width:500px;margin:auto;">';
+  inner += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">';
+  inner += '<div style="font-size:15px;font-weight:800;">&#128203; Weekly Programme</div>';
+  inner += '<button onclick="closeProgrammeModal()" style="background:none;border:1.5px solid var(--bd);color:var(--t3);font-size:18px;width:32px;height:32px;border-radius:8px;cursor:pointer;font-family:inherit;">&#215;</button>';
+  inner += '</div>';
+  inner += '<div style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.6;">Each week can contain workouts, notes, or instructions. Client sees this in their portal after Drive sync.</div>';
+  weeks.forEach(function(wk, i) {
+    inner += '<div style="margin-bottom:10px;"><span style="font-size:11px;color:var(--t3);font-family:monospace;text-transform:uppercase;letter-spacing:.08em;">Week ' + (i+1) + '</span>';
+    inner += '<textarea id="prog-week-' + i + '" style="width:100%;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t);border-radius:8px;padding:10px;font-size:13px;line-height:1.6;margin-top:4px;font-family:inherit;resize:vertical;" rows="3" placeholder="e.g. Day 1: Squat 3x8, RDL 3x10\nDay 2: Bench 3x8, Row 3x10...">' + (wk.content||'') + '</textarea></div>';
+  });
+  inner += '<div style="display:flex;gap:10px;margin-top:4px;">';
+  inner += '<button onclick="addProgWeek()" style="flex:1;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t3);font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">+ Add Week</button>';
+  inner += '<button onclick="saveProgramme()" style="flex:2;background:var(--grad);border:none;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">&#128190; Save Programme</button>';
+  inner += '</div></div>';
+  modal.innerHTML = inner;
+  document.body.appendChild(modal);
+  document.body.style.overflow = 'hidden';
+}
+
+function addProgWeek() {
+  var overlay = document.getElementById('prog-modal-overlay');
+  if (!overlay) return;
+  var i = overlay.querySelectorAll('textarea[id^="prog-week-"]').length;
+  var container = overlay.querySelector('textarea[id^="prog-week-"]').closest('div').parentNode;
+  var btns = overlay.querySelector('div[style*="display:flex;gap:10px"]');
+  var div = document.createElement('div');
+  div.style.marginBottom = '10px';
+  div.innerHTML = '<span style="font-size:11px;color:var(--t3);font-family:monospace;text-transform:uppercase;letter-spacing:.08em;">Week ' + (i+1) + '</span>'
+    + '<textarea id="prog-week-' + i + '" style="width:100%;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t);border-radius:8px;padding:10px;font-size:13px;line-height:1.6;margin-top:4px;font-family:inherit;resize:vertical;" rows="3" placeholder="e.g. Day 1: Squat 3x8..."></textarea>';
+  btns.parentNode.insertBefore(div, btns);
+}
+
+function closeProgrammeModal() {
+  var el = document.getElementById('prog-modal-overlay');
+  if (el) el.remove();
+  document.body.style.overflow = '';
+}
+
+function saveProgramme() {
+  var textareas = document.querySelectorAll('textarea[id^="prog-week-"]');
+  var weeks = [];
+  textareas.forEach(function(ta) { weeks.push({content: ta.value.trim()}); });
+  weeks = weeks.filter(function(w){ return w.content; });
+  if (!weeks.length) { alert('Add at least one week of content.'); return; }
+  if (!DB.programmes) DB.programmes = [];
+  var idx = DB.programmes.findIndex(function(p){return p.clientId===_progClientId;});
+  var prog = { clientId: _progClientId, updatedAt: new Date().toISOString(), weeks: weeks };
+  if (idx >= 0) DB.programmes[idx] = prog;
+  else DB.programmes.push(prog);
+  saveDB();
+  closeProgrammeModal();
+  try { toast('Programme saved ✓ — sync to Drive so client can see it'); } catch(e) {}
+  if (currentPage === 'profile' && profileClientId) renderProfile(profileClientId);
+}
+
 </script>
 </head>
 <body>
@@ -1726,7 +1793,8 @@ function doPost(e) {
 let DB = {
   clients:[], sessions:[], customExercises:[],
   customSchemes:{}, deletedIds:[], deletedClientIds:[], tdeeHistory:[],
-  settings:{scriptUrl:"", lastSync:null}
+  checkins:[], programmes:[],
+  settings:{scriptUrl:"", lastSync:null, ptName:""}
 };
 
 // Current build
@@ -2381,6 +2449,48 @@ function renderProfile(clientId) {
   } else {
     h = h.replace('<!-- TDEE_PLACEHOLDER -->', buildWeightGraph(c.statsLog || []));
   }
+
+  // ── CLIENT CHECK-INS (from Drive sync) ──
+  var clientCheckins = (DB.checkins||[]).filter(function(ci){ return ci.clientId === clientId; })
+    .sort(function(a,b){ return (b.submittedAt||b.date||'').localeCompare(a.submittedAt||a.date||''); });
+  h += '<div class="prof-sec" style="margin-top:18px;">&#9989; Client Check-ins</div>';
+  h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px;">';
+  if (!clientCheckins.length) {
+    h += '<div style="font-size:13px;color:var(--t4);padding:4px 0;">No check-ins yet — client hasn't submitted one.</div>';
+  } else {
+    var ratingEmoji = {great:'&#128513;',good:'&#128512;',ok:'&#128528;',tough:'&#128547;',missed:'&#10060;'};
+    var ratingLabel = {great:'Great',good:'Good',ok:'OK',tough:'Tough',missed:'Missed'};
+    clientCheckins.forEach(function(ci) {
+      h += '<div style="padding:10px 0;border-bottom:1px solid var(--bd);">';
+      h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">';
+      h += '<span style="font-size:13px;font-weight:700;">' + (ratingEmoji[ci.rating]||'') + ' ' + (ratingLabel[ci.rating]||ci.rating) + '</span>';
+      h += '<span style="font-size:11px;color:var(--t3);font-family:monospace;">' + (ci.date||'') + '</span>';
+      h += '</div>';
+      if (ci.notes) h += '<div style="font-size:12px;color:var(--t3);line-height:1.6;font-style:italic;">&#8220;' + ci.notes + '&#8221;</div>';
+      h += '</div>';
+    });
+  }
+  h += '</div>';
+
+  // ── WEEKLY PROGRAMME (assign to client) ──
+  var clientProg = (DB.programmes||[]).find(function(p){ return p.clientId === clientId; }) || null;
+  h += '<div class="prof-sec" style="margin-top:4px;">&#128203; Weekly Programme</div>';
+  h += '<div style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:14px;">';
+  h += '<div style="font-size:12px;color:var(--t3);margin-bottom:10px;line-height:1.6;">Assign a programme — client sees it in their portal after your next Drive sync.</div>';
+  if (clientProg && clientProg.weeks && clientProg.weeks.length) {
+    h += '<div style="margin-bottom:10px;">';
+    clientProg.weeks.forEach(function(wk, wi) {
+      h += '<div style="background:var(--bg3);border-radius:8px;padding:10px 12px;margin-bottom:8px;">';
+      h += '<div style="font-size:11px;color:var(--t3);font-family:monospace;margin-bottom:4px;">WEEK ' + (wi+1) + '</div>';
+      h += '<div style="font-size:13px;color:var(--t);white-space:pre-wrap;">' + (wk.content||'') + '</div>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+  h += '<button onclick="openProgrammeModal(\'' + clientId + '\')" style="width:100%;background:var(--bg3);border:1.5px solid var(--bd);color:var(--t2);font-weight:700;font-size:13px;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">'
+     + (clientProg ? '&#9998; Edit Programme' : '+ Assign Programme') + '</button>';
+  h += '</div>';
+
   // Set everything at once — single DOM write, no surgery
   contentEl.innerHTML = h;
 }

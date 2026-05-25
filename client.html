@@ -127,6 +127,48 @@ function submitCheckin() {
   setTimeout(function(){ document.getElementById('checkin-confirm').style.display = 'none'; }, 3000);
 }
 
+function loadProgramme() {
+  var el = document.getElementById('programme-list');
+  if (!el) return;
+  // First check local DB
+  try {
+    var raw = localStorage.getItem('impact-coaching-v2');
+    if (raw) {
+      var db = JSON.parse(raw);
+      var prog = (db.programmes||[]).find(function(p){ return p.clientId === clientId; });
+      if (prog && prog.weeks && prog.weeks.length) { renderProgramme(prog); return; }
+    }
+  } catch(e) {}
+  // Try Drive if available
+  if (SCRIPT_URL) {
+    fetch(SCRIPT_URL + '?action=getProgramme&clientId=' + encodeURIComponent(clientId))
+      .then(function(r){ return r.json(); })
+      .then(function(data) {
+        if (data && data.weeks && data.weeks.length) renderProgramme(data);
+        else el.innerHTML = '<span style="color:var(--t4);">No programme assigned yet — check back after your next session.</span>';
+      })
+      .catch(function(){
+        el.innerHTML = '<span style="color:var(--t4);">No programme assigned yet.</span>';
+      });
+  } else {
+    el.innerHTML = '<span style="color:var(--t4);">No programme assigned yet — check back after your next session.</span>';
+  }
+}
+
+function renderProgramme(prog) {
+  var el = document.getElementById('programme-list');
+  if (!el) return;
+  var h = '';
+  (prog.weeks||[]).forEach(function(wk, i) {
+    h += '<div style="background:var(--bg3);border-radius:10px;padding:12px;margin-bottom:10px;">';
+    h += '<div style="font-size:10px;color:var(--t3);font-family:monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">Week ' + (i+1) + '</div>';
+    h += '<div style="font-size:13px;color:var(--t);line-height:1.7;white-space:pre-wrap;">' + (wk.content||'') + '</div>';
+    h += '</div>';
+  });
+  if (prog.updatedAt) h += '<div style="font-size:11px;color:var(--t4);font-family:monospace;margin-top:4px;">Updated ' + (prog.updatedAt||'').slice(0,10) + '</div>';
+  el.innerHTML = h || '<span style="color:var(--t4);">No programme assigned yet.</span>';
+}
+
 </script>
 </head>
 <body>
@@ -202,7 +244,7 @@ function submitCheckin() {
 
     <div class="page-section">
       <div class="sec-title">&#128203; My Weekly Programme</div>
-      <div id="programme-list" style="color:var(--t4);font-size:13px;padding:8px 0;">No programme assigned yet — check back after your next session.</div>
+      <div id="programme-list" style="color:var(--t4);font-size:13px;padding:8px 0;">Loading...</div>
     </div>
 
     <div class="page-section">
@@ -355,6 +397,7 @@ function loadClientData(db, client) {
   if (window._isOnline) {
     var onlineSec = document.getElementById('online-sections');
     if (onlineSec) onlineSec.style.display = 'block';
+    loadProgramme();
   }
   // Show offline warning if no script URL
   if (!SCRIPT_URL) {
