@@ -372,6 +372,46 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
         </div>
       </div>
 
+      <div class="ib teal">
+        <div class="ib-hdr" onclick="toggleCard('nt-protein')">
+          <div class="ib-title">📏 NHS Protein Guidelines + Calculator</div>
+          <div class="ib-chev" id="chev-nt-protein">&#8964;</div>
+        </div>
+        <div class="ib-body" id="nt-protein">
+          <strong>NHS recommended protein intake:</strong><br><br>
+          The NHS advises a minimum of <strong>0.75g of protein per kg of body weight</strong> per day for healthy adults. However, on weight loss medication — where muscle loss is a real risk — most specialists recommend higher targets:<br><br>
+          <ul>
+            <li><strong>General health:</strong> 0.75g per kg (NHS minimum)</li>
+            <li><strong>Active / exercising:</strong> 1.2–1.6g per kg</li>
+            <li><strong>On GLP-1 medication:</strong> 1.2–1.5g per kg (to protect muscle)</li>
+            <li><strong>Older adults (60+):</strong> 1.0–1.2g per kg minimum</li>
+          </ul>
+          <em>Always discuss specific targets with your prescriber or GP.</em><br><br>
+
+          <strong>🧮 Your Personal Protein Target</strong><br><br>
+          <div style="background:#0d1215;border:1.5px solid #00b4d833;border-radius:12px;padding:16px;margin-top:8px;">
+            <div style="font-size:13px;color:#c0d8e0;margin-bottom:12px;">Enter your weight to calculate your recommended daily protein range.</div>
+            <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
+              <input type="number" id="protein-calc-weight" placeholder="Weight in kg" min="30" max="300"
+                style="flex:1;background:#1a2830;border:1.5px solid #00b4d844;color:#e8e8f0;border-radius:8px;padding:10px 12px;font-size:16px;font-family:monospace;text-align:center;outline:none;">
+              <span style="color:#00b4d8;font-size:13px;font-family:monospace;font-weight:700;">kg</span>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <button onclick="calcProtein()" style="flex:2;background:linear-gradient(135deg,#e83a3a,#e8923a,#00b4d8);border:none;color:#fff;font-weight:700;font-size:14px;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;">Calculate</button>
+              <button onclick="resetProtein()" style="flex:1;background:#1a2830;border:1.5px solid #00b4d833;color:#7898a8;font-weight:700;font-size:14px;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit;">Reset</button>
+            </div>
+            <div id="protein-result" style="display:none;margin-top:14px;">
+              <div style="background:#0a1e28;border:1.5px solid #00b4d844;border-radius:10px;padding:14px;text-align:center;">
+                <div style="font-size:11px;color:#7898a8;font-family:monospace;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Your daily protein range</div>
+                <div id="protein-min-max" style="font-size:28px;font-weight:900;background:linear-gradient(135deg,#e8923a,#00b4d8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;"></div>
+                <div style="font-size:12px;color:#7898a8;margin-bottom:12px;">grams per day</div>
+                <div id="protein-breakdown" style="font-size:12px;color:#a0b8c8;line-height:1.8;text-align:left;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="ib orange">
         <div class="ib-hdr" onclick="toggleCard('nt2')">
           <div class="ib-title">🍽️ NHS Eatwell Guide basics</div>
@@ -1014,6 +1054,34 @@ function goToFB() {
   window.open(FB_URL, '_blank');
 }
 
+
+function calcProtein() {
+  var w = parseFloat(document.getElementById('protein-calc-weight').value);
+  if (!w || w < 30 || w > 300) {
+    alert('Please enter a valid weight between 30 and 300 kg.');
+    return;
+  }
+  var nhs    = Math.round(w * 0.75);
+  var active = Math.round(w * 1.2) + '–' + Math.round(w * 1.6);
+  var glp1   = Math.round(w * 1.2) + '–' + Math.round(w * 1.5);
+  var older  = Math.round(w * 1.0) + '–' + Math.round(w * 1.2);
+  var minG   = Math.round(w * 0.75);
+  var maxG   = Math.round(w * 1.6);
+
+  document.getElementById('protein-min-max').textContent = minG + 'g – ' + maxG + 'g';
+  document.getElementById('protein-breakdown').innerHTML =
+    '<strong style="color:#00b4d8;">NHS minimum:</strong> ' + nhs + 'g/day<br>' +
+    '<strong style="color:#e8923a;">On GLP-1 medication:</strong> ' + glp1 + 'g/day<br>' +
+    '<strong style="color:#3ae87a;">Active / exercising:</strong> ' + active + 'g/day<br>' +
+    '<strong style="color:#c4a0e8;">60+ years:</strong> ' + older + 'g/day';
+
+  document.getElementById('protein-result').style.display = 'block';
+}
+
+function resetProtein() {
+  document.getElementById('protein-calc-weight').value = '';
+  document.getElementById('protein-result').style.display = 'none';
+}
 </script>
 </body>
 </html>
