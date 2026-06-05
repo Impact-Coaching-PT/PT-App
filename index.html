@@ -4480,8 +4480,8 @@ function renderMenoPicker() {
   // Decide which categories to show based on filter
   var catMap = {
     'Compound':    ['Compound'],
-    'Legs':        ['Compound','Travelling (20m)','Legs','Combination'],
-    'Upper Body':  ['Compound','Upper Body','Combination','Core (Standing)','Core (Floor)'],
+    'Legs':        ['Compound','Travelling (20m)','Legs','Combination','Cardio'],
+    'Upper Body':  ['Compound','Upper Body','Combination','Core (Standing)','Core (Floor)','Cardio'],
     'All':         Object.keys(MENO_LIB)
   };
   var showCats = catMap[filter] || Object.keys(MENO_LIB);
