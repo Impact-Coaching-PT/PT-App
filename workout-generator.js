@@ -42,6 +42,29 @@
     return "isolation";
   }
 
+  // ── Equipment type inference ───────────────────────────────────────
+  // Same approach: infer from existing name keywords, no re-tagging needed.
+  // "Soft" focus — used as a scoring bias, never a hard filter, so a slot
+  // never comes up empty just because the gym's missing a specific machine.
+  const EQUIP_KEYWORDS = {
+    pinplate: ["pin", "plate", "smith", "belt squat", "leg press", "hack squat", "machine", "extension", "curl (pin)", "curl (plate)"],
+    cable:    ["cable"],
+    free:     ["db ", " db", "kb ", " kb", "dumbbell", "kettlebell", "bb ", " bb", "barbell"],
+    bodyweight: ["press up", "plank", "pull up", "pull ups", "chin up", "dip", "crunch", "sit up", "mountain climber", "burpee", "bear crawl", "superman", "hold", "v sit", "bird dog", "dead bug", "wall sit"],
+  };
+
+  function inferEquipment(ex) {
+    const n = ex.name.toLowerCase();
+    if (EQUIP_KEYWORDS.pinplate.some(k => n.includes(k))) return "pinplate";
+    if (EQUIP_KEYWORDS.cable.some(k => n.includes(k))) return "cable";
+    if (EQUIP_KEYWORDS.free.some(k => n.includes(k))) return "free";
+    if (EQUIP_KEYWORDS.bodyweight.some(k => n.includes(k))) return "bodyweight";
+    // Common unlabelled barbell compound lifts default to "free" (your gym's convention)
+    const BARBELL_DEFAULT = ["squat", "deadlift", "bench press", "bent over row", "rack pull", "rdl", "romanian", "hip thrust", "lunge"];
+    if (BARBELL_DEFAULT.some(k => n.includes(k))) return "free";
+    return "other";
+  }
+
   // ── Difficulty profiles ──────────────────────────────────────────
   // Controls both movement complexity (which patterns/cats are allowed)
   // and load/intensity (which scheme pool is used + how many finishers).
@@ -148,7 +171,7 @@
   }
 
   // ── Core selection logic ─────────────────────────────────────────
-  function pickExerciseForSlot(slotDef, sessionCat, diffProfile, usedNames, usedMuscles) {
+  function pickExerciseForSlot(slotDef, sessionCat, diffProfile, usedNames, usedMuscles, muscleFocus, equipFocus) {
     // Finisher slots are special: combination/cardio exercises live under their
     // own cat tags ("combination"/"cardio"), never under the session's own cat
     // (e.g. "legs"), so they must search across both regardless of catOverride.
@@ -172,27 +195,65 @@
 
     if (!pool.length) return null;
 
-    // Prefer exercises that don't repeat a muscle we've already hit twice this session,
-    // to spread coverage rather than stacking the same muscle group 3+ times.
+    // Weighted scoring — lower score wins. Three soft factors combined:
+    //  1. Muscle-overlap-avoidance: penalise muscles already hit this session,
+    //     so coverage spreads rather than stacking one group repeatedly.
+    //  2. Muscle Focus bonus: strongly reward exercises matching the chosen
+    //     focus (e.g. Quad Focus), reduced on posterior/core/finisher roles
+    //     so balance work still gets in.
+    //  3. Equipment Focus bonus: soft preference only — never excludes,
+    //     just nudges selection toward the requested equipment type.
+    const focusMuscles = (muscleFocus && MUSCLE_FOCUS[muscleFocus]) || null;
+    const focusWeight = REDUCED_FOCUS_ROLES.includes(slotDef.role) ? 1 : 3;
+
     const scored = pool.map(ex => {
-      const overlap = (ex.m || []).filter(m => usedMuscles.has(m)).length;
-      return { ex, overlap };
+      const overlapPenalty = (ex.m || []).filter(m => usedMuscles.has(m)).length;
+      let focusBonus = 0;
+      if (focusMuscles && (ex.m || []).some(m => focusMuscles.includes(m))) focusBonus = -focusWeight;
+      let equipBonus = 0;
+      if (equipFocus && equipFocus !== "any" && inferEquipment(ex) === equipFocus) equipBonus = -1;
+      const score = overlapPenalty + focusBonus + equipBonus;
+      return { ex, score };
     });
-    scored.sort((a, b) => a.overlap - b.overlap);
-    const minOverlap = scored[0].overlap;
-    const best = scored.filter(s => s.overlap === minOverlap).map(s => s.ex);
+    scored.sort((a, b) => a.score - b.score);
+    const minScore = scored[0].score;
+    const best = scored.filter(s => s.score === minScore).map(s => s.ex);
     return best[Math.floor(Math.random() * best.length)];
   }
 
-  // ── Main entry point ──────────────────────────────────────────────
+  // ── Muscle Focus map ────────────────────────────────────────────
+  // Which muscle tags count as "the focus" for each selectable option.
+  // Weighted, not strict — posterior/balance-type slot roles get a
+  // reduced bonus so a Quad Focus leg day still includes real hamstring/
+  // glute posterior-chain work rather than becoming quad-only.
+  const MUSCLE_FOCUS = {
+    quad:      ["Quads"],
+    glute:     ["Glutes"],
+    hamstring: ["Hamstrings"],
+    chestf:    ["Chest"],
+    shoulderf: ["Shoulders"],
+    tricepf:   ["Triceps"],
+    backf:     ["Lats", "Upper Back"],
+    bicepf:    ["Biceps"],
+  };
+  // Slot roles where the muscle-focus bonus is dialled down, so the
+  // session still gets balanced posterior-chain / stability work even
+  // when a strong focus is selected.
+  const REDUCED_FOCUS_ROLES = ["posterior", "core", "finisher"];
+
+
   // Reads the current Build Session form state (B.cat, B.template, difficulty
   // selector), fills B.rows in place to match the template's slot COUNT,
   // and re-renders. Name/notes are left untouched per Ritchie's spec.
   window.autoGenerateWorkout = function () {
     const catSelect = document.getElementById("b-cat");
     const diffSelect = document.getElementById("b-difficulty");
+    const focusSelect = document.getElementById("b-focus");
+    const equipSelect = document.getElementById("b-equip");
     const sessionCat = catSelect ? catSelect.value : "legs";
     const difficulty = diffSelect ? diffSelect.value : "intermediate";
+    const muscleFocus = focusSelect ? focusSelect.value : "";
+    const equipFocus = equipSelect ? equipSelect.value : "any";
     const diffProfile = DIFFICULTY[difficulty] || DIFFICULTY.intermediate;
 
     if (sessionCat === "custom") {
@@ -223,7 +284,7 @@
     const results = [];
 
     rolesToFill.forEach(function (slotDef) {
-      const picked = pickExerciseForSlot(slotDef, sessionCat, diffProfile, usedNames, usedMuscles);
+      const picked = pickExerciseForSlot(slotDef, sessionCat, diffProfile, usedNames, usedMuscles, muscleFocus, equipFocus);
       if (picked) {
         usedNames.add(picked.name);
         (picked.m || []).forEach(m => usedMuscles.add(m));
@@ -255,6 +316,34 @@
     } else {
       toast("Workout generated ✓ — review & adjust as needed");
     }
+  };
+
+  // ── Muscle Focus dropdown options per session category ────────────
+  // Legs / Chest / Back have real internal muscle splits worth focusing.
+  // Full Body / Upper / Lower span too many groups for a single focus
+  // to make sense, so they only offer "All".
+  const FOCUS_OPTIONS_BY_CAT = {
+    legs:  [["", "All — Balanced"], ["quad", "Quad Focus"], ["glute", "Glute Focus"], ["hamstring", "Hamstring Focus"]],
+    lower: [["", "All — Balanced"], ["quad", "Quad Focus"], ["glute", "Glute Focus"], ["hamstring", "Hamstring Focus"]],
+    chest: [["", "All — Balanced"], ["chestf", "Chest Focus"], ["shoulderf", "Shoulder Focus"], ["tricepf", "Tricep Focus"]],
+    back:  [["", "All — Balanced"], ["backf", "Back (Lats) Focus"], ["bicepf", "Bicep Focus"]],
+    full:  [["", "All — Balanced"]],
+    upper: [["", "All — Balanced"]],
+  };
+
+  // Called from index.html's onchange handler on the Category select,
+  // so the Muscle Focus dropdown always shows options relevant to the
+  // chosen session type instead of irrelevant ones (e.g. "Bicep Focus"
+  // showing up on a Legs day).
+  window.updateFocusDropdown = function () {
+    const catSelect = document.getElementById("b-cat");
+    const focusSelect = document.getElementById("b-focus");
+    if (!catSelect || !focusSelect) return;
+    const cat = catSelect.value;
+    const opts = FOCUS_OPTIONS_BY_CAT[cat] || [["", "All — Balanced"]];
+    focusSelect.innerHTML = opts.map(function (o) {
+      return '<option value="' + o[0] + '">' + o[1] + '</option>';
+    }).join("");
   };
 
 })();

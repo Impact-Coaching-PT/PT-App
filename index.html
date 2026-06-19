@@ -1021,7 +1021,7 @@ function hideMenoHubQR() { document.getElementById('meno-hub-qr-modal').style.di
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;" id="b-cat-row">
       <div>
         <span class="lbl">Category</span>
-        <select class="inp" id="b-cat">
+        <select class="inp" id="b-cat" onchange="if(window.updateFocusDropdown)updateFocusDropdown()">
           <option value="legs">🦵 Legs</option>
           <option value="chest">💪 Chest, Tris & Shoulders</option>
           <option value="back">🔙 Back & Biceps</option>
@@ -1042,7 +1042,7 @@ function hideMenoHubQR() { document.getElementById('meno-hub-qr-modal').style.di
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
         <span style="font-size:13px;font-weight:700;color:var(--t2);">🎲 Auto Workout Generator</span>
       </div>
-      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
         <div>
           <span class="lbl">Difficulty</span>
           <select class="inp" id="b-difficulty">
@@ -1051,8 +1051,27 @@ function hideMenoHubQR() { document.getElementById('meno-hub-qr-modal').style.di
             <option value="advanced">🔥 Advanced</option>
           </select>
         </div>
+        <div>
+          <span class="lbl">Muscle Focus</span>
+          <select class="inp" id="b-focus">
+            <option value="">All — Balanced</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;">
+        <div>
+          <span class="lbl">Equipment Focus</span>
+          <select class="inp" id="b-equip">
+            <option value="any">Any Equipment</option>
+            <option value="pinplate">📍 Pin / Plate Machines</option>
+            <option value="free">🏋️ Free Weights (DB/KB/BB)</option>
+            <option value="cable">🔗 Cables</option>
+            <option value="bodyweight">🤸 Bodyweight</option>
+          </select>
+        </div>
         <button class="btn btn-b" style="white-space:nowrap;padding:0 16px;height:42px;" onclick="autoGenerateWorkout()">🎲 Auto-Fill</button>
       </div>
+      <div style="font-size:11px;color:var(--t4);margin-top:8px;line-height:1.5;">Focus options are soft preferences — slots are never left empty just to satisfy them.</div>
     </div>
 
     <!-- Coverage pills -->
@@ -1990,7 +2009,7 @@ function renderPage(page) {
     else if (page === "settings")                           renderSettings();
     else if (page === "calendar")                           renderCalendar();
     else if (page === "tdee")                               renderTDEEPage();
-    else if (page === "build")                              { renderBuildClientChips(); renderSlots(); }
+    else if (page === "build")                              { renderBuildClientChips(); renderSlots(); if (window.updateFocusDropdown) updateFocusDropdown(); }
     else if (page === "menofit")  renderMenoDashboard();
     // NOTE: "profile" is NOT handled here — only viewProfile() triggers renderProfile()
     // This prevents stale profileClientId from showing wrong client
