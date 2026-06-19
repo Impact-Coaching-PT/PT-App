@@ -1317,8 +1317,8 @@ const MC = {
   Core:"#e83a9a",Cardio:"#666",
 };
 
-const CAT_LABELS = {legs:"Legs",chest:"Chest",back:"Back",shoulders:"Shoulders",arms:"Arms",core:"Core",cardio:"Cardio"};
-const CAT_ICONS  = {legs:"🦵",chest:"💪",back:"🔙",shoulders:"🏋️",arms:"💪",core:"🎯",cardio:"🏃",full:"🏋️",upper:"⬆️",lower:"⬇️"};
+const CAT_LABELS = {legs:"Legs",chest:"Chest",back:"Back",shoulders:"Shoulders",arms:"Arms",core:"Core",cardio:"Cardio",combination:"Combination"};
+const CAT_ICONS  = {legs:"🦵",chest:"💪",back:"🔙",shoulders:"🏋️",arms:"💪",core:"🎯",cardio:"🏃",full:"🏋️",upper:"⬆️",lower:"⬇️",combination:"🔀"};
 
 const SCHEMES = {
   "Strength":   ["3×5","6×4","8×3","8×4","10×3","10×4","12×3","12×4","15×3","15×4","5×5"],
@@ -1369,7 +1369,7 @@ const TEMPLATES = {
   },
 };
 
-const CATS = ["all","legs","chest","back","shoulders","arms","core","cardio"];
+const CATS = ["all","legs","chest","back","shoulders","arms","core","cardio","combination"];
 
 // ═══════════════════════════════════════════════════════════════════
 // EXERCISE DATABASE
@@ -1727,6 +1727,58 @@ const EX_BUILTIN = [
   {id:"CV28",name:"Jump Rope",cat:"cardio",m:["Cardio"]},
   {id:"CV29",name:"Slam Ball Intervals",cat:"cardio",m:["Cardio","Core"]},
   {id:"CV30",name:"Battle Ropes",cat:"cardio",m:["Cardio","Shoulders","Core"]},
+
+  // COMBINATION — multi-muscle compound moves (Bodyweight / Dumbbell / Kettlebell only)
+  {id:"CB01",name:"Squat + Bicep Curl (BW)",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB02",name:"DB Squat + Bicep Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB03",name:"KB Squat + Bicep Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB04",name:"DB Squat + Front Raise",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB05",name:"DB Squat + Lateral Raise",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB06",name:"DB Squat + Shoulder Press (Thruster)",cat:"combination",m:["Quads","Glutes","Shoulders","Triceps"]},
+  {id:"CB07",name:"DB Squat + Upright Row",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB08",name:"DB Squat + Arnold Press",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB09",name:"DB Goblet Squat + Press",cat:"combination",m:["Quads","Glutes","Shoulders","Triceps"]},
+  {id:"CB10",name:"DB Sumo Squat + Upright Row",cat:"combination",m:["Glutes","Adductors","Shoulders"]},
+  {id:"CB11",name:"KB Goblet Squat + Press",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB12",name:"DB Squat Pulse + Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB13",name:"DB Squat + Twist",cat:"combination",m:["Quads","Glutes","Core"]},
+  {id:"CB14",name:"BW Squat Jump + Overhead Reach",cat:"combination",m:["Quads","Glutes","Shoulders","Cardio"]},
+  {id:"CB15",name:"DB Reverse Lunge + Bicep Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB16",name:"DB Reverse Lunge + Front Raise",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB17",name:"DB Reverse Lunge + Shoulder Press",cat:"combination",m:["Quads","Glutes","Shoulders","Triceps"]},
+  {id:"CB18",name:"DB Reverse Lunge + Overhead Reach",cat:"combination",m:["Quads","Glutes","Shoulders","Core"]},
+  {id:"CB19",name:"DB Forward Lunge + Bicep Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB20",name:"DB Forward Lunge + Lateral Raise",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB21",name:"DB Lateral Lunge + Front Raise",cat:"combination",m:["Glutes","Adductors","Shoulders"]},
+  {id:"CB22",name:"DB Curtsy Lunge + Lateral Raise",cat:"combination",m:["Glutes","Adductors","Shoulders"]},
+  {id:"CB23",name:"BW Walking Lunge + Twist",cat:"combination",m:["Quads","Glutes","Core"]},
+  {id:"CB24",name:"DB Walking Lunge + Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB25",name:"DB Step Up + Shoulder Press",cat:"combination",m:["Quads","Glutes","Shoulders","Triceps"]},
+  {id:"CB26",name:"DB Step Up + Bicep Curl",cat:"combination",m:["Quads","Glutes","Biceps"]},
+  {id:"CB27",name:"DB Step Up + Lateral Raise",cat:"combination",m:["Quads","Glutes","Shoulders"]},
+  {id:"CB28",name:"DB Step Up + Knee Drive + Press",cat:"combination",m:["Quads","Glutes","Shoulders","Core"]},
+  {id:"CB29",name:"DB Deadlift + Bent Over Row",cat:"combination",m:["Hamstrings","Glutes","Lats","Upper Back"]},
+  {id:"CB30",name:"DB Deadlift + Bicep Curl",cat:"combination",m:["Hamstrings","Glutes","Biceps"]},
+  {id:"CB31",name:"DB RDL + Row",cat:"combination",m:["Hamstrings","Glutes","Lats","Upper Back"]},
+  {id:"CB32",name:"KB Sumo Deadlift + Upright Row",cat:"combination",m:["Glutes","Hamstrings","Shoulders"]},
+  {id:"CB33",name:"KB Swing + Squat",cat:"combination",m:["Glutes","Hamstrings","Quads","Cardio"]},
+  {id:"CB34",name:"DB Single Leg RDL + Row",cat:"combination",m:["Hamstrings","Glutes","Lats","Core"]},
+  {id:"CB35",name:"DB Renegade Row + Press Up",cat:"combination",m:["Lats","Core","Chest","Triceps"]},
+  {id:"CB36",name:"KB Around the World + Squat",cat:"combination",m:["Shoulders","Core","Quads","Glutes"]},
+  {id:"CB37",name:"DB Bear Crawl + Row",cat:"combination",m:["Core","Lats","Shoulders"]},
+  {id:"CB38",name:"BW Burpee + Tuck Jump",cat:"combination",m:["Full Leg","Chest","Cardio","Core"]},
+  {id:"CB39",name:"BW Mountain Climber + Press Up",cat:"combination",m:["Core","Chest","Triceps","Cardio"]},
+  {id:"CB40",name:"BW Plank + Shoulder Tap + Jack",cat:"combination",m:["Core","Shoulders","Cardio"]},
+  {id:"CB41",name:"DB Halo + Squat",cat:"combination",m:["Shoulders","Core","Quads","Glutes"]},
+  {id:"CB42",name:"DB Floor Press + Leg Raise",cat:"combination",m:["Chest","Triceps","Core"]},
+  {id:"CB43",name:"DB Chest Press + Skull Crusher",cat:"combination",m:["Chest","Triceps"]},
+  {id:"CB44",name:"DB Incline Press + Fly",cat:"combination",m:["Chest","Shoulders"]},
+  {id:"CB45",name:"DB Single Arm Row + Rotation",cat:"combination",m:["Lats","Upper Back","Core"]},
+  {id:"CB46",name:"DB Bent Over Row + Reverse Fly",cat:"combination",m:["Lats","Upper Back","Shoulders"]},
+  {id:"CB47",name:"DB Shoulder Press + Tricep Ext",cat:"combination",m:["Shoulders","Triceps"]},
+  {id:"CB48",name:"DB Hammer Curl + Press",cat:"combination",m:["Biceps","Shoulders"]},
+  {id:"CB49",name:"DB Plank Row + Press Up",cat:"combination",m:["Lats","Core","Chest","Triceps"]},
+  {id:"CB50",name:"DB Crab Toe Touch",cat:"combination",m:["Core","Triceps","Hamstrings"]},
 ];
 
 const APPS_SCRIPT = `function doGet(e) {
