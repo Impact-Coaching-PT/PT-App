@@ -1037,6 +1037,24 @@ function hideMenoHubQR() { document.getElementById('meno-hub-qr-modal').style.di
       </div>
     </div>
 
+    <!-- Auto Workout Generator -->
+    <div style="background:var(--bg2);border:1.5px solid var(--bd2);border-radius:12px;padding:12px;margin-bottom:14px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:700;color:var(--t2);">🎲 Auto Workout Generator</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end;">
+        <div>
+          <span class="lbl">Difficulty</span>
+          <select class="inp" id="b-difficulty">
+            <option value="beginner">🌱 Beginner</option>
+            <option value="intermediate" selected>⚡ Intermediate</option>
+            <option value="advanced">🔥 Advanced</option>
+          </select>
+        </div>
+        <button class="btn btn-b" style="white-space:nowrap;padding:0 16px;height:42px;" onclick="autoGenerateWorkout()">🎲 Auto-Fill</button>
+      </div>
+    </div>
+
     <!-- Coverage pills -->
     <div id="coverage"></div>
 
@@ -4900,6 +4918,8 @@ function clearMenoSlot(event, blockId, sessId, field, idx) {
 
 
 </script>
+<!-- Auto Workout Generator — separate file, hosted alongside index.html on GitHub -->
+<script src="workout-generator.js"></script>
 <div id="portal-qr-modal" onclick="hidePortalQR()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;padding:24px;">
   <div onclick="event.stopPropagation()" style="background:var(--bg2);border:1.5px solid var(--bd);border-radius:20px;padding:20px;max-width:360px;width:100%;text-align:center;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
