@@ -1769,7 +1769,9 @@ let B = {clientId:null, clientId2:null, date:"", template:"strength1hr", cat:"le
 let currentPage = "build";
 let currentModal = null;
 let epRowId = null;     // exercise picker target row id
+let epSource = "builder"; // "builder" = B.rows (Build Session page) | "record" = live session rows (Record screen)
 let spRowId = null;     // scheme picker target row id
+let spSource = "builder"; // "builder" = B.rows | "record" = live session rows (Record screen)
 let editClientId = null;
 let histFilterId = "all";
 let libCatFilter = "all";
@@ -2671,8 +2673,9 @@ function fallbackCopy(text) {
 // ═══════════════════════════════════════════════════════════════════
 let epCat = "all";
 
-function openExPicker(rowId) {
+function openExPicker(rowId, source) {
   epRowId = rowId;
+  epSource = source || "builder";
   epCat = "all";
   document.getElementById("ep-search").value = "";
   renderCatTabs("ep-cats", epCat, c=>{ epCat=c; renderExPicker(); });
@@ -2689,8 +2692,11 @@ function renderExPicker() {
   });
   const list = document.getElementById("ep-list");
   if (!exList.length) { list.innerHTML = '<div style="color:var(--t3);padding:20px;text-align:center;font-size:13px;">No exercises found</div>'; return; }
+  const pickerClientId = (epSource === "record")
+    ? (DB.sessions.find(x=>x.id===recSessionId) || {}).clientId
+    : B.clientId;
   list.innerHTML = exList.map(ex => {
-    const lw = (B.clientId) ? lastWeight(B.clientId, ex.name) : null;
+    const lw = pickerClientId ? lastWeight(pickerClientId, ex.name) : null;
     const lwHtml = lw ? `<span class="ex-li-last">Last: ${lw.weight}kg · ${lw.date}</span>` : "";
     const mPills = (ex.m||[]).filter(m=>m!=="Cardio").slice(0,3).map(pillHtml).join("");
     return `<div class="ex-li" onclick="selectExercise('${ex.name.replace(/'/g,"\\'")}')">
@@ -2703,6 +2709,20 @@ function renderExPicker() {
 }
 
 function selectExercise(name) {
+  if (epSource === "record") {
+    const s = DB.sessions.find(x=>x.id===recSessionId);
+    const row = s && (s.rows||[]).find(r=>r.id===epRowId);
+    if (!row) { closeModal(); return; }
+    row.exerciseName = name;
+    const ex = getExercise(name);
+    row.muscles = ex ? (ex.m||[]) : [];
+    s.updatedAt = new Date().toISOString();
+    saveDB();
+    closeModal();
+    renderRecord(recSessionId);
+    toast("Exercise updated ✓");
+    return;
+  }
   const row = B.rows.find(r=>r.id===epRowId);
   if (!row) { closeModal(); return; }
   row.exerciseName = name;
@@ -2715,9 +2735,16 @@ function selectExercise(name) {
 // ═══════════════════════════════════════════════════════════════════
 // SCHEME PICKER MODAL
 // ═══════════════════════════════════════════════════════════════════
-function openSchemePicker(rowId) {
+function openSchemePicker(rowId, fromRecord) {
   spRowId = rowId;
-  const row = B.rows.find(r=>r.id===rowId);
+  spSource = fromRecord ? "record" : "builder";
+  let row;
+  if (spSource === "record") {
+    const s = DB.sessions.find(x=>x.id===recSessionId);
+    row = s && (s.rows||[]).find(r=>r.id===rowId);
+  } else {
+    row = B.rows.find(r=>r.id===rowId);
+  }
   const cur = row ? row.scheme : "";
   document.getElementById("sp-custom").value = "";
 
@@ -2735,6 +2762,19 @@ function openSchemePicker(rowId) {
 
 function applyScheme(scheme) {
   if (!scheme.trim()) return;
+  if (spSource === "record") {
+    const s = DB.sessions.find(x=>x.id===recSessionId);
+    const row = s && (s.rows||[]).find(r=>r.id===spRowId);
+    if (row) {
+      row.scheme = scheme.trim();
+      s.updatedAt = new Date().toISOString();
+      saveDB();
+      closeModal();
+      renderRecord(recSessionId);
+      toast("Scheme updated ✓");
+    }
+    return;
+  }
   const row = B.rows.find(r=>r.id===spRowId);
   if (row) { row.scheme = scheme.trim(); closeModal(); renderSlots(); }
 }
@@ -3305,6 +3345,21 @@ function openRecord(sessionId, fromPage) {
   renderRecord(sessionId);
 }
 
+function captureRecordActuals(s) {
+  // Pull any in-progress typed values from the DOM into the session before we re-render,
+  // so swapping/adding/removing an exercise mid-session never loses what's been typed.
+  (s.rows || []).forEach(function(row) {
+    const a  = document.getElementById("actual-" + row.id);
+    const ab = document.getElementById("actualB-" + row.id);
+    if (a)  row.actual  = a.value;
+    if (ab) row.actualB = ab.value;
+  });
+  const notesEl = document.getElementById("rec-notes");
+  const clNotesEl = document.getElementById("rec-client-notes");
+  if (notesEl)   s.notes = notesEl.value;
+  if (clNotesEl) s.clientNotes = clNotesEl.value;
+}
+
 function renderRecord(sessionId) {
   const s = DB.sessions.find(x=>x.id===sessionId);
   if (!s) return;
@@ -3323,12 +3378,23 @@ function renderRecord(sessionId) {
   document.getElementById("rec-notes").value   = s.notes||"";
   document.getElementById("rec-client-notes").value = s.clientNotes||"";
 
+  function rowActionsHtml(row) {
+    return `<div style="display:flex;gap:6px;flex-shrink:0;">
+      <button onclick="openExPicker('${row.id}','record')" title="Swap exercise" style="background:var(--bg3);border:1.5px solid var(--bd2);color:var(--t2);border-radius:7px;width:30px;height:30px;font-size:14px;cursor:pointer;font-family:inherit;">&#8644;</button>
+      <button onclick="openSchemePicker('${row.id}', true)" title="Change scheme" style="background:var(--bg3);border:1.5px solid var(--bd2);color:var(--t2);border-radius:7px;width:30px;height:30px;font-size:13px;cursor:pointer;font-family:inherit;">&#128221;</button>
+      <button onclick="removeRecordRow('${row.id}')" title="Remove exercise" style="background:var(--bg3);border:1.5px solid var(--bd2);color:var(--red);border-radius:7px;width:30px;height:30px;font-size:14px;cursor:pointer;font-family:inherit;">&#215;</button>
+    </div>`;
+  }
+
   document.getElementById("rec-slots").innerHTML = (s.rows||[]).map(row=>{
     const isCardio = row.slot==="cardio";
     const muscPills = (row.muscles||[]).filter(m=>m!=="Cardio").slice(0,2).map(pillHtml).join("");
 
     if (isCardio) return `<div class="rc-card">
-      <div class="rc-ex">${row.exerciseName}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
+        <div class="rc-ex">${row.exerciseName}</div>
+        ${rowActionsHtml(row)}
+      </div>
       <div class="rc-scheme">${row.scheme||""}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><span class="lbl">Planned</span><div class="rc-tgt">${row.scheme||"—"}</div></div>
@@ -3338,7 +3404,10 @@ function renderRecord(sessionId) {
     if (partner) return `<div class="rc-card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
         <span class="rc-ex">${row.exerciseName}</span>
-        <span class="rc-scheme">${row.scheme||""}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="rc-scheme">${row.scheme||""}</span>
+          ${rowActionsHtml(row)}
+        </div>
       </div>
       <div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap">${muscPills}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
@@ -3361,14 +3430,41 @@ function renderRecord(sessionId) {
     return `<div class="rc-card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;">
         <span class="rc-ex">${row.exerciseName}</span>
-        <span class="rc-scheme">${row.scheme||""}</span>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="rc-scheme">${row.scheme||""}</span>
+          ${rowActionsHtml(row)}
+        </div>
       </div>
       <div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap">${muscPills}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><span class="lbl">Target</span><div class="rc-tgt">${row.target||"—"}${row.target?"kg":""}</div></div>
         <div><span class="lbl">Actual</span><input class="inp" id="actual-${row.id}" value="${row.actual||""}" placeholder="kg" style="font-family:monospace;text-align:center;"></div>
       </div></div>`;
-  }).join("");
+  }).join("") + `<button onclick="addRecordRow()" style="background:transparent;border:2px dashed var(--bd);color:var(--t3);font-size:14px;padding:12px;border-radius:10px;cursor:pointer;width:100%;margin-top:4px;font-family:inherit;">+ Add Exercise</button>`;
+}
+
+function addRecordRow() {
+  const s = DB.sessions.find(x=>x.id===recSessionId);
+  if (!s) return;
+  captureRecordActuals(s);
+  if (!s.rows) s.rows = [];
+  s.rows.push({ id: uid(), exerciseName: "", muscles: [], scheme: "", target: "", actual: "" });
+  saveDB();
+  renderRecord(recSessionId);
+  // Immediately open the picker for the new (empty) row so it's quick to fill in
+  const newRow = s.rows[s.rows.length - 1];
+  openExPicker(newRow.id, "record");
+}
+
+function removeRecordRow(rowId) {
+  const s = DB.sessions.find(x=>x.id===recSessionId);
+  if (!s) return;
+  if (!confirm("Remove this exercise from the session?")) return;
+  captureRecordActuals(s);
+  s.rows = (s.rows||[]).filter(r=>r.id!==rowId);
+  saveDB();
+  renderRecord(recSessionId);
+  toast("Exercise removed");
 }
 
 function saveRecord() {
