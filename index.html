@@ -4455,6 +4455,7 @@ function markSessComplete(bId, sId, complete) {
   if (complete) s.completedAt = new Date().toISOString();
   saveDB(); renderMenoActive();
   toast(complete ? 'Week ' + s.week + ' completed &#10003;' : 'Marked as planned');
+  syncNow();
 }
 
 function finishMenoBlock() {
