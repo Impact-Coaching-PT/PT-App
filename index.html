@@ -4446,11 +4446,16 @@ function getMenoSess(blockId, sessId) {
   return mb.sessions.find(function(s) { return s.id === sessId; });
 }
 
-function updateSessDate(bId, sId, v)               { var s=getMenoSess(bId,sId); if(s){s.date=v; saveDB();} }
-function updateSessNotes(bId, sId, v)              { var s=getMenoSess(bId,sId); if(s){s.notes=v; saveDB();} }
-function updateSessCompound(bId, sId, field, v)    { var s=getMenoSess(bId,sId); if(s){s.compound[field]=v; saveDB();} }
-function updateSessExercise(bId, sId, field, i, v) { var s=getMenoSess(bId,sId); if(s){s[field][i]=v; saveDB();} }
-function updateSessCircuit(bId, sId, ci, ei, v)    { var s=getMenoSess(bId,sId); if(s){s.circuits[ci].exercises[ei]=v; saveDB();} }
+var _menoSyncTimer = null;
+function menoAutoSync() {
+  clearTimeout(_menoSyncTimer);
+  _menoSyncTimer = setTimeout(function(){ syncNow(); }, 3000);
+}
+function updateSessDate(bId, sId, v)               { var s=getMenoSess(bId,sId); if(s){s.date=v; saveDB(); menoAutoSync();} }
+function updateSessNotes(bId, sId, v)              { var s=getMenoSess(bId,sId); if(s){s.notes=v; saveDB(); menoAutoSync();} }
+function updateSessCompound(bId, sId, field, v)    { var s=getMenoSess(bId,sId); if(s){s.compound[field]=v; saveDB(); menoAutoSync();} }
+function updateSessExercise(bId, sId, field, i, v) { var s=getMenoSess(bId,sId); if(s){s[field][i]=v; saveDB(); menoAutoSync();} }
+function updateSessCircuit(bId, sId, ci, ei, v)    { var s=getMenoSess(bId,sId); if(s){s.circuits[ci].exercises[ei]=v; saveDB(); menoAutoSync();} }
 
 function markSessComplete(bId, sId, complete) {
   var s = getMenoSess(bId, sId); if (!s) return;
