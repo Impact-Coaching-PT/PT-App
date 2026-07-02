@@ -4047,28 +4047,8 @@ async function pullFromDrive() {
     DB.sideEffects = remote.sideEffects || [];
     DB.progress    = remote.progress    || [];
 
-    // Merge menofit data
-    if (remote.menofit) {
-      var lm = DB.menofit || { activeBlock: null, history: [] };
-      var rm = remote.menofit;
-      if (!lm.activeBlock && rm.activeBlock) {
-        DB.menofit = rm;
-      } else if (lm.activeBlock && rm.activeBlock) {
-        var lts = lm.activeBlock.createdAt || '';
-        var rts = rm.activeBlock.createdAt || '';
-        // Always take remote sessions as Drive is source of truth
-        if (lm.activeBlock.id === rm.activeBlock.id) {
-          DB.menofit.activeBlock = rm.activeBlock;
-        } else if (rts > lts) DB.menofit.activeBlock = rm.activeBlock;
-        var hMap = {};
-        (lm.history||[]).concat(rm.history||[]).forEach(function(b){ hMap[b.id]=b; });
-        DB.menofit.history = Object.values(hMap).sort(function(a,b){ return (b.archivedAt||'').localeCompare(a.archivedAt||''); });
-      } else if (!lm.activeBlock && !rm.activeBlock && rm.history && rm.history.length) {
-        var hMap2 = {};
-        (lm.history||[]).concat(rm.history||[]).forEach(function(b){ hMap2[b.id]=b; });
-        DB.menofit.history = Object.values(hMap2);
-      }
-    }
+    // Menofit — Drive always wins
+    if (remote.menofit) DB.menofit = remote.menofit;
     // Merge menoCustomExercises
     if (remote.menoCustomExercises) {
       if (!DB.menoCustomExercises) DB.menoCustomExercises = {};
