@@ -4056,7 +4056,10 @@ async function pullFromDrive() {
       } else if (lm.activeBlock && rm.activeBlock) {
         var lts = lm.activeBlock.createdAt || '';
         var rts = rm.activeBlock.createdAt || '';
-        if (rts > lts) DB.menofit.activeBlock = rm.activeBlock;
+        // Always take remote sessions as Drive is source of truth
+        if (lm.activeBlock.id === rm.activeBlock.id) {
+          DB.menofit.activeBlock = rm.activeBlock;
+        } else if (rts > lts) DB.menofit.activeBlock = rm.activeBlock;
         var hMap = {};
         (lm.history||[]).concat(rm.history||[]).forEach(function(b){ hMap[b.id]=b; });
         DB.menofit.history = Object.values(hMap).sort(function(a,b){ return (b.archivedAt||'').localeCompare(a.archivedAt||''); });
