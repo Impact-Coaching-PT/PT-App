@@ -1,1 +1,8 @@
-
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.impactcoaching.ptapp",
+        "sha256_cert_fingerprints": ["A2:A6:F7:75:4D:9C:59:81:3E:A0:3E:91:65:AB:26:F6:E5:CF:DC:A0:4C:F1:88:47:93:53:37:81:E0:16:4D:69"]
+      }
+    }]
