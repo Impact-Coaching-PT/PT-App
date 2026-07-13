@@ -730,19 +730,19 @@ body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSyste
       </button>
     </div>
 
-    <!-- FB Confirm Popup -->
-    <div id="fb-overlay" onclick="hideFBConfirm()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:24px;">
-      <div onclick="event.stopPropagation()" style="background:#1a0a2e;border:1.5px solid #9a3ae8;border-radius:20px;padding:28px 22px;max-width:340px;width:100%;text-align:center;">
-        <div style="font-size:32px;margin-bottom:12px;">📘</div>
-        <div style="font-size:15px;font-weight:800;color:#e8a0d0;margin-bottom:10px;">Leaving MenoFit Hub</div>
-        <div style="font-size:13px;color:#cbb8e0;line-height:1.6;margin-bottom:22px;">You're about to be taken to <strong style="color:#fff;">Impact Coaching's Facebook page</strong> where you can message Ritchie directly about 1:1 &amp; 2:1 personal training.</div>
-        <div style="display:flex;gap:10px;">
-          <button onclick="hideFBConfirm()" style="flex:1;background:none;border:1.5px solid #9a3ae8;color:#c4a0e8;font-size:13px;font-weight:700;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">Cancel</button>
-          <button onclick="goToFB()" style="flex:2;background:linear-gradient(135deg,#9a3ae8,#e8389a);border:none;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">Continue →</button>
-        </div>
-      </div>
-    </div>
+  </div>
+</div>
 
+<!-- FB Confirm Popup (lives outside all page containers so it works from any page) -->
+<div id="fb-overlay" onclick="hideFBConfirm()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:999;align-items:center;justify-content:center;padding:24px;">
+  <div onclick="event.stopPropagation()" style="background:#1a0a2e;border:1.5px solid #9a3ae8;border-radius:20px;padding:28px 22px;max-width:340px;width:100%;text-align:center;">
+    <div style="font-size:32px;margin-bottom:12px;">📘</div>
+    <div style="font-size:15px;font-weight:800;color:#e8a0d0;margin-bottom:10px;">Leaving MenoFit Hub</div>
+    <div style="font-size:13px;color:#cbb8e0;line-height:1.6;margin-bottom:22px;">You're about to be taken to <strong style="color:#fff;">Impact Coaching's Facebook page</strong> where you can message Ritchie directly about 1:1 &amp; 2:1 personal training.</div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="hideFBConfirm()" style="flex:1;background:none;border:1.5px solid #9a3ae8;color:#c4a0e8;font-size:13px;font-weight:700;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">Cancel</button>
+      <button onclick="goToFB()" style="flex:2;background:linear-gradient(135deg,#9a3ae8,#e8389a);border:none;color:#fff;font-size:13px;font-weight:700;padding:12px;border-radius:10px;cursor:pointer;font-family:inherit;">Continue →</button>
+    </div>
   </div>
 </div>
 
@@ -764,7 +764,7 @@ function toggleCard(id) {
   if (chev) chev.classList.toggle('open');
 }
 
-var FB_URL = 'https://www.facebook.com/share/1RMh4WnoA5/';
+var FB_URL = 'https://www.facebook.com/profile.php?id=61555588884682';
 function showFBConfirm() {
   var el = document.getElementById('fb-overlay');
   el.style.display = 'flex';
@@ -774,7 +774,11 @@ function hideFBConfirm() {
 }
 function goToFB() {
   hideFBConfirm();
-  window.open(FB_URL, '_blank');
+  var win = window.open(FB_URL, '_blank');
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    // Popup blocked (common in Android WebView/PWA wrappers) - fall back to same-tab nav
+    window.location.href = FB_URL;
+  }
 }
 </script>
 </body>
