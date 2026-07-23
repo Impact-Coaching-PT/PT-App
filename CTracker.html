@@ -602,6 +602,20 @@ main{max-width:520px;margin:0 auto;padding:16px;}
       </div>
     </div>
 
+    <div class="card" id="water-card" style="margin-bottom:16px;">
+      <div class="row between" style="align-items:baseline;margin-bottom:10px;">
+        <span class="lbl" style="margin-bottom:0;">&#128167; Water</span>
+        <span id="water-total-txt" style="font-family:var(--disp);font-weight:700;font-size:14px;">0 / 2000ml</span>
+      </div>
+      <div class="macro-track" style="height:8px;margin-bottom:12px;"><div class="macro-fill" id="water-bar" style="width:0%;background:var(--blue);"></div></div>
+      <div class="row gap8">
+        <button class="btn btn-blk" data-water-add="100" style="flex:1;padding:10px;font-size:12px;">&#43;100ml</button>
+        <button class="btn btn-blk" data-water-add="250" style="flex:1;padding:10px;font-size:12px;">&#43;250ml</button>
+        <button class="btn btn-blk" data-water-add="500" style="flex:1;padding:10px;font-size:12px;">&#43;500ml</button>
+        <button class="btn btn-gh" id="water-undo-btn" style="padding:10px 14px;font-size:12px;">&#8630;</button>
+      </div>
+    </div>
+
     <div class="row between" style="align-items:baseline;">
       <div id="log-title">Today's log</div>
       <button class="btn btn-gh" id="copy-yesterday-btn" style="padding:6px 12px;font-size:11px;">&#8635; Copy yesterday</button>
@@ -777,6 +791,7 @@ main{max-width:520px;margin:0 auto;padding:16px;}
     <span class="lbl">Daily targets</span>
     <div class="row gap10" style="margin-bottom:6px;">
       <div style="flex:1;"><span class="lbl">Calories</span><input class="inp" id="set-kcal" type="number" inputmode="numeric"></div>
+      <div style="flex:1;"><span class="lbl">Water (ml)</span><input class="inp" id="set-water" type="number" inputmode="numeric"></div>
     </div>
     <div class="row gap10" style="margin-top:10px;">
       <div style="flex:1;"><span class="lbl">Protein (g)</span><input class="inp" id="set-protein" type="number" inputmode="decimal"></div>
@@ -862,10 +877,10 @@ function getActiveProfile(){
   return store.profiles.find(function(p){ return p.id === store.activeId; });
 }
 function defaultTargets(){
-  return { kcal:2000, protein:150, carbs:200, fat:65 };
+  return { kcal:2000, protein:150, carbs:200, fat:65, water:2000 };
 }
 function newProfile(name){
-  return { id: uid(), name: name, targets: defaultTargets(), logs: {}, recentFoods: [], customFoods: [], weightLog: {}, notes: {} };
+  return { id: uid(), name: name, targets: defaultTargets(), logs: {}, recentFoods: [], customFoods: [], weightLog: {}, notes: {}, waterLog: {} };
 }
 
 /* ============ DATE HELPERS ============ */
@@ -1492,6 +1507,12 @@ function renderAll(){
   });
 
   document.getElementById('daily-note-input').value = (p.notes && p.notes[key]) || '';
+
+  var waterTarget = (p.targets && p.targets.water) || defaultTargets().water;
+  var waterTotal = (p.waterLog && p.waterLog[key]) || 0;
+  document.getElementById('water-total-txt').textContent = waterTotal + ' / ' + waterTarget + 'ml';
+  var waterPct = waterTarget > 0 ? Math.min(100, (waterTotal/waterTarget)*100) : 0;
+  document.getElementById('water-bar').style.width = waterPct + '%';
 }
 function setMacroBar(key, val, target){
   document.getElementById('m-'+key+'-txt').textContent = round1(val)+' / '+Math.round(target)+'g';
@@ -1568,6 +1589,32 @@ document.getElementById('daily-note-input').addEventListener('input', function(e
   if(!p.notes) p.notes = {};
   p.notes[dateKey(currentDate)] = e.target.value;
   saveStore(store);
+});
+
+/* ============ WATER TRACKING ============ */
+var lastWaterAdd = 0;
+document.getElementById('water-card').addEventListener('click', function(e){
+  var amt = e.target.getAttribute('data-water-add');
+  if(!amt) return;
+  amt = parseInt(amt, 10);
+  var p = getActiveProfile();
+  if(!p.waterLog) p.waterLog = {};
+  var key = dateKey(currentDate);
+  p.waterLog[key] = (p.waterLog[key] || 0) + amt;
+  lastWaterAdd = amt;
+  saveStore(store);
+  renderAll();
+});
+document.getElementById('water-undo-btn').addEventListener('click', function(){
+  if(lastWaterAdd <= 0){ toast('Nothing to undo'); return; }
+  var p = getActiveProfile();
+  var key = dateKey(currentDate);
+  if(!p.waterLog) p.waterLog = {};
+  p.waterLog[key] = Math.max(0, (p.waterLog[key] || 0) - lastWaterAdd);
+  lastWaterAdd = 0;
+  saveStore(store);
+  renderAll();
+  toast('Undone');
 });
 
 document.getElementById('day-prev').addEventListener('click', function(){
@@ -2099,6 +2146,7 @@ function openEditProfile(profileId){
   editingProfileId = profileId;
   document.getElementById('set-name').value = p.name;
   document.getElementById('set-kcal').value = p.targets.kcal;
+  document.getElementById('set-water').value = p.targets.water || defaultTargets().water;
   document.getElementById('set-protein').value = p.targets.protein;
   document.getElementById('set-carbs').value = p.targets.carbs;
   document.getElementById('set-fat').value = p.targets.fat;
@@ -2111,6 +2159,7 @@ document.getElementById('save-settings-btn').addEventListener('click', function(
   if(name) p.name = name;
   p.targets = {
     kcal: parseFloat(document.getElementById('set-kcal').value) || defaultTargets().kcal,
+    water: parseFloat(document.getElementById('set-water').value) || defaultTargets().water,
     protein: parseFloat(document.getElementById('set-protein').value) || defaultTargets().protein,
     carbs: parseFloat(document.getElementById('set-carbs').value) || defaultTargets().carbs,
     fat: parseFloat(document.getElementById('set-fat').value) || defaultTargets().fat
@@ -2206,6 +2255,8 @@ document.getElementById('import-file-input').addEventListener('change', function
       if(!p.customFoods) p.customFoods = [];
       if(!p.weightLog) p.weightLog = {};
       if(!p.notes) p.notes = {};
+      if(!p.waterLog) p.waterLog = {};
+      if(p.targets && !p.targets.water) p.targets.water = defaultTargets().water;
     });
     saveStore(store);
     applyTheme();
