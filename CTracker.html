@@ -46,7 +46,7 @@ html,body{height:100%;margin:0;background:
     radial-gradient(ellipse 900px 500px at 50% -10%, #22262e 0%, transparent 60%),
     var(--bg);
   color:var(--t);font-family:system-ui,-apple-system,sans-serif;font-size:16px;overscroll-behavior:none;}
-body{padding-bottom:90px;}
+body{padding-bottom:130px;}
 .disp{font-family:var(--disp);text-transform:uppercase;letter-spacing:.03em;}
 .mono{font-family:monospace;}
 .lbl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.1em;font-family:monospace;margin-bottom:6px;display:block;}
@@ -700,9 +700,15 @@ main{max-width:520px;margin:0 auto;padding:16px;}
       <div class="modal-title">Log weight</div>
       <button class="modal-x" data-close="weight-modal">&#215;</button>
     </div>
-    <span class="lbl">Today's weight (kg)</span>
-    <input class="inp" id="weight-input" type="number" inputmode="decimal" step="0.1" style="margin-bottom:14px;">
+    <div class="row gap10" style="margin-bottom:14px;">
+      <div style="flex:1;"><span class="lbl">Date</span><input class="inp" id="weight-date-input" type="date"></div>
+      <div style="flex:1;"><span class="lbl">Weight (kg)</span><input class="inp" id="weight-input" type="number" inputmode="decimal" step="0.1"></div>
+    </div>
     <button class="btn btn-r" id="weight-save-btn" style="width:100%;">Save weight</button>
+    <div class="macro-preview" id="weight-stats-row" style="margin-top:16px;">
+      <div class="mp-box"><div class="mp-num" id="weight-stat-total">—</div><div class="mp-lbl">total change</div></div>
+      <div class="mp-box"><div class="mp-num" id="weight-stat-week">—</div><div class="mp-lbl">last 7 days</div></div>
+    </div>
     <div class="ov-section-title" style="margin-top:22px;">Recent entries</div>
     <div id="weight-recent-list"></div>
   </div>
@@ -1154,6 +1160,11 @@ function renderWeightTrend(p){
   svg.innerHTML = '';
   rangeEl.innerHTML = '';
   if(dates.length < 2){
+    if(dates.length === 1){
+      emptyEl.textContent = 'Latest: ' + round1(wLog[dates[0]]) + 'kg — log another day to see a trend.';
+    } else {
+      emptyEl.textContent = 'No weight logged yet — use the Weight tile on the dashboard to start tracking.';
+    }
     emptyEl.classList.remove('hidden');
     svg.classList.add('hidden');
     return;
@@ -1886,13 +1897,44 @@ function openWeightModal(){
   if(!p) return;
   if(!p.weightLog) p.weightLog = {};
   var todayKey = dateKey(new Date());
+  document.getElementById('weight-date-input').value = todayKey;
+  document.getElementById('weight-date-input').max = todayKey;
   document.getElementById('weight-input').value = p.weightLog[todayKey] || '';
   renderWeightRecent();
   openModal('weight-modal');
 }
+document.getElementById('weight-date-input').addEventListener('change', function(e){
+  var p = getActiveProfile();
+  if(!p || !p.weightLog) return;
+  document.getElementById('weight-input').value = p.weightLog[e.target.value] || '';
+});
+function computeWeightStats(wLog){
+  var dates = Object.keys(wLog).sort();
+  if(dates.length < 2) return {total:null, week:null};
+  var latestKey = dates[dates.length-1];
+  var latestVal = wLog[latestKey];
+  var total = latestVal - wLog[dates[0]];
+  var latestDate = new Date(latestKey+'T00:00:00');
+  var weekAgo = new Date(latestDate);
+  weekAgo.setDate(weekAgo.getDate()-7);
+  var weekVal = null;
+  for(var i=dates.length-2; i>=0; i--){
+    var d = new Date(dates[i]+'T00:00:00');
+    if(d <= weekAgo){ weekVal = wLog[dates[i]]; break; }
+  }
+  var week = weekVal !== null ? (latestVal - weekVal) : null;
+  return {total: total, week: week};
+}
+function fmtWeightDelta(v){
+  if(v === null) return '—';
+  return (v >= 0 ? '+' : '') + round1(v) + 'kg';
+}
 function renderWeightRecent(){
   var p = getActiveProfile();
   var wLog = (p && p.weightLog) ? p.weightLog : {};
+  var stats = computeWeightStats(wLog);
+  document.getElementById('weight-stat-total').textContent = fmtWeightDelta(stats.total);
+  document.getElementById('weight-stat-week').textContent = fmtWeightDelta(stats.week);
   var dates = Object.keys(wLog).sort().reverse().slice(0, 8);
   var list = document.getElementById('weight-recent-list');
   list.innerHTML = '';
@@ -1921,13 +1963,14 @@ document.getElementById('weight-recent-list').addEventListener('click', function
 document.getElementById('weight-save-btn').addEventListener('click', function(){
   var val = parseFloat(document.getElementById('weight-input').value);
   if(!val || val <= 0){ toast('Enter a valid weight'); return; }
+  var chosenDate = document.getElementById('weight-date-input').value || dateKey(new Date());
   var p = getActiveProfile();
   if(!p.weightLog) p.weightLog = {};
-  p.weightLog[dateKey(new Date())] = val;
+  p.weightLog[chosenDate] = val;
   saveStore(store);
   renderWeightRecent();
   renderDashboard();
-  toast('Weight saved');
+  toast('Weight saved for ' + new Date(chosenDate+'T00:00:00').toLocaleDateString('en-GB', {day:'2-digit', month:'short'}));
 });
 
 var searchRequestId = 0;
