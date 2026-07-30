@@ -594,9 +594,7 @@ function renderSlot(s, i){
     </div>`;
   }
   const ex = s.chosen;
-  const imgHtml = ex.image ? `<img src="${ex.image}" alt="" style="width:100%;max-height:150px;object-fit:cover;border-radius:10px;margin-bottom:9px;border:1px solid var(--border);" loading="lazy">` : '';
   return `<div class="slot slot-${s.role}">
-    ${imgHtml}
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
       <span class="badge">${s.setsReps.sets} x ${s.setsReps.reps}</span>
@@ -646,7 +644,6 @@ function renderPicker(){
   if(list.length===0){ el.innerHTML = '<div class="empty">No exercises match</div>'; return; }
   el.innerHTML = list.slice(0,150).map(e=>`
     <div class="ex-item">
-      ${e.image ? `<img src="${e.image}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:8px;border:1px solid var(--border);flex-shrink:0;" loading="lazy">` : `<div style="width:44px;height:44px;border-radius:8px;background:var(--panel);border:1px solid var(--border);flex-shrink:0;"></div>`}
       <div class="info"><b>${e.name}</b><div class="m">${e.m.join(', ')} · ${e.eq.replace('_',' ')}</div></div>
       <button class="btn btn-sm" onclick="pickExercise('${e.id}')">Select</button>
     </div>`).join('');
@@ -713,7 +710,7 @@ function renderCfSlots(){
           <label>Movement pattern</label>
           <select onchange="cfSlotDraft[${i}].movementPattern=this.value">
             <option value="">Any</option>
-            ${["squat","hinge","push","pull","core","isolation","cardio"].map(p=>`<option value="${p}" ${s.movementPattern===p?'selected':''}>${p}</option>`).join('')}
+            ${["squat","hinge","push","pull","core","isolation","cardio","carry","combo"].map(p=>`<option value="${p}" ${s.movementPattern===p?'selected':''}>${p}</option>`).join('')}
           </select>
         </div>
         <div>
