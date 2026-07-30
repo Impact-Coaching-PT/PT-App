@@ -174,6 +174,19 @@
       <label>Name (just a label for this test profile)</label>
       <input type="text" id="clientName" value="Test Client" />
 
+      <label>Training category (auto-selects a training type below — still overridable)</label>
+      <select id="clientCategory" onchange="applyCategoryMapping()">
+        <option value="">— none —</option>
+        <option value="strength">Strength</option>
+        <option value="fatloss">Fat Loss</option>
+        <option value="mwl">Medical Weight-Loss</option>
+        <option value="menopause">Menopause</option>
+        <option value="general">General Fitness</option>
+        <option value="hypertrophy">Muscle Build</option>
+        <option value="junior">Junior</option>
+        <option value="general">Paired</option>
+      </select>
+
       <label>Contraindications (hard-excludes matching exercises)</label>
       <div class="chips" id="contraChips"></div>
 
@@ -252,7 +265,7 @@
 let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let CLIENT = JSON.parse(localStorage.getItem('iwb-test-client') || 'null') || {
-  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null
+  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, trainingCategory: ''
 };
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
@@ -268,9 +281,11 @@ const TRAINING_TYPES = [
   { id:"fatloss", name:"Fat Loss", defaultSetsReps:{compound:{sets:3,reps:"10-15"},accessory:{sets:3,reps:"12-15"}},
     restGuidance:"45-60s throughout", restSeconds:{compound:50,accessory:45}, desc:"Higher reps, minimal rest, density-focused." },
   { id:"menopause", name:"Menopause", defaultSetsReps:{compound:{sets:3,reps:"8-10"},accessory:{sets:3,reps:"10-12"}},
-    restGuidance:"90s throughout, joint-friendly tempo", restSeconds:{compound:90,accessory:90}, desc:"Resistance-focused, bone-density priority, controlled tempo." },
+    restGuidance:"90s throughout, joint-friendly tempo", restSeconds:{compound:90,accessory:90}, excludeHighImpact:true,
+    desc:"Resistance-focused, bone-density priority, controlled tempo." },
   { id:"mwl", name:"Medical Weight Loss", defaultSetsReps:{compound:{sets:3,reps:"10-12"},accessory:{sets:3,reps:"12-15"}},
-    restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, desc:"Sustainable, joint-friendly, consistency-focused." },
+    restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, excludeHighImpact:true,
+    desc:"Sustainable, joint-friendly, consistency-focused." },
   { id:"general", name:"General Fitness", defaultSetsReps:{compound:{sets:3,reps:"8-12"},accessory:{sets:3,reps:"10-12"}},
     restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, desc:"Balanced middle ground across goals." },
   { id:"junior", name:"Junior", defaultSetsReps:{compound:{sets:3,reps:"8-12"},accessory:{sets:2,reps:"10-12"}},
@@ -343,12 +358,28 @@ async function init(){
   renderClientLists();
   document.getElementById('clientName').value = CLIENT.name || 'Test Client';
   document.getElementById('exerciseCount').value = CLIENT.exerciseCount || '';
+  document.getElementById('clientCategory').value = CLIENT.trainingCategory || '';
   document.getElementById('clientName').oninput = saveClient;
   document.getElementById('exerciseCount').oninput = saveClient;
+  if(CLIENT.trainingCategory){
+    document.getElementById('trainingType').value = CLIENT.trainingCategory;
+    document.getElementById('trainingType').onchange();
+  }
   renderClientSummary();
   if(localStorage.getItem('iwb-panel-collapsed') !== '0'){
     document.getElementById('clientPanelBody').style.display = 'none';
     document.getElementById('clientPanelArrow').textContent = '▸';
+  }
+}
+
+function applyCategoryMapping(){
+  const cat = document.getElementById('clientCategory').value;
+  CLIENT.trainingCategory = cat;
+  saveClient();
+  if(cat){
+    const sel = document.getElementById('trainingType');
+    sel.value = cat;
+    sel.onchange();
   }
 }
 
@@ -438,7 +469,7 @@ function removeHistory(date, exerciseId){
 function renderTrainingTypes(){
   const sel = document.getElementById('trainingType');
   sel.innerHTML = TRAINING_TYPES.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');
-  sel.onchange = ()=>{ document.getElementById('ttDesc').textContent = getTT().desc + ' · Rest: ' + getTT().restGuidance; };
+  sel.onchange = ()=>{ const t=getTT(); document.getElementById('ttDesc').textContent = t.desc + ' · Rest: ' + t.restGuidance + (t.excludeHighImpact ? ' · High-impact/plyometric exercises excluded' : ''); };
   sel.onchange();
 }
 function getTT(){ return TRAINING_TYPES.find(t=>t.id===document.getElementById('trainingType').value); }
@@ -461,6 +492,8 @@ function daysAgo(dateStr){
   return Math.floor((now - d) / (1000*60*60*24));
 }
 
+let CURRENT_TT = null;
+
 function hardFilter(slot){
   return EXERCISES.filter(e=>{
     if(slot.role==='compound' && !e.compound) return false;
@@ -471,6 +504,7 @@ function hardFilter(slot){
     if(CLIENT.equipmentAccess.length>0 && e.eq!=='bodyweight' && e.eq!=='cable' && !CLIENT.equipmentAccess.includes(e.eq)) return false;
     if(CLIENT.dislikes.includes(e.id)) return false;
     if(e.contraindications.some(c=>CLIENT.contraindications.includes(c))) return false;
+    if(CURRENT_TT && CURRENT_TT.excludeHighImpact && e.highImpact) return false;
     return true;
   });
 }
@@ -499,6 +533,7 @@ function scoreCandidates(candidates, alreadyPickedMuscles){
 function generateWorkout(){
   const format = allFormats().find(f=>f.id===currentFormatId);
   const tt = getTT();
+  CURRENT_TT = tt;
   let slots = format.slots.map((s,i)=>({ ...s, slotIndex:i }));
 
   // apply exercise count: shrink if fewer requested, cycle through the slot pattern if more requested
@@ -559,7 +594,9 @@ function renderSlot(s, i){
     </div>`;
   }
   const ex = s.chosen;
+  const imgHtml = ex.image ? `<img src="${ex.image}" alt="" style="width:100%;max-height:150px;object-fit:cover;border-radius:10px;margin-bottom:9px;border:1px solid var(--border);" loading="lazy">` : '';
   return `<div class="slot slot-${s.role}">
+    ${imgHtml}
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
       <span class="badge">${s.setsReps.sets} x ${s.setsReps.reps}</span>
@@ -609,6 +646,7 @@ function renderPicker(){
   if(list.length===0){ el.innerHTML = '<div class="empty">No exercises match</div>'; return; }
   el.innerHTML = list.slice(0,150).map(e=>`
     <div class="ex-item">
+      ${e.image ? `<img src="${e.image}" alt="" style="width:44px;height:44px;object-fit:cover;border-radius:8px;border:1px solid var(--border);flex-shrink:0;" loading="lazy">` : `<div style="width:44px;height:44px;border-radius:8px;background:var(--panel);border:1px solid var(--border);flex-shrink:0;"></div>`}
       <div class="info"><b>${e.name}</b><div class="m">${e.m.join(', ')} · ${e.eq.replace('_',' ')}</div></div>
       <button class="btn btn-sm" onclick="pickExercise('${e.id}')">Select</button>
     </div>`).join('');

@@ -12,7 +12,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L02",
@@ -27,7 +29,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L03",
@@ -42,7 +46,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hack_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L04",
@@ -58,7 +64,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L05",
@@ -73,7 +81,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Single-Leg_Split_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L06",
@@ -88,7 +98,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L07",
@@ -102,7 +114,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Barbell_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L08",
@@ -118,7 +132,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sumo_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L09",
@@ -133,7 +149,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Glute_Bridge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L10",
@@ -148,7 +166,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Glute_Bridge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L11",
@@ -163,7 +183,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Hip_Thrust/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L12",
@@ -179,7 +201,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Single-Leg_Split_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L13",
@@ -194,7 +218,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Split_Squat_with_Dumbbells/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L14",
@@ -209,7 +235,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L15",
@@ -224,7 +252,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L16",
@@ -239,7 +269,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L17",
@@ -254,7 +286,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L18",
@@ -270,7 +304,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L19",
@@ -285,7 +321,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L20",
@@ -300,7 +338,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sit_Squats/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L21",
@@ -314,7 +354,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Leg_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L22",
@@ -328,7 +370,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Leg_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L23",
@@ -342,7 +386,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L24",
@@ -356,7 +402,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L25",
@@ -371,7 +419,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L26",
@@ -386,7 +436,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L27",
@@ -398,7 +450,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Adductor/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L28",
@@ -411,7 +465,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Thigh_Abductor/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L29",
@@ -425,7 +481,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L30",
@@ -437,7 +495,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L31",
@@ -452,7 +512,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Landmine_180s/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L32",
@@ -468,7 +530,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Sumo_High_Pull/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L33",
@@ -480,7 +544,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L34",
@@ -495,7 +561,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L35",
@@ -509,7 +577,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C01",
@@ -523,7 +593,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Press_with_Chains/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C02",
@@ -536,7 +608,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Press_with_Chains/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C03",
@@ -549,7 +623,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Bench_Pull/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C04",
@@ -561,7 +637,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Barbell_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C05",
@@ -574,7 +652,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C06",
@@ -587,7 +667,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C07",
@@ -600,7 +682,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C08",
@@ -613,7 +697,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C09",
@@ -626,7 +712,9 @@
   "eq": "smith",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Incline_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C10",
@@ -638,7 +726,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C11",
@@ -650,7 +740,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Flyes/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C12",
@@ -662,7 +754,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C13",
@@ -674,7 +768,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C14",
@@ -687,7 +783,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C15",
@@ -700,7 +798,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C16",
@@ -713,7 +813,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B01",
@@ -726,7 +828,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B02",
@@ -739,7 +843,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B03",
@@ -752,7 +858,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B04",
@@ -766,7 +874,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Cable_Rows/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B05",
@@ -780,7 +890,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Barbell_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B06",
@@ -796,7 +908,9 @@
   "movementPattern": "pull",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Barbell_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B07",
@@ -812,7 +926,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B08",
@@ -827,7 +943,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rack_Pull_with_Bands/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B09",
@@ -843,7 +961,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sumo_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B10",
@@ -856,7 +976,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B11",
@@ -869,7 +991,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B12",
@@ -881,7 +1005,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B13",
@@ -894,7 +1020,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B14",
@@ -907,7 +1035,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B15",
@@ -920,7 +1050,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B16",
@@ -933,7 +1065,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B17",
@@ -946,7 +1080,9 @@
   "eq": "kettlebell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B18",
@@ -959,7 +1095,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B19",
@@ -972,7 +1110,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/T-Bar_Row_with_Handle/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B20",
@@ -985,7 +1125,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S01",
@@ -1000,7 +1142,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S02",
@@ -1015,7 +1159,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S03",
@@ -1030,7 +1176,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S04",
@@ -1045,7 +1193,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S05",
@@ -1059,7 +1209,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S06",
@@ -1071,7 +1223,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S07",
@@ -1083,7 +1237,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Dumbbell_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S08",
@@ -1096,7 +1252,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S09",
@@ -1109,7 +1267,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S10",
@@ -1124,7 +1284,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Board_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S11",
@@ -1139,7 +1301,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Barbell_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A01",
@@ -1151,7 +1315,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A02",
@@ -1163,7 +1329,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Hammer_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A03",
@@ -1175,7 +1343,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Cable_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A04",
@@ -1187,7 +1357,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A05",
@@ -1200,7 +1372,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A06",
@@ -1212,7 +1386,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Body_Hammer_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A07",
@@ -1224,7 +1400,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A08",
@@ -1237,7 +1415,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A09",
@@ -1249,7 +1429,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A10",
@@ -1262,7 +1444,9 @@
   "eq": "kettlebell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Arnold_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A11",
@@ -1274,7 +1458,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A12",
@@ -1286,7 +1472,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A13",
@@ -1298,7 +1486,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A14",
@@ -1313,7 +1503,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A15",
@@ -1325,7 +1517,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Skull_Crusher/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A16",
@@ -1339,7 +1533,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Dips/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O01",
@@ -1353,7 +1549,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O02",
@@ -1367,7 +1565,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/3_4_Sit-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O03",
@@ -1381,7 +1581,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O04",
@@ -1393,7 +1595,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent-Knee_Hip_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O05",
@@ -1407,7 +1611,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O06",
@@ -1421,7 +1627,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Russian_Twist/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O07",
@@ -1433,7 +1641,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Plank/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O08",
@@ -1445,7 +1655,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Up_to_Side_Plank/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O09",
@@ -1457,7 +1669,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O10",
@@ -1471,7 +1685,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Frog_Sit-Ups/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O11",
@@ -1485,7 +1701,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV01",
@@ -1497,7 +1715,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV02",
@@ -1509,7 +1729,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stairmaster/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV03",
@@ -1521,7 +1743,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV04",
@@ -1533,7 +1757,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV05",
@@ -1545,7 +1771,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV06",
@@ -1557,7 +1785,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV07",
@@ -1570,7 +1800,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV08",
@@ -1583,7 +1815,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV09",
@@ -1596,7 +1830,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV10",
@@ -1609,7 +1845,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV11",
@@ -1622,7 +1860,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV12",
@@ -1635,7 +1875,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV13",
@@ -1648,7 +1890,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV14",
@@ -1660,7 +1904,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Walking_Treadmill/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV15",
@@ -1672,7 +1918,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Running_Treadmill/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L36",
@@ -1686,7 +1934,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Leg_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L37",
@@ -1700,7 +1950,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L38",
@@ -1715,7 +1967,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L39",
@@ -1730,7 +1984,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L40",
@@ -1745,7 +2001,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L41",
@@ -1759,7 +2017,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single-Leg_Leg_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L42",
@@ -1773,7 +2033,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L43",
@@ -1788,7 +2050,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Single_Leg_Glute_Bridge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L44",
@@ -1802,7 +2066,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Narrow_Stance_Hack_Squats/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L45",
@@ -1817,7 +2083,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hack_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L46",
@@ -1832,7 +2100,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L47",
@@ -1848,7 +2118,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L48",
@@ -1864,7 +2136,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Crossover_Reverse_Lunge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L49",
@@ -1879,7 +2153,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L50",
@@ -1894,7 +2170,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L51",
@@ -1909,7 +2187,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L52",
@@ -1924,7 +2204,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Drag_-_Harness/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L53",
@@ -1938,7 +2220,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L54",
@@ -1952,7 +2236,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L55",
@@ -1967,7 +2253,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pull_Through/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L56",
@@ -1979,7 +2267,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Glute_Kickback/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L57",
@@ -1994,7 +2284,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hip_Adduction/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L58",
@@ -2008,7 +2300,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Hip_Adduction/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L59",
@@ -2023,7 +2317,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L60",
@@ -2038,7 +2334,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L61",
@@ -2053,7 +2351,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Jump/0.jpg",
+  "highImpact": true
  },
  {
   "id": "L62",
@@ -2068,7 +2368,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L63",
@@ -2082,7 +2384,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L64",
@@ -2097,7 +2401,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L65",
@@ -2112,7 +2418,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L66",
@@ -2128,7 +2436,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Good_Mornings/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L67",
@@ -2143,7 +2453,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Romanian_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L68",
@@ -2158,7 +2470,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stiff-Legged_Barbell_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L69",
@@ -2172,7 +2486,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L70",
@@ -2186,7 +2502,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L71",
@@ -2201,7 +2519,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Star_Jump/0.jpg",
+  "highImpact": true
  },
  {
   "id": "L72",
@@ -2216,7 +2536,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L73",
@@ -2231,7 +2553,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Monster_Walk/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L74",
@@ -2246,7 +2570,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L75",
@@ -2261,7 +2587,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C17",
@@ -2273,7 +2601,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C18",
@@ -2286,7 +2616,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C19",
@@ -2298,7 +2630,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C20",
@@ -2311,7 +2645,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C21",
@@ -2324,7 +2660,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Smith_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C22",
@@ -2337,7 +2675,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C23",
@@ -2349,7 +2689,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Smith_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C24",
@@ -2362,7 +2704,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C25",
@@ -2375,7 +2719,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C26",
@@ -2387,7 +2733,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C27",
@@ -2399,7 +2747,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C28",
@@ -2411,7 +2761,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crossover/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C29",
@@ -2425,7 +2777,9 @@
   "eq": "smith",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C30",
@@ -2438,7 +2792,9 @@
   "eq": "smith",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C31",
@@ -2451,7 +2807,9 @@
   "eq": "smith",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C32",
@@ -2464,7 +2822,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Push-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C33",
@@ -2476,7 +2836,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C34",
@@ -2489,7 +2851,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Push-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C35",
@@ -2502,7 +2866,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Dips/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C36",
@@ -2515,7 +2881,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent-Arm_Dumbbell_Pullover/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C37",
@@ -2528,7 +2896,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Dumbbell_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B21",
@@ -2541,7 +2911,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B22",
@@ -2554,7 +2926,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B23",
@@ -2567,7 +2941,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B24",
@@ -2580,7 +2956,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B25",
@@ -2593,7 +2971,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B26",
@@ -2606,7 +2986,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B27",
@@ -2619,7 +3001,9 @@
   "eq": "machine_pin",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B28",
@@ -2632,7 +3016,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/T-Bar_Row_with_Handle/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B29",
@@ -2645,7 +3031,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B30",
@@ -2658,7 +3046,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B31",
@@ -2671,7 +3061,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B32",
@@ -2684,7 +3076,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B33",
@@ -2697,7 +3091,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B34",
@@ -2709,7 +3105,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Straight-Arm_Pulldown/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B35",
@@ -2722,7 +3120,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B36",
@@ -2735,7 +3135,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Face_Pull/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B37",
@@ -2748,7 +3150,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B38",
@@ -2761,7 +3165,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B39",
@@ -2774,7 +3180,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B40",
@@ -2790,7 +3198,9 @@
   "movementPattern": "pull",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bent_Over_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B41",
@@ -2805,7 +3215,9 @@
   "movementPattern": "pull",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B42",
@@ -2820,7 +3232,9 @@
   "movementPattern": "pull",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B43",
@@ -2835,7 +3249,9 @@
   "movementPattern": "pull",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B44",
@@ -2850,7 +3266,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Superman/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B45",
@@ -2866,7 +3284,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B46",
@@ -2881,7 +3301,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B47",
@@ -2895,7 +3317,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B48",
@@ -2908,7 +3332,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S12",
@@ -2923,7 +3349,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S13",
@@ -2936,7 +3364,9 @@
   "eq": "machine_pin",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S14",
@@ -2951,7 +3381,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leverage_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S15",
@@ -2963,7 +3395,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Seated_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S16",
@@ -2975,7 +3409,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Seated_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S17",
@@ -2987,7 +3423,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cable_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S18",
@@ -2999,7 +3437,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cable_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S19",
@@ -3012,7 +3452,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S20",
@@ -3027,7 +3469,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S21",
@@ -3042,7 +3486,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S22",
@@ -3054,7 +3500,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S23",
@@ -3066,7 +3514,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Dumbbell_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S24",
@@ -3079,7 +3529,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rear_Delt_Fly/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S25",
@@ -3094,7 +3546,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shrug/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S26",
@@ -3109,7 +3563,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S27",
@@ -3125,7 +3581,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S28",
@@ -3137,7 +3595,9 @@
   "eq": "machine_plate",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Plate_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S29",
@@ -3149,7 +3609,9 @@
   "eq": "machine_plate",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S30",
@@ -3164,7 +3626,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A17",
@@ -3176,7 +3640,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Hammer_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A18",
@@ -3188,7 +3654,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A19",
@@ -3200,7 +3668,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A20",
@@ -3212,7 +3682,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Cable_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A21",
@@ -3224,7 +3696,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lying_Cable_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A22",
@@ -3236,7 +3710,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A23",
@@ -3248,7 +3724,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A24",
@@ -3262,7 +3740,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Rope_Overhead_Triceps_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A25",
@@ -3274,7 +3754,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_One_Arm_Tricep_Extension/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A26",
@@ -3286,7 +3768,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A27",
@@ -3298,7 +3782,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A28",
@@ -3310,7 +3796,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A29",
@@ -3324,7 +3812,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "wrist"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Wrist_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A30",
@@ -3336,7 +3826,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A31",
@@ -3348,7 +3840,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A32",
@@ -3360,7 +3854,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A33",
@@ -3372,7 +3868,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A34",
@@ -3384,7 +3882,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A35",
@@ -3398,7 +3898,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A36",
@@ -3410,7 +3912,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A37",
@@ -3423,7 +3927,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A38",
@@ -3435,7 +3941,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Concentration_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A39",
@@ -3447,7 +3955,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A40",
@@ -3459,7 +3969,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Zottman_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A41",
@@ -3471,7 +3983,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Barbell_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A42",
@@ -3483,7 +3997,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Dumbbell_Kickback/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A43",
@@ -3495,7 +4011,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tricep_Dumbbell_Kickback/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A44",
@@ -3509,7 +4027,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A45",
@@ -3523,7 +4043,9 @@
   "movementPattern": "isolation",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A46",
@@ -3536,7 +4058,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Barbell_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A47",
@@ -3551,7 +4075,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A48",
@@ -3563,7 +4089,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O12",
@@ -3577,7 +4105,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O13",
@@ -3591,7 +4121,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O14",
@@ -3605,7 +4137,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O15",
@@ -3619,7 +4153,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O16",
@@ -3633,7 +4169,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O17",
@@ -3647,7 +4185,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O18",
@@ -3662,7 +4202,9 @@
   "movementPattern": "core",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bench_Jump/0.jpg",
+  "highImpact": true
  },
  {
   "id": "O19",
@@ -3676,7 +4218,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O20",
@@ -3691,7 +4235,9 @@
   "movementPattern": "core",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O21",
@@ -3703,7 +4249,9 @@
   "eq": "bag_ball",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O22",
@@ -3717,7 +4265,9 @@
   "eq": "bag_ball",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O23",
@@ -3731,7 +4281,9 @@
   "eq": "bag_ball",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O24",
@@ -3745,7 +4297,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O25",
@@ -3757,7 +4311,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dead_Bug/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O26",
@@ -3770,7 +4326,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O27",
@@ -3782,7 +4340,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Mountain_Climbers/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O28",
@@ -3794,7 +4354,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O29",
@@ -3806,7 +4368,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/3_4_Sit-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O30",
@@ -3818,7 +4382,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O31",
@@ -3830,7 +4396,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Hanging_Leg_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O32",
@@ -3842,7 +4410,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O33",
@@ -3854,7 +4424,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O34",
@@ -3866,7 +4438,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O35",
@@ -3880,7 +4454,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Decline_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O36",
@@ -3894,7 +4470,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Toe_Touchers/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O37",
@@ -3906,7 +4484,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Flutter_Kicks/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O38",
@@ -3918,7 +4498,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O39",
@@ -3932,7 +4514,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/3_4_Sit-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV16",
@@ -3945,7 +4529,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV17",
@@ -3959,7 +4545,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Drag_-_Harness/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV18",
@@ -3972,7 +4560,9 @@
   "eq": "bag_ball",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV19",
@@ -3986,7 +4576,9 @@
   "eq": "bag_ball",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV20",
@@ -4000,7 +4592,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Farmers_Walk/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV21",
@@ -4014,7 +4608,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV22",
@@ -4026,7 +4622,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV23",
@@ -4040,7 +4638,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Push/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV24",
@@ -4053,7 +4653,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV25",
@@ -4065,7 +4667,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV26",
@@ -4079,7 +4683,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV27",
@@ -4091,7 +4697,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV28",
@@ -4103,7 +4711,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV29",
@@ -4116,7 +4726,9 @@
   "eq": "bag_ball",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV30",
@@ -4130,7 +4742,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Battling_Ropes/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB01",
@@ -4146,7 +4760,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB02",
@@ -4162,7 +4778,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB03",
@@ -4178,7 +4796,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB04",
@@ -4194,7 +4814,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Laterals_to_Front_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB05",
@@ -4210,7 +4832,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB06",
@@ -4228,7 +4852,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB07",
@@ -4245,7 +4871,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_One-Arm_Upright_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB08",
@@ -4262,7 +4890,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Arnold_Dumbbell_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB09",
@@ -4280,7 +4910,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB10",
@@ -4297,7 +4929,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB11",
@@ -4314,7 +4948,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB12",
@@ -4330,7 +4966,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB13",
@@ -4346,7 +4984,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB14",
@@ -4364,7 +5004,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CB15",
@@ -4380,7 +5022,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB16",
@@ -4396,7 +5040,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Laterals_to_Front_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB17",
@@ -4414,7 +5060,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB18",
@@ -4432,7 +5080,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB19",
@@ -4448,7 +5098,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB20",
@@ -4464,7 +5116,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB21",
@@ -4480,7 +5134,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Laterals_to_Front_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB22",
@@ -4496,7 +5152,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB23",
@@ -4512,7 +5170,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bodyweight_Walking_Lunge/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB24",
@@ -4528,7 +5188,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB25",
@@ -4546,7 +5208,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB26",
@@ -4562,7 +5226,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB27",
@@ -4578,7 +5244,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Side_Lateral_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB28",
@@ -4596,7 +5264,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB29",
@@ -4613,7 +5283,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Bent_Over_Two-Dumbbell_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB30",
@@ -4629,7 +5301,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Bicep_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB31",
@@ -4646,7 +5320,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB32",
@@ -4663,7 +5339,9 @@
   "contraindications": [
    "lower-back",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB33",
@@ -4680,7 +5358,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB34",
@@ -4697,7 +5377,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB35",
@@ -4714,7 +5396,9 @@
   "movementPattern": "core",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB36",
@@ -4732,7 +5416,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB37",
@@ -4746,7 +5432,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB38",
@@ -4763,7 +5451,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Knee_Tuck_Jump/0.jpg",
+  "highImpact": true
  },
  {
   "id": "CB39",
@@ -4780,7 +5470,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB40",
@@ -4794,7 +5486,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB41",
@@ -4812,7 +5506,9 @@
   "contraindications": [
    "knee",
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB42",
@@ -4828,7 +5524,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Floor_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB43",
@@ -4843,7 +5541,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB44",
@@ -4858,7 +5558,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Incline_Dumbbell_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB45",
@@ -4872,7 +5574,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB46",
@@ -4886,7 +5590,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB47",
@@ -4901,7 +5607,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB48",
@@ -4916,7 +5624,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Alternate_Hammer_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB49",
@@ -4933,7 +5643,9 @@
   "movementPattern": "core",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB50",
@@ -4947,7 +5659,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L76",
@@ -4959,7 +5673,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L77",
@@ -4973,7 +5689,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L78",
@@ -4985,7 +5703,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L79",
@@ -4997,7 +5717,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L80",
@@ -5011,7 +5733,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L81",
@@ -5025,7 +5749,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Seated_Calf_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L82",
@@ -5039,7 +5765,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L83",
@@ -5053,7 +5781,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Dumbbell_Calf_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L84",
@@ -5067,7 +5797,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Calf_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L85",
@@ -5081,7 +5813,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L86",
@@ -5096,7 +5830,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L87",
@@ -5111,7 +5847,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Goblet_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L88",
@@ -5126,7 +5864,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Squat/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L89",
@@ -5141,7 +5881,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L90",
@@ -5157,7 +5899,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Trap_Bar_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L91",
@@ -5172,7 +5916,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L92",
@@ -5187,7 +5933,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Windmill/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L93",
@@ -5199,7 +5947,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Glute_Kickback/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L94",
@@ -5213,7 +5963,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L95",
@@ -5228,7 +5980,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L96",
@@ -5244,7 +5998,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L97",
@@ -5260,7 +6016,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L98",
@@ -5275,7 +6033,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L99",
@@ -5289,7 +6049,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L100",
@@ -5304,7 +6066,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Stiff_Leg_Barbell_Good_Morning/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L101",
@@ -5319,7 +6083,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Good_Morning/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L102",
@@ -5334,7 +6100,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Leg_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "L103",
@@ -5349,7 +6117,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L104",
@@ -5363,7 +6133,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "L105",
@@ -5377,7 +6149,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B49",
@@ -5390,7 +6164,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B50",
@@ -5403,7 +6179,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B51",
@@ -5416,7 +6194,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Chin-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B52",
@@ -5429,7 +6209,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B53",
@@ -5442,7 +6224,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inverted_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B54",
@@ -5455,7 +6239,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Inverted_Row_with_Straps/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B55",
@@ -5467,7 +6253,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B56",
@@ -5480,7 +6268,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B57",
@@ -5493,7 +6283,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B58",
@@ -5506,7 +6298,9 @@
   "eq": "machine_plate",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B59",
@@ -5519,7 +6313,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B60",
@@ -5532,7 +6328,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Long_Bar_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B61",
@@ -5545,7 +6343,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Upright_Cable_Row/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B62",
@@ -5557,7 +6357,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Rope_Straight-Arm_Pulldown/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B63",
@@ -5570,7 +6372,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "B64",
@@ -5583,7 +6387,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Wide-Grip_Lat_Pulldown/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B65",
@@ -5596,7 +6402,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "pull",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Pull_Apart/0.jpg",
+  "highImpact": false
  },
  {
   "id": "B66",
@@ -5612,7 +6420,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C38",
@@ -5625,7 +6435,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_and_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C39",
@@ -5638,7 +6450,9 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C40",
@@ -5650,7 +6464,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Svend_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C41",
@@ -5662,7 +6478,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C42",
@@ -5674,7 +6492,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C43",
@@ -5686,7 +6506,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C44",
@@ -5698,7 +6520,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C45",
@@ -5710,7 +6534,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C46",
@@ -5722,7 +6548,9 @@
   "eq": "machine_plate",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C47",
@@ -5735,7 +6563,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C48",
@@ -5748,7 +6578,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Push-Ups_With_Feet_Elevated/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C49",
@@ -5761,7 +6593,9 @@
   "eq": "bodyweight",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C50",
@@ -5774,7 +6608,9 @@
   "eq": "kettlebell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Floor_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C51",
@@ -5787,7 +6623,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Floor_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C52",
@@ -5800,7 +6638,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "C53",
@@ -5813,7 +6653,9 @@
   "eq": "smith",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Smith_Machine_Bench_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "C54",
@@ -5826,7 +6668,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "push",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_and_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S31",
@@ -5840,7 +6684,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Bradford_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S32",
@@ -5852,7 +6698,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cable_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S33",
@@ -5864,7 +6712,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S34",
@@ -5879,7 +6729,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S35",
@@ -5894,7 +6746,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Arnold_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S36",
@@ -5909,7 +6763,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Arnold_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S37",
@@ -5921,7 +6777,9 @@
   "eq": "machine_plate",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Plate_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S38",
@@ -5934,7 +6792,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Front_Cable_Raise/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S39",
@@ -5946,7 +6806,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Lateral_Raise_-_With_Bands/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S40",
@@ -5958,7 +6820,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S41",
@@ -5972,7 +6836,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cuban_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S42",
@@ -5987,7 +6853,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Dumbbell_Shoulder_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S43",
@@ -6002,7 +6870,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Standing_Military_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "S44",
@@ -6014,7 +6884,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "S45",
@@ -6029,7 +6901,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Chest_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A49",
@@ -6041,7 +6915,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/EZ-Bar_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A50",
@@ -6053,7 +6929,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Preacher_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A51",
@@ -6065,7 +6943,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Drag_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A52",
@@ -6077,7 +6957,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A53",
@@ -6089,7 +6971,9 @@
   "eq": "kettlebell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A54",
@@ -6101,7 +6985,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Triceps_Pushdown/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A55",
@@ -6113,7 +6999,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A56",
@@ -6125,7 +7013,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Band_Skull_Crusher/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A57",
@@ -6137,7 +7027,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A58",
@@ -6149,7 +7041,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/JM_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A59",
@@ -6162,7 +7056,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Close-Grip_Push-Up_off_of_a_Dumbbell/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A60",
@@ -6176,7 +7072,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Weighted_Bench_Dip/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A61",
@@ -6191,7 +7089,9 @@
   "movementPattern": "push",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Ring_Dips/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A62",
@@ -6203,7 +7103,9 @@
   "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cross_Body_Hammer_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A63",
@@ -6215,7 +7117,9 @@
   "eq": "barbell",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "A64",
@@ -6227,7 +7131,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "A65",
@@ -6239,7 +7145,9 @@
   "eq": "cable",
   "compound": false,
   "movementPattern": "isolation",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Cable_Curl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O40",
@@ -6251,7 +7159,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "carry",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O41",
@@ -6263,7 +7173,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "carry",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O42",
@@ -6275,7 +7187,9 @@
   "eq": "kettlebell",
   "compound": true,
   "movementPattern": "carry",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O43",
@@ -6290,7 +7204,9 @@
   "movementPattern": "carry",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O44",
@@ -6302,7 +7218,9 @@
   "eq": "bag_ball",
   "compound": true,
   "movementPattern": "carry",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O45",
@@ -6314,7 +7232,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O46",
@@ -6326,7 +7246,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O47",
@@ -6338,7 +7260,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O48",
@@ -6352,7 +7276,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O49",
@@ -6366,7 +7292,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O50",
@@ -6380,7 +7308,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O51",
@@ -6394,7 +7324,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O52",
@@ -6406,7 +7338,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O53",
@@ -6418,7 +7352,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/3_4_Sit-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O54",
@@ -6430,7 +7366,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O55",
@@ -6442,7 +7380,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O56",
@@ -6454,7 +7394,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O57",
@@ -6466,7 +7408,9 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O58",
@@ -6480,7 +7424,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O59",
@@ -6494,7 +7440,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Cable_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O60",
@@ -6506,7 +7454,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Pallof_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O61",
@@ -6520,7 +7470,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Reverse_Crunch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O62",
@@ -6532,7 +7484,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "O63",
@@ -6544,7 +7498,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "core",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Spider_Crawl/0.jpg",
+  "highImpact": false
  },
  {
   "id": "O64",
@@ -6558,7 +7514,9 @@
   "movementPattern": "core",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Jackknife_Sit-Up/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV31",
@@ -6570,7 +7528,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV32",
@@ -6582,7 +7542,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV33",
@@ -6594,7 +7556,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV34",
@@ -6606,7 +7570,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV35",
@@ -6618,7 +7584,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV36",
@@ -6630,7 +7598,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV37",
@@ -6642,7 +7612,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV38",
@@ -6654,7 +7626,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV39",
@@ -6666,7 +7640,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV40",
@@ -6678,7 +7654,9 @@
   "eq": "cardio_machine",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV41",
@@ -6690,7 +7668,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": true
  },
  {
   "id": "CV42",
@@ -6702,7 +7682,9 @@
   "eq": "bodyweight",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CV43",
@@ -6715,7 +7697,9 @@
   "eq": "other",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sled_Drag_-_Harness/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CV44",
@@ -6729,7 +7713,9 @@
   "eq": "kettlebell",
   "compound": false,
   "movementPattern": "cardio",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Windmill/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB51",
@@ -6744,7 +7730,9 @@
   "eq": "barbell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB52",
@@ -6760,7 +7748,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Clean_and_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB53",
@@ -6775,7 +7765,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Seated_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB54",
@@ -6790,7 +7782,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB55",
@@ -6806,7 +7800,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "shoulder"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Tate_Press/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB56",
@@ -6820,7 +7816,9 @@
   "eq": "bag_ball",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB57",
@@ -6834,7 +7832,9 @@
   "eq": "kettlebell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Kettlebell_Snatch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB58",
@@ -6848,7 +7848,9 @@
   "eq": "kettlebell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Kettlebell_Turkish_Get-Up_Lunge_style/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB59",
@@ -6861,7 +7863,9 @@
   "eq": "dumbbell",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Snatch/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB60",
@@ -6878,7 +7882,9 @@
   "movementPattern": "hinge",
   "contraindications": [
    "lower-back"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Barbell_Deadlift/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB61",
@@ -6895,7 +7901,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/One-Arm_Medicine_Ball_Slam/0.jpg",
+  "highImpact": false
  },
  {
   "id": "CB62",
@@ -6912,7 +7920,9 @@
   "movementPattern": "squat",
   "contraindications": [
    "knee"
-  ]
+  ],
+  "image": null,
+  "highImpact": false
  },
  {
   "id": "CB63",
@@ -6926,6 +7936,8 @@
   "eq": "other",
   "compound": true,
   "movementPattern": "squat",
-  "contraindications": []
+  "contraindications": [],
+  "image": "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/Sledgehammer_Swings/0.jpg",
+  "highImpact": false
  }
 ]
