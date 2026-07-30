@@ -388,6 +388,7 @@ function saveClient(){
   CLIENT.exerciseCount = parseInt(document.getElementById('exerciseCount').value) || null;
   localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
   renderClientSummary();
+  renderFormatList();
 }
 
 function renderClientSummary(){
@@ -481,7 +482,7 @@ function renderFormatList(){
   el.innerHTML = allFormats().map(f=>`
     <div class="format-card ${f.id===currentFormatId?'active':''}" onclick="selectFormat('${f.id}')">
       <b>${f.name}</b>${f.builtIn?'':' <span class="badge">custom</span>'}
-      <div class="m">${f.style} · ${f.slots.length} slots</div>
+      <div class="m">${f.style}</div>
     </div>`).join('');
 }
 function selectFormat(id){ currentFormatId = id; renderFormatList(); }
