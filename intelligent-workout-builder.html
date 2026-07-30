@@ -6,75 +6,158 @@
 <title>Intelligent Workout Builder — Test Build</title>
 <style>
   :root{
-    --bg:#14161b; --panel:#1c1f26; --panel2:#242833; --border:#31353f;
-    --red:#e33d2d; --red-dim:#e33d2d33; --text:#e9ebf0; --sub:#9aa1af;
-    --good:#3ae8a0; --warn:#f5b642; --bad:#ff5b5b; --accent2:#7d8cff;
+    --bg:#0e1015; --bg2:#15171e; --panel:#181b23; --panel2:#20242f; --border:#2a2f3b;
+    --red:#e33d2d; --red-dark:#ae231c; --red-glow:#e33d2d66; --red-dim:#e33d2d22;
+    --text:#f2f3f6; --sub:#8b93a3;
+    --good:#3ae8a0; --bad:#ff5b5b; --accent2:#7d8cff; --accent2-dim:#7d8cff22;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding-bottom:60px;}
-  header{padding:18px 16px 14px;text-align:center;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:20;}
-  header h1{font-size:17px;margin:0 0 2px;letter-spacing:.2px;}
-  header .tag{font-size:12px;color:var(--sub);}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, #e33d2d1a, transparent 60%),
+      linear-gradient(180deg,#0e1015 0%,#0b0c10 100%);
+    color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    padding-bottom:70px; min-height:100vh;
+  }
+  header{
+    padding:26px 16px 20px;text-align:center;position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg,#0e1015ee 70%, #0e101500);
+    backdrop-filter:blur(6px);
+  }
+  header h1{
+    font-size:19px;margin:0 0 4px;letter-spacing:.3px;font-weight:800;
+    background:linear-gradient(90deg,#fff, #ffb5ab 60%, var(--red));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    text-shadow:0 0 30px var(--red-glow);
+  }
+  header .emoji-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:30px;height:30px;border-radius:9px;font-size:16px;
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    box-shadow:0 0 18px var(--red-glow), inset 0 1px 0 #ffffff33;
+    -webkit-text-fill-color:initial;
+  }
+  header .tag{font-size:11.5px;color:var(--sub);letter-spacing:.5px;text-transform:uppercase;}
   .wrap{max-width:640px;margin:0 auto;padding:14px;}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;}
-  .card h2{font-size:14px;margin:0 0 10px;color:var(--text);display:flex;align-items:center;gap:8px;}
-  .card h2 .n{width:20px;height:20px;border-radius:50%;background:var(--red-dim);color:var(--red);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;}
-  label{display:block;font-size:12px;color:var(--sub);margin:10px 0 4px;}
-  select, input[type=text], input[type=number]{width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);padding:9px 10px;border-radius:9px;font-size:14px;}
+  .card{
+    background:linear-gradient(160deg, var(--panel), var(--bg2));
+    border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;
+    box-shadow:0 8px 24px -12px #000a, inset 0 1px 0 #ffffff08;
+    position:relative;
+  }
+  .card h2{
+    font-size:13px;margin:0 0 12px;color:var(--text);display:flex;align-items:center;gap:8px;
+    text-transform:uppercase;letter-spacing:.8px;font-weight:700;
+  }
+  .card h2 .n{
+    width:22px;height:22px;border-radius:7px;
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:800;
+    box-shadow:0 0 12px var(--red-glow);
+  }
+  label{display:block;font-size:11.5px;color:var(--sub);margin:12px 0 5px;letter-spacing:.2px;}
+  select, input[type=text], input[type=number]{
+    width:100%;background:var(--panel2);border:1px solid var(--border);color:var(--text);
+    padding:10px 11px;border-radius:10px;font-size:14px;transition:border-color .15s;
+  }
+  select:focus, input:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px var(--red-dim);}
   .row{display:flex;gap:8px;}
   .row > *{flex:1;}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
-  .chip{padding:6px 10px;border-radius:20px;border:1px solid var(--border);background:var(--panel2);font-size:12px;color:var(--sub);cursor:pointer;user-select:none;}
-  .chip.active{border-color:var(--red);color:var(--red);background:var(--red-dim);}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:5px;}
+  .chip{
+    padding:7px 12px;border-radius:20px;border:1px solid var(--border);background:var(--panel2);
+    font-size:12px;color:var(--sub);cursor:pointer;user-select:none;transition:all .15s;
+  }
+  .chip.active{
+    border-color:var(--red);color:#fff;
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    box-shadow:0 0 14px var(--red-glow);font-weight:600;
+  }
   button{cursor:pointer;font-family:inherit;}
-  .btn{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:9px 12px;font-size:13px;}
+  .btn{
+    background:var(--panel2);color:var(--text);border:1px solid var(--border);
+    border-radius:11px;padding:10px 13px;font-size:13px;transition:all .15s;
+  }
   .btn:active{transform:scale(.97);}
-  .btn-primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:600;}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--red),var(--red-dark));
+    border:none;color:#fff;font-weight:700;letter-spacing:.3px;
+    box-shadow:0 6px 20px -4px var(--red-glow), inset 0 1px 0 #ffffff33;
+  }
+  .btn-primary:active{box-shadow:0 2px 10px -2px var(--red-glow);}
   .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--sub);}
-  .btn-sm{padding:6px 9px;font-size:12px;border-radius:8px;}
+  .btn-sm{padding:7px 10px;font-size:12px;border-radius:9px;}
   .btn-full{width:100%;}
-  .divider{height:1px;background:var(--border);margin:12px 0;}
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:14px 0;}
   .muted{color:var(--sub);font-size:12px;}
-  .slot{background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:10px;}
+  .slot{
+    background:linear-gradient(160deg,var(--panel2),var(--panel));
+    border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:11px;
+    border-left:3px solid var(--border);position:relative;overflow:hidden;
+  }
+  .slot.slot-compound{border-left-color:var(--red);box-shadow:-2px 0 16px -6px var(--red-glow);}
+  .slot.slot-accessory{border-left-color:var(--accent2);box-shadow:-2px 0 16px -6px #7d8cff55;}
   .slot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
-  .slot-role{font-size:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:700;padding:3px 7px;border-radius:6px;}
-  .slot-role.compound{background:#e33d2d33;color:#ff8a7a;}
-  .slot-role.accessory{background:#7d8cff33;color:#a8b2ff;}
-  .slot-ex-name{font-size:15px;font-weight:600;margin:6px 0 2px;}
+  .slot-role{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;padding:4px 8px;border-radius:6px;}
+  .slot-role.compound{background:linear-gradient(135deg,var(--red-dim),#e33d2d33);color:#ff8a7a;}
+  .slot-role.accessory{background:linear-gradient(135deg,var(--accent2-dim),#7d8cff33);color:#a8b2ff;}
+  .slot-ex-name{font-size:16px;font-weight:700;margin:7px 0 3px;letter-spacing:.1px;}
   .slot-meta{font-size:12px;color:var(--sub);}
-  .slot-explain{font-size:11.5px;color:var(--good);margin-top:6px;line-height:1.4;}
+  .slot-explain{font-size:11.5px;color:var(--good);margin-top:7px;line-height:1.4;}
   .slot-none{color:var(--bad);font-size:13px;font-style:italic;}
-  .slot-actions{display:flex;gap:6px;margin-top:10px;}
+  .slot-actions{display:flex;gap:7px;margin-top:11px;}
   .slot-actions button{flex:1;}
-  .badge{display:inline-block;font-size:10px;padding:2px 6px;border-radius:5px;background:var(--panel);border:1px solid var(--border);color:var(--sub);margin-left:4px;}
-  .modal-bg{display:none;position:fixed;inset:0;background:#000a;z-index:100;align-items:flex-end;justify-content:center;}
+  .badge{
+    display:inline-block;font-size:10px;padding:3px 8px;border-radius:6px;
+    background:var(--panel);border:1px solid var(--border);color:var(--sub);margin-left:4px;font-weight:600;
+  }
+  .modal-bg{display:none;position:fixed;inset:0;background:#000c;z-index:100;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px);}
   .modal-bg.open{display:flex;}
-  .modal{background:var(--panel);width:100%;max-width:640px;max-height:85vh;overflow-y:auto;border-radius:16px 16px 0 0;padding:16px;border:1px solid var(--border);border-bottom:none;}
-  .modal h3{margin:0 0 12px;font-size:15px;display:flex;justify-content:space-between;align-items:center;}
-  .modal h3 .close{font-size:20px;color:var(--sub);cursor:pointer;line-height:1;}
-  .ex-item{padding:10px;border-radius:9px;border:1px solid var(--border);margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .modal{
+    background:linear-gradient(160deg,var(--panel),var(--bg2));width:100%;max-width:640px;max-height:85vh;
+    overflow-y:auto;border-radius:20px 20px 0 0;padding:18px;border:1px solid var(--border);border-bottom:none;
+    box-shadow:0 -10px 40px -10px #000a;
+  }
+  .modal h3{margin:0 0 14px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+  .modal h3 .close{font-size:22px;color:var(--sub);cursor:pointer;line-height:1;}
+  .ex-item{
+    padding:11px;border-radius:11px;border:1px solid var(--border);margin-bottom:7px;
+    display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--panel2);
+  }
   .ex-item .info{flex:1;}
   .ex-item .info b{font-size:13.5px;}
   .ex-item .info .m{font-size:11px;color:var(--sub);}
-  .picklist{max-height:50vh;overflow-y:auto;margin-top:8px;}
-  .empty{text-align:center;color:var(--sub);font-size:13px;padding:20px 10px;}
-  .format-card{padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:6px;cursor:pointer;}
-  .format-card.active{border-color:var(--red);background:var(--red-dim);}
+  .picklist{max-height:50vh;overflow-y:auto;margin-top:9px;}
+  .empty{text-align:center;color:var(--sub);font-size:13px;padding:22px 10px;}
+  .format-card{
+    padding:12px 14px;border:1px solid var(--border);border-radius:13px;margin-bottom:7px;cursor:pointer;
+    background:var(--panel2);transition:all .15s;
+  }
+  .format-card.active{
+    border-color:var(--red);background:linear-gradient(135deg,var(--red-dim),#e33d2d11);
+    box-shadow:0 0 0 1px var(--red), 0 6px 20px -6px var(--red-glow);
+  }
   .format-card b{font-size:13.5px;}
   .format-card .m{font-size:11px;color:var(--sub);}
-  .slot-builder-row{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:10px;margin-bottom:8px;}
-  .slot-builder-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-  .hist-item{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+  .slot-builder-row{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:11px;margin-bottom:9px;}
+  .slot-builder-row .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+  .hist-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
   .hist-item:last-child{border-bottom:none;}
   .hist-item .x{color:var(--bad);cursor:pointer;padding:2px 6px;}
-  .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--border);padding:10px 16px;border-radius:10px;font-size:13px;z-index:200;display:none;}
+  .toast{
+    position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+    background:var(--panel2);border:1px solid var(--red);padding:11px 18px;border-radius:12px;
+    font-size:13px;z-index:200;display:none;box-shadow:0 6px 24px -6px var(--red-glow);
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🏋️ Intelligent Workout Builder</h1>
-  <div class="tag">Standalone test build — Phase 0-2</div>
+  <h1><span class="emoji-badge">🏋️</span>Intelligent Workout Builder</h1>
+  <div class="tag">Standalone test build · Phase 0-2</div>
 </header>
 
 <div class="wrap">
@@ -418,21 +501,31 @@ function generateWorkout(){
   const tt = getTT();
   let slots = format.slots.map((s,i)=>({ ...s, slotIndex:i }));
 
-  // apply exercise count cap
+  // apply exercise count: shrink if fewer requested, cycle through the slot pattern if more requested
   if(CLIENT.exerciseCount){
-    slots = slots.slice(0, CLIENT.exerciseCount);
+    if(CLIENT.exerciseCount <= slots.length){
+      slots = slots.slice(0, CLIENT.exerciseCount);
+    } else {
+      const extended = [];
+      for(let i=0;i<CLIENT.exerciseCount;i++){
+        extended.push({ ...slots[i % slots.length], slotIndex:i });
+      }
+      slots = extended;
+    }
   }
 
   const pickedMuscles = [];
+  const pickedIds = new Set();
   let estSeconds = 0;
   const WORK_SECONDS_PER_SET = 40; // rough time to actually perform a set
   const builtSlots = slots.map(slot=>{
-    const candidates = hardFilter(slot);
+    let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
+    if(candidates.length===0) candidates = hardFilter(slot); // fallback: allow a repeat if truly nothing else fits
     const ranked = scoreCandidates(candidates, pickedMuscles);
     const setsReps = slot.customSetsReps || tt.defaultSetsReps[slot.role];
     const restPerSet = tt.restSeconds[slot.role];
     estSeconds += setsReps.sets * (WORK_SECONDS_PER_SET + restPerSet);
-    if(ranked.length>0){ pickedMuscles.push(...ranked[0].ex.m); }
+    if(ranked.length>0){ pickedMuscles.push(...ranked[0].ex.m); pickedIds.add(ranked[0].ex.id); }
     return {
       ...slot, ranked, rerollIndex:0,
       chosen: ranked.length>0 ? ranked[0].ex : null,
@@ -460,13 +553,13 @@ function renderWorkout(){
 
 function renderSlot(s, i){
   if(!s.chosen){
-    return `<div class="slot">
+    return `<div class="slot slot-${s.role}">
       <span class="slot-role ${s.role}">${s.role}</span>
       <div class="slot-none">No matching exercise found for this slot's criteria + client restrictions.</div>
     </div>`;
   }
   const ex = s.chosen;
-  return `<div class="slot">
+  return `<div class="slot slot-${s.role}">
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
       <span class="badge">${s.setsReps.sets} x ${s.setsReps.reps}</span>
