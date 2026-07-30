@@ -97,8 +97,8 @@
       <label>Equipment access (leave all off = no restriction · bodyweight & cable always allowed as a baseline)</label>
       <div class="chips" id="eqChips"></div>
 
-      <label>Session time budget (minutes, optional — caps total slots)</label>
-      <input type="number" id="timeBudget" placeholder="e.g. 45" />
+      <label>Number of exercises (optional — caps the workout to this many slots)</label>
+      <input type="number" id="exerciseCount" placeholder="e.g. 6" />
 
       <div class="divider"></div>
       <label style="margin-top:0;">Exercise dislikes (hard-excluded)</label>
@@ -169,7 +169,7 @@
 let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let CLIENT = JSON.parse(localStorage.getItem('iwb-test-client') || 'null') || {
-  contraindications: [], equipmentAccess: [], dislikes: [], history: [], timeBudget: null
+  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null
 };
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
@@ -179,19 +179,19 @@ const CONTRA_TAGS = ["shoulder","lower-back","knee","wrist"];
 
 const TRAINING_TYPES = [
   { id:"strength", name:"Strength", defaultSetsReps:{compound:{sets:5,reps:"3-6"},accessory:{sets:3,reps:"6-8"}},
-    restGuidance:"2-3 min compounds / 90s accessory", desc:"Low reps, heavier loads, longer rest. Priority on the big compound lifts." },
+    restGuidance:"2-3 min compounds / 90s accessory", restSeconds:{compound:150,accessory:90}, desc:"Low reps, heavier loads, longer rest. Priority on the big compound lifts." },
   { id:"hypertrophy", name:"Hypertrophy / Muscle Build", defaultSetsReps:{compound:{sets:4,reps:"6-10"},accessory:{sets:3,reps:"10-12"}},
-    restGuidance:"90s compounds / 60s accessory", desc:"Moderate reps, shorter rest, volume-focused." },
+    restGuidance:"90s compounds / 60s accessory", restSeconds:{compound:90,accessory:60}, desc:"Moderate reps, shorter rest, volume-focused." },
   { id:"fatloss", name:"Fat Loss", defaultSetsReps:{compound:{sets:3,reps:"10-15"},accessory:{sets:3,reps:"12-15"}},
-    restGuidance:"45-60s throughout", desc:"Higher reps, minimal rest, density-focused." },
+    restGuidance:"45-60s throughout", restSeconds:{compound:50,accessory:45}, desc:"Higher reps, minimal rest, density-focused." },
   { id:"menopause", name:"Menopause", defaultSetsReps:{compound:{sets:3,reps:"8-10"},accessory:{sets:3,reps:"10-12"}},
-    restGuidance:"90s throughout, joint-friendly tempo", desc:"Resistance-focused, bone-density priority, controlled tempo." },
+    restGuidance:"90s throughout, joint-friendly tempo", restSeconds:{compound:90,accessory:90}, desc:"Resistance-focused, bone-density priority, controlled tempo." },
   { id:"mwl", name:"Medical Weight Loss", defaultSetsReps:{compound:{sets:3,reps:"10-12"},accessory:{sets:3,reps:"12-15"}},
-    restGuidance:"60-90s throughout", desc:"Sustainable, joint-friendly, consistency-focused." },
+    restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, desc:"Sustainable, joint-friendly, consistency-focused." },
   { id:"general", name:"General Fitness", defaultSetsReps:{compound:{sets:3,reps:"8-12"},accessory:{sets:3,reps:"10-12"}},
-    restGuidance:"60-90s throughout", desc:"Balanced middle ground across goals." },
+    restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, desc:"Balanced middle ground across goals." },
   { id:"junior", name:"Junior", defaultSetsReps:{compound:{sets:3,reps:"8-12"},accessory:{sets:2,reps:"10-12"}},
-    restGuidance:"60-90s, technique-first", desc:"Conservative loading, technique priority, no maxing out." },
+    restGuidance:"60-90s, technique-first", restSeconds:{compound:75,accessory:75}, desc:"Conservative loading, technique priority, no maxing out." },
 ];
 
 // Built-in formats: role = compound/accessory (maps to exercise.compound bool)
@@ -259,9 +259,9 @@ async function init(){
   renderFormatList();
   renderClientLists();
   document.getElementById('clientName').value = CLIENT.name || 'Test Client';
-  document.getElementById('timeBudget').value = CLIENT.timeBudget || '';
+  document.getElementById('exerciseCount').value = CLIENT.exerciseCount || '';
   document.getElementById('clientName').oninput = saveClient;
-  document.getElementById('timeBudget').oninput = saveClient;
+  document.getElementById('exerciseCount').oninput = saveClient;
   renderClientSummary();
   if(localStorage.getItem('iwb-panel-collapsed') !== '0'){
     document.getElementById('clientPanelBody').style.display = 'none';
@@ -271,7 +271,7 @@ async function init(){
 
 function saveClient(){
   CLIENT.name = document.getElementById('clientName').value;
-  CLIENT.timeBudget = parseInt(document.getElementById('timeBudget').value) || null;
+  CLIENT.exerciseCount = parseInt(document.getElementById('exerciseCount').value) || null;
   localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
   renderClientSummary();
 }
@@ -418,18 +418,20 @@ function generateWorkout(){
   const tt = getTT();
   let slots = format.slots.map((s,i)=>({ ...s, slotIndex:i }));
 
-  // apply session time budget: cap number of slots roughly (assume ~7 min per slot incl rest)
-  const budget = CLIENT.timeBudget;
-  if(budget){
-    const maxSlots = Math.max(2, Math.floor(budget/7));
-    slots = slots.slice(0, maxSlots);
+  // apply exercise count cap
+  if(CLIENT.exerciseCount){
+    slots = slots.slice(0, CLIENT.exerciseCount);
   }
 
   const pickedMuscles = [];
+  let estSeconds = 0;
+  const WORK_SECONDS_PER_SET = 40; // rough time to actually perform a set
   const builtSlots = slots.map(slot=>{
     const candidates = hardFilter(slot);
     const ranked = scoreCandidates(candidates, pickedMuscles);
     const setsReps = slot.customSetsReps || tt.defaultSetsReps[slot.role];
+    const restPerSet = tt.restSeconds[slot.role];
+    estSeconds += setsReps.sets * (WORK_SECONDS_PER_SET + restPerSet);
     if(ranked.length>0){ pickedMuscles.push(...ranked[0].ex.m); }
     return {
       ...slot, ranked, rerollIndex:0,
@@ -439,7 +441,7 @@ function generateWorkout(){
     };
   });
 
-  currentWorkout = { formatId: format.id, formatName: format.name, style: format.style, trainingTypeId: tt.id, restGuidance: tt.restGuidance, slots: builtSlots };
+  currentWorkout = { formatId: format.id, formatName: format.name, style: format.style, trainingTypeId: tt.id, restGuidance: tt.restGuidance, estMinutes: Math.round(estSeconds/60), slots: builtSlots };
   renderWorkout();
 }
 
@@ -450,7 +452,7 @@ function renderWorkout(){
   el.innerHTML = `
     <div class="card">
       <h2>Generated: ${w.formatName}</h2>
-      <div class="muted" style="margin-bottom:10px;">${TRAINING_TYPES.find(t=>t.id===w.trainingTypeId).name} · Rest: ${w.restGuidance}</div>
+      <div class="muted" style="margin-bottom:10px;">${TRAINING_TYPES.find(t=>t.id===w.trainingTypeId).name} · Rest: ${w.restGuidance} · <b style="color:var(--text);">Est. ~${w.estMinutes} min session</b></div>
       ${w.slots.map((s,i)=>renderSlot(s,i)).join('')}
     </div>
   `;
