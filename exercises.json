@@ -1877,21 +1877,6 @@
   "highImpact": false
  },
  {
-  "id": "L41",
-  "name": "Leg Extension (Plate)",
-  "cat": "legs",
-  "m": [
-   "Quads"
-  ],
-  "eq": "machine_plate",
-  "compound": false,
-  "movementPattern": "isolation",
-  "contraindications": [
-   "knee"
-  ],
-  "highImpact": false
- },
- {
   "id": "L42",
   "name": "Leg Curl (Plate) Single",
   "cat": "legs",
@@ -3918,22 +3903,6 @@
    "lower-back"
   ],
   "highImpact": false
- },
- {
-  "id": "O18",
-  "name": "Box Jump",
-  "cat": "core",
-  "m": [
-   "Core",
-   "Full Leg"
-  ],
-  "eq": "bodyweight",
-  "compound": true,
-  "movementPattern": "core",
-  "contraindications": [
-   "knee"
-  ],
-  "highImpact": true
  },
  {
   "id": "O19",
@@ -7429,6 +7398,956 @@
    "Shoulders"
   ],
   "eq": "other",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB64",
+  "name": "DB Sumo Squat + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB65",
+  "name": "DB Sumo Squat + Front Raise",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB66",
+  "name": "KB Sumo Squat + Upright Row",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Shoulders"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB67",
+  "name": "DB Squat + Overhead Tricep Extension",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB68",
+  "name": "BW Jump Squat + Punch",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Cardio",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": true
+ },
+ {
+  "id": "CB69",
+  "name": "DB Squat Pulse + Lateral Raise",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB70",
+  "name": "DB Squat + Curl + Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Biceps",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB71",
+  "name": "DB Squat + Calf Raise + Curl",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB72",
+  "name": "DB Lateral Lunge + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB73",
+  "name": "DB Reverse Lunge + Lateral Raise",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB74",
+  "name": "DB Forward Lunge + Overhead Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB75",
+  "name": "DB Walking Lunge + Overhead Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB76",
+  "name": "DB Split Squat + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB77",
+  "name": "DB Bulgarian Split Squat + Shoulder Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB78",
+  "name": "BW Reverse Lunge + Rotation",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Core"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB79",
+  "name": "DB Curtsy Lunge + Front Raise",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB80",
+  "name": "DB Lunge + Row + Rotation",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Upper Back",
+   "Core"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB81",
+  "name": "DB RDL + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB82",
+  "name": "DB RDL + Upright Row",
+  "cat": "combination",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB83",
+  "name": "KB Sumo Deadlift + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Hamstrings",
+   "Biceps"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB84",
+  "name": "DB Deadlift + Shrug",
+  "cat": "combination",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Upper Back"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB85",
+  "name": "DB Single Leg RDL + Lateral Raise",
+  "cat": "combination",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB86",
+  "name": "DB Deadlift + Row + Shrug",
+  "cat": "combination",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Lats",
+   "Upper Back"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB87",
+  "name": "DB Step Up + Row",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Upper Back"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB88",
+  "name": "DB Step Up + Curl + Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Biceps",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB89",
+  "name": "KB Goblet Squat + Curl",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Biceps"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB90",
+  "name": "BW Curtsy Lunge + Knee Drive",
+  "cat": "combination",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Core"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB91",
+  "name": "DB Front Squat + Press",
+  "cat": "combination",
+  "m": [
+   "Quads",
+   "Glutes",
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "knee",
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB92",
+  "name": "BW Plank Jack + Shoulder Tap",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Cardio"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB93",
+  "name": "BW Plank + Reach Through",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB94",
+  "name": "DB Bird Dog Row",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB95",
+  "name": "BW Bear Crawl + Reach",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB96",
+  "name": "DB Renegade Row + Mountain Climber",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Lats",
+   "Cardio"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB97",
+  "name": "BW Plank to Pike + Press Up",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Chest",
+   "Triceps"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB98",
+  "name": "BW Side Plank + Rotation",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB99",
+  "name": "BW V-Sit + Punch",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Cardio"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB100",
+  "name": "DB Dead Bug + Press",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB101",
+  "name": "DB Hollow Hold + Pullover",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Lats",
+   "Chest"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB102",
+  "name": "DB Superman + Row",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB103",
+  "name": "BW Crab Walk + Reach",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Cardio"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB104",
+  "name": "BW Plank + Hip Dip + Reach",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB105",
+  "name": "DB Plank Pull Through",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB106",
+  "name": "BW Bicycle Crunch + Reach",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "bodyweight",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB107",
+  "name": "KB Plank Drag",
+  "cat": "combination",
+  "m": [
+   "Core",
+   "Shoulders",
+   "Lats"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB108",
+  "name": "DB Chest Press + Fly",
+  "cat": "combination",
+  "m": [
+   "Chest",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB109",
+  "name": "DB Bent Over Row + Reverse Fly Combo",
+  "cat": "combination",
+  "m": [
+   "Lats",
+   "Upper Back",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB110",
+  "name": "DB Curl + Shoulder Press",
+  "cat": "combination",
+  "m": [
+   "Biceps",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB111",
+  "name": "BW Push Up + Row (Suspension)",
+  "cat": "combination",
+  "m": [
+   "Chest",
+   "Triceps",
+   "Lats"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB112",
+  "name": "DB Tricep Extension + Lateral Raise",
+  "cat": "combination",
+  "m": [
+   "Triceps",
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB113",
+  "name": "DB Front Raise + Lateral Raise + Shrug",
+  "cat": "combination",
+  "m": [
+   "Shoulders",
+   "Upper Back"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB114",
+  "name": "DB Row + Bicep Curl",
+  "cat": "combination",
+  "m": [
+   "Lats",
+   "Upper Back",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB115",
+  "name": "DB Chest Press + Pullover",
+  "cat": "combination",
+  "m": [
+   "Chest",
+   "Lats",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB116",
+  "name": "DB Skull Crusher + Pullover",
+  "cat": "combination",
+  "m": [
+   "Triceps",
+   "Lats",
+   "Chest"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB117",
+  "name": "DB Upright Row + Shrug + Curl",
+  "cat": "combination",
+  "m": [
+   "Shoulders",
+   "Upper Back",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB118",
+  "name": "DB Incline Press + Skull Crusher",
+  "cat": "combination",
+  "m": [
+   "Chest",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB119",
+  "name": "DB Lateral Raise + Front Raise",
+  "cat": "combination",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "CB120",
+  "name": "DB Hammer Curl + Overhead Extension",
+  "cat": "combination",
+  "m": [
+   "Biceps",
+   "Triceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "combo",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "CB121",
+  "name": "Cable Row + Face Pull",
+  "cat": "combination",
+  "m": [
+   "Upper Back",
+   "Shoulders",
+   "Lats"
+  ],
+  "eq": "cable",
   "compound": true,
   "movementPattern": "combo",
   "contraindications": [],
