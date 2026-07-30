@@ -174,27 +174,11 @@
       <label>Name (just a label for this test profile)</label>
       <input type="text" id="clientName" value="Test Client" />
 
-      <label>Training category (auto-selects a training type below — still overridable)</label>
-      <select id="clientCategory" onchange="applyCategoryMapping()">
-        <option value="">— none —</option>
-        <option value="strength">Strength</option>
-        <option value="fatloss">Fat Loss</option>
-        <option value="mwl">Medical Weight-Loss</option>
-        <option value="menopause">Menopause</option>
-        <option value="general">General Fitness</option>
-        <option value="hypertrophy">Muscle Build</option>
-        <option value="junior">Junior</option>
-        <option value="general">Paired</option>
-      </select>
-
       <label>Contraindications (hard-excludes matching exercises)</label>
       <div class="chips" id="contraChips"></div>
 
       <label>Equipment access (leave all off = no restriction · bodyweight & cable always allowed as a baseline)</label>
       <div class="chips" id="eqChips"></div>
-
-      <label>Number of exercises (optional — caps the workout to this many slots)</label>
-      <input type="number" id="exerciseCount" placeholder="e.g. 6" />
 
       <div class="divider"></div>
       <label style="margin-top:0;">Exercise dislikes (hard-excluded)</label>
@@ -213,12 +197,30 @@
     <h2><span class="n">2</span>Training Type</h2>
     <select id="trainingType"></select>
     <div class="muted" id="ttDesc" style="margin-top:8px;"></div>
+
+    <div id="circuitSetup" style="display:none;margin-top:12px;">
+      <label>Circuit protocol</label>
+      <select id="circuitProtocol" onchange="onCircuitConfigChange()"></select>
+      <label>Area focus</label>
+      <select id="circuitArea" onchange="onCircuitConfigChange()">
+        <option value="full">Full Body</option>
+        <option value="upper">Upper Body</option>
+        <option value="lower">Lower Body</option>
+      </select>
+      <div class="muted" id="circuitDesc" style="margin-top:8px;"></div>
+    </div>
   </div>
 
-  <div class="card">
+  <div class="card" id="formatCard">
     <h2><span class="n">3</span>Format</h2>
     <div id="formatList"></div>
     <button class="btn btn-full" style="margin-top:8px;" onclick="openFormatBuilder()">+ Build custom format</button>
+  </div>
+
+  <div class="card">
+    <h2><span class="n">4</span>Number of Exercises</h2>
+    <div class="muted" id="countSuggestion" style="margin-bottom:6px;"></div>
+    <input type="number" id="exerciseCount" placeholder="e.g. 6" oninput="saveExerciseCount()" />
   </div>
 
   <button class="btn btn-primary btn-full" style="padding:13px;font-size:15px;" onclick="generateWorkout()">Generate Workout</button>
@@ -258,6 +260,21 @@
   </div>
 </div>
 
+<!-- DIFFICULTY RATING MODAL -->
+<div class="modal-bg" id="difficultyModal">
+  <div class="modal">
+    <h3>How was that session?</h3>
+    <div class="muted" style="margin-bottom:12px;">Feeds into future generation for this training type.</div>
+    <div class="chips">
+      <div class="chip" onclick="rateDifficulty(1)">1 · Too easy</div>
+      <div class="chip" onclick="rateDifficulty(2)">2 · Easy</div>
+      <div class="chip" onclick="rateDifficulty(3)">3 · Right</div>
+      <div class="chip" onclick="rateDifficulty(4)">4 · Hard</div>
+      <div class="chip" onclick="rateDifficulty(5)">5 · Too hard</div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -265,7 +282,7 @@
 let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let CLIENT = JSON.parse(localStorage.getItem('iwb-test-client') || 'null') || {
-  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, trainingCategory: ''
+  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: []
 };
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
@@ -290,46 +307,60 @@ const TRAINING_TYPES = [
     restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, desc:"Balanced middle ground across goals." },
   { id:"junior", name:"Junior", defaultSetsReps:{compound:{sets:3,reps:"8-12"},accessory:{sets:2,reps:"10-12"}},
     restGuidance:"60-90s, technique-first", restSeconds:{compound:75,accessory:75}, desc:"Conservative loading, technique priority, no maxing out." },
+  { id:"circuit", name:"Circuit", isCircuit:true, desc:"Time-based station rotation — pick a protocol and area focus below." },
 ];
 
-// Built-in formats: role = compound/accessory (maps to exercise.compound bool)
-// movementPattern optional, muscleGroup optional (matches against exercise.m array)
+// Circuit protocols — simplified unified station-rotation model (rounds through N stations)
+// rather than true per-method structure (e.g. real Tabata repeats ONE exercise for 8 rounds).
+// Chosen for one consistent engine across all 4 protocols; flag if you want true-to-method later.
+const CIRCUIT_PROTOCOLS = [
+  { id:"40-20", name:"40/20", workSeconds:40, stationRestSeconds:20, rounds:3, roundRestSeconds:75,
+    suggestedCount:7, suggestedLabel:"6-8", desc:"Classic conditioning circuit, moderate intensity." },
+  { id:"30-30", name:"30/30", workSeconds:30, stationRestSeconds:30, rounds:3, roundRestSeconds:60,
+    suggestedCount:7, suggestedLabel:"6-8", desc:"1:1 work-rest, beginner-friendly steady pace." },
+  { id:"vo2max", name:"VO2 Max", workSeconds:180, stationRestSeconds:60, rounds:4, roundRestSeconds:120,
+    suggestedCount:3, suggestedLabel:"2-3", desc:"Longer efforts, fewer stations, conditioning-focused." },
+  { id:"tabata", name:"Tabata", workSeconds:20, stationRestSeconds:10, rounds:8, roundRestSeconds:60,
+    suggestedCount:2, suggestedLabel:"1-2", desc:"Max-intensity short bursts, very few exercises." },
+];
+
+const AREA_FOCUS = [
+  { id:"full", name:"Full Body", muscleGroups:null },
+  { id:"upper", name:"Upper Body", muscleGroups:["Chest","Triceps","Shoulders","Lats","Upper Back","Biceps"] },
+  { id:"lower", name:"Lower Body", muscleGroups:["Quads","Glutes","Hamstrings","Adductors","Abductors"] },
+];
+
+// suitableFor: which training type ids each built-in format is offered under
+const ALL_STANDARD_TYPES = ["strength","hypertrophy","fatloss","menopause","mwl","general","junior"];
 const BUILT_IN_FORMATS = [
-  { id:"fb-strength", name:"Full Body — Straight Sets", style:"straight", builtIn:true, slots:[
+  { id:"fb-strength", name:"Full Body — Straight Sets", style:"straight", builtIn:true, suitableFor:ALL_STANDARD_TYPES, slots:[
     { role:"compound", movementPattern:"squat" },
     { role:"compound", movementPattern:"hinge" },
     { role:"compound", movementPattern:"push" },
     { role:"compound", movementPattern:"pull" },
     { role:"accessory", movementPattern:"core" },
   ]},
-  { id:"upper-push", name:"Upper Push Day", style:"straight", builtIn:true, slots:[
+  { id:"upper-push", name:"Upper Push Day", style:"straight", builtIn:true, suitableFor:ALL_STANDARD_TYPES, slots:[
     { role:"compound", movementPattern:"push", muscleGroup:"Chest" },
     { role:"compound", movementPattern:"push", muscleGroup:"Shoulders" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Chest" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Shoulders" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Triceps" },
   ]},
-  { id:"upper-pull", name:"Upper Pull Day", style:"straight", builtIn:true, slots:[
+  { id:"upper-pull", name:"Upper Pull Day", style:"straight", builtIn:true, suitableFor:ALL_STANDARD_TYPES, slots:[
     { role:"compound", movementPattern:"pull", muscleGroup:"Lats" },
     { role:"compound", movementPattern:"pull", muscleGroup:"Upper Back" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Biceps" },
     { role:"accessory", movementPattern:"isolation" },
   ]},
-  { id:"leg-day", name:"Leg Day", style:"straight", builtIn:true, slots:[
+  { id:"leg-day", name:"Leg Day", style:"straight", builtIn:true, suitableFor:ALL_STANDARD_TYPES, slots:[
     { role:"compound", movementPattern:"squat" },
     { role:"compound", movementPattern:"hinge" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Quads" },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Hamstrings" },
     { role:"accessory", movementPattern:"core" },
   ]},
-  { id:"fb-circuit", name:"Full Body Circuit", style:"circuit", builtIn:true, slots:[
-    { role:"compound", movementPattern:"squat" },
-    { role:"compound", movementPattern:"push" },
-    { role:"compound", movementPattern:"pull" },
-    { role:"accessory", movementPattern:"core" },
-    { role:"accessory", movementPattern:"cardio" },
-  ]},
-  { id:"upper-superset", name:"Upper Body Superset", style:"superset", builtIn:true, slots:[
+  { id:"upper-superset", name:"Upper Body Superset", style:"superset", builtIn:true, suitableFor:["hypertrophy","fatloss","general"], slots:[
     { role:"compound", movementPattern:"push", pairWith:1 },
     { role:"compound", movementPattern:"pull", pairWith:0 },
     { role:"accessory", movementPattern:"isolation", muscleGroup:"Biceps", pairWith:3 },
@@ -358,34 +389,22 @@ async function init(){
   renderClientLists();
   document.getElementById('clientName').value = CLIENT.name || 'Test Client';
   document.getElementById('exerciseCount').value = CLIENT.exerciseCount || '';
-  document.getElementById('clientCategory').value = CLIENT.trainingCategory || '';
   document.getElementById('clientName').oninput = saveClient;
-  document.getElementById('exerciseCount').oninput = saveClient;
-  if(CLIENT.trainingCategory){
-    document.getElementById('trainingType').value = CLIENT.trainingCategory;
-    document.getElementById('trainingType').onchange();
-  }
   renderClientSummary();
+  updateCountSuggestion();
   if(localStorage.getItem('iwb-panel-collapsed') !== '0'){
     document.getElementById('clientPanelBody').style.display = 'none';
     document.getElementById('clientPanelArrow').textContent = '▸';
   }
 }
 
-function applyCategoryMapping(){
-  const cat = document.getElementById('clientCategory').value;
-  CLIENT.trainingCategory = cat;
-  saveClient();
-  if(cat){
-    const sel = document.getElementById('trainingType');
-    sel.value = cat;
-    sel.onchange();
-  }
+function saveExerciseCount(){
+  CLIENT.exerciseCount = parseInt(document.getElementById('exerciseCount').value) || null;
+  localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
 }
 
 function saveClient(){
   CLIENT.name = document.getElementById('clientName').value;
-  CLIENT.exerciseCount = parseInt(document.getElementById('exerciseCount').value) || null;
   localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
   renderClientSummary();
   renderFormatList();
@@ -470,27 +489,90 @@ function removeHistory(date, exerciseId){
 function renderTrainingTypes(){
   const sel = document.getElementById('trainingType');
   sel.innerHTML = TRAINING_TYPES.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');
-  sel.onchange = ()=>{ const t=getTT(); document.getElementById('ttDesc').textContent = t.desc + ' · Rest: ' + t.restGuidance + (t.excludeHighImpact ? ' · High-impact/plyometric exercises excluded' : ''); };
+  const protoSel = document.getElementById('circuitProtocol');
+  protoSel.innerHTML = CIRCUIT_PROTOCOLS.map(p=>`<option value="${p.id}">${p.name} (${p.workSeconds}s/${p.stationRestSeconds}s)</option>`).join('');
+  sel.onchange = ()=>{
+    const t=getTT();
+    const isCircuit = !!t.isCircuit;
+    document.getElementById('circuitSetup').style.display = isCircuit ? 'block' : 'none';
+    document.getElementById('formatCard').style.display = isCircuit ? 'none' : 'block';
+
+    let txt;
+    if(isCircuit){
+      txt = t.desc;
+    } else {
+      txt = t.desc + ' · Rest: ' + t.restGuidance + (t.excludeHighImpact ? ' · High-impact/plyometric exercises excluded' : '');
+      const sessions = (CLIENT.completedSessions||[]).filter(s=>s.trainingTypeId===t.id);
+      if(sessions.length>0){
+        const last = sessions.sort((a,b)=>b.date.localeCompare(a.date))[0];
+        const labels = {1:'too easy',2:'easy',3:'right',4:'hard',5:'too hard'};
+        txt += ` · Last session (${last.date}) rated: ${labels[last.rating]}`;
+      }
+    }
+    document.getElementById('ttDesc').textContent = txt;
+
+    if(isCircuit) onCircuitConfigChange();
+    else { renderFormatList(); updateCountSuggestion(); }
+  };
   sel.onchange();
 }
 function getTT(){ return TRAINING_TYPES.find(t=>t.id===document.getElementById('trainingType').value); }
+function getCircuitProtocol(){ return CIRCUIT_PROTOCOLS.find(p=>p.id===document.getElementById('circuitProtocol').value); }
+function getAreaFocus(){ return AREA_FOCUS.find(a=>a.id===document.getElementById('circuitArea').value); }
+
+function onCircuitConfigChange(){
+  const p = getCircuitProtocol();
+  document.getElementById('circuitDesc').textContent = p.desc + ' · ' + p.rounds + ' rounds · ' + p.roundRestSeconds + 's between rounds';
+  updateCountSuggestion();
+}
+
+function updateCountSuggestion(){
+  const t = getTT();
+  const el = document.getElementById('countSuggestion');
+  const input = document.getElementById('exerciseCount');
+  let suggestedCount, suggestedLabel;
+  if(t.isCircuit){
+    const p = getCircuitProtocol();
+    suggestedCount = p.suggestedCount; suggestedLabel = p.suggestedLabel;
+  } else {
+    const format = allFormats().find(f=>f.id===currentFormatId);
+    suggestedCount = format ? format.slots.length : 5;
+    suggestedLabel = String(suggestedCount);
+  }
+  el.textContent = `Suggested: ${suggestedLabel} exercises for this selection — still your call`;
+  if(!CLIENT.exerciseCount){ input.placeholder = `e.g. ${suggestedCount}`; }
+}
 
 /* ===================== FORMAT LIST ===================== */
 function allFormats(){ return [...BUILT_IN_FORMATS, ...CUSTOM_FORMATS]; }
 function renderFormatList(){
   const el = document.getElementById('formatList');
-  el.innerHTML = allFormats().map(f=>`
+  const t = getTT();
+  // built-ins filtered by suitableFor; custom formats always shown regardless of training type
+  const shown = [
+    ...BUILT_IN_FORMATS.filter(f=>f.suitableFor.includes(t.id)),
+    ...CUSTOM_FORMATS
+  ];
+  if(shown.length>0 && !shown.some(f=>f.id===currentFormatId)) currentFormatId = shown[0].id;
+  el.innerHTML = shown.map(f=>`
     <div class="format-card ${f.id===currentFormatId?'active':''}" onclick="selectFormat('${f.id}')">
       <b>${f.name}</b>${f.builtIn?'':' <span class="badge">custom</span>'}
       <div class="m">${f.style}</div>
-    </div>`).join('');
+    </div>`).join('') || `<div class="empty">No formats available for this training type yet — build a custom one</div>`;
 }
-function selectFormat(id){ currentFormatId = id; renderFormatList(); }
+function selectFormat(id){ currentFormatId = id; renderFormatList(); updateCountSuggestion(); }
 
 /* ===================== GENERATION ENGINE ===================== */
 function daysAgo(dateStr){
   const d = new Date(dateStr); const now = new Date();
   return Math.floor((now - d) / (1000*60*60*24));
+}
+
+function lastWeightFor(exerciseId){
+  const entries = CLIENT.history.filter(h=>h.exerciseId===exerciseId && h.weight);
+  if(entries.length===0) return null;
+  entries.sort((a,b)=>b.date.localeCompare(a.date));
+  return entries[0];
 }
 
 let CURRENT_TT = null;
@@ -514,7 +596,7 @@ function scoreCandidates(candidates, alreadyPickedMuscles){
   return candidates.map(e=>{
     let score = 0;
     let reasons = [];
-    // recency
+    // exercise-level recency
     const hist = CLIENT.history.filter(h=>h.exerciseId===e.id);
     if(hist.length===0){
       score += 50; reasons.push('not in logged history');
@@ -524,6 +606,17 @@ function scoreCandidates(candidates, alreadyPickedMuscles){
       else if(mostRecent <= 30){ score -= 30; reasons.push(`used ${mostRecent}d ago`); }
       else { score += 40; reasons.push(`not used in ${mostRecent}+ days`); }
     }
+    // muscle-group-level recovery — checks ANY logged exercise sharing a muscle, not just this exact one
+    const muscleHits = CLIENT.history.filter(h=>{
+      if(h.exerciseId===e.id) return false; // already scored above
+      const histEx = EXERCISES.find(x=>x.id===h.exerciseId);
+      if(!histEx) return false;
+      return histEx.m.some(m=>e.m.includes(m)) && daysAgo(h.date)<=3;
+    });
+    if(muscleHits.length>0){
+      score -= 15;
+      reasons.push('shared muscle group trained in last 3 days');
+    }
     // secondary muscle overlap with what's already in this workout
     const overlap = e.m.filter(m=>alreadyPickedMuscles.includes(m)).length;
     if(overlap>0){ score -= 10*overlap; reasons.push(`${overlap} muscle overlap in workout`); }
@@ -532,9 +625,14 @@ function scoreCandidates(candidates, alreadyPickedMuscles){
 }
 
 function generateWorkout(){
-  const format = allFormats().find(f=>f.id===currentFormatId);
   const tt = getTT();
   CURRENT_TT = tt;
+  if(tt.isCircuit) generateCircuitWorkout(tt);
+  else generateStandardWorkout(tt);
+}
+
+function generateStandardWorkout(tt){
+  const format = allFormats().find(f=>f.id===currentFormatId);
   let slots = format.slots.map((s,i)=>({ ...s, slotIndex:i }));
 
   // apply exercise count: shrink if fewer requested, cycle through the slot pattern if more requested
@@ -570,7 +668,50 @@ function generateWorkout(){
     };
   });
 
-  currentWorkout = { formatId: format.id, formatName: format.name, style: format.style, trainingTypeId: tt.id, restGuidance: tt.restGuidance, estMinutes: Math.round(estSeconds/60), slots: builtSlots };
+  currentWorkout = { formatId: format.id, formatName: format.name, style: format.style, isCircuit:false,
+    trainingTypeId: tt.id, restGuidance: tt.restGuidance, estMinutes: Math.round(estSeconds/60), slots: builtSlots };
+  renderWorkout();
+}
+
+function generateCircuitWorkout(tt){
+  const protocol = getCircuitProtocol();
+  const area = getAreaFocus();
+  const count = CLIENT.exerciseCount || protocol.suggestedCount;
+
+  let slots = [];
+  for(let i=0;i<count;i++){
+    const slot = { role: i%2===0 ? 'compound':'accessory', slotIndex:i };
+    if(area.muscleGroups) slot.muscleGroup = area.muscleGroups[i % area.muscleGroups.length];
+    slots.push(slot);
+  }
+
+  const pickedMuscles = [];
+  const pickedIds = new Set();
+  const builtSlots = slots.map(slot=>{
+    let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
+    if(candidates.length===0) candidates = hardFilter(slot);
+    const ranked = scoreCandidates(candidates, pickedMuscles);
+    if(ranked.length>0){ pickedMuscles.push(...ranked[0].ex.m); pickedIds.add(ranked[0].ex.id); }
+    return {
+      ...slot, ranked, rerollIndex:0,
+      chosen: ranked.length>0 ? ranked[0].ex : null,
+      chosenReasons: ranked.length>0 ? ranked[0].reasons : [],
+      setsReps: null, manualOverride:false
+    };
+  });
+
+  const estSeconds = protocol.rounds * builtSlots.length * (protocol.workSeconds + protocol.stationRestSeconds)
+    + (protocol.rounds - 1) * protocol.roundRestSeconds;
+
+  currentWorkout = {
+    formatId: 'circuit-'+protocol.id+'-'+area.id,
+    formatName: `${protocol.name} Circuit — ${area.name}`,
+    style: 'circuit', isCircuit: true, protocol, area,
+    trainingTypeId: tt.id,
+    restGuidance: `${protocol.workSeconds}s work / ${protocol.stationRestSeconds}s rest · ${protocol.rounds} rounds · ${protocol.roundRestSeconds}s between rounds`,
+    estMinutes: Math.round(estSeconds/60),
+    slots: builtSlots
+  };
   renderWorkout();
 }
 
@@ -583,11 +724,16 @@ function renderWorkout(){
       <h2>Generated: ${w.formatName}</h2>
       <div class="muted" style="margin-bottom:10px;">${TRAINING_TYPES.find(t=>t.id===w.trainingTypeId).name} · Rest: ${w.restGuidance} · <b style="color:var(--text);">Est. ~${w.estMinutes} min session</b></div>
       ${w.slots.map((s,i)=>renderSlot(s,i)).join('')}
+      <button class="btn btn-primary btn-full" style="margin-top:6px;" onclick="completeWorkout()">✓ Complete &amp; Log Workout</button>
     </div>
   `;
 }
 
 function renderSlot(s, i){
+  const isCircuit = currentWorkout && currentWorkout.isCircuit;
+  const badgeText = isCircuit
+    ? `${currentWorkout.protocol.workSeconds}s / ${currentWorkout.protocol.stationRestSeconds}s`
+    : `${s.setsReps.sets} x ${s.setsReps.reps}`;
   if(!s.chosen){
     return `<div class="slot slot-${s.role}">
       <span class="slot-role ${s.role}">${s.role}</span>
@@ -595,14 +741,17 @@ function renderSlot(s, i){
     </div>`;
   }
   const ex = s.chosen;
+  const lastW = !isCircuit ? lastWeightFor(ex.id) : null;
+  const progressionHtml = lastW ? `<div class="slot-explain" style="color:var(--accent2);">↑ Last logged: ${lastW.weight}kg (${lastW.date}) — consider a small increase</div>` : '';
   return `<div class="slot slot-${s.role}">
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
-      <span class="badge">${s.setsReps.sets} x ${s.setsReps.reps}</span>
+      <span class="badge">${badgeText}</span>
     </div>
     <div class="slot-ex-name">${ex.name}</div>
     <div class="slot-meta">${ex.m.join(', ')} · ${ex.eq.replace('_',' ')}${s.manualOverride?' · manually picked':''}</div>
     <div class="slot-explain">✓ ${s.chosenReasons.join(' · ') || 'matches slot criteria'}</div>
+    ${progressionHtml}
     <div class="slot-actions">
       <button class="btn btn-sm" onclick="reroll(${i})">↻ Re-roll (${s.rerollIndex+1}/${s.ranked.length||1})</button>
       <button class="btn btn-sm btn-ghost" onclick="openPicker('swap', ${i})">Manual swap</button>
@@ -671,6 +820,39 @@ function pickExercise(id){
     return;
   }
   closeModal('pickerModal');
+}
+
+function completeWorkout(){
+  if(!currentWorkout) return;
+  const today = new Date().toISOString().slice(0,10);
+  currentWorkout.slots.forEach(s=>{
+    if(!s.chosen) return;
+    const w = prompt(`Weight used for ${s.chosen.name}? (leave blank to skip)`, '');
+    const entry = { date: today, exerciseId: s.chosen.id };
+    if(w && !isNaN(parseFloat(w))) entry.weight = parseFloat(w);
+    CLIENT.history.push(entry);
+  });
+  saveClient();
+  renderClientLists();
+  pendingCompletion = { trainingTypeId: currentWorkout.trainingTypeId, formatId: currentWorkout.formatId };
+  document.getElementById('difficultyModal').classList.add('open');
+}
+
+let pendingCompletion = null;
+function rateDifficulty(rating){
+  if(!pendingCompletion) return;
+  CLIENT.completedSessions = CLIENT.completedSessions || [];
+  CLIENT.completedSessions.push({
+    date: new Date().toISOString().slice(0,10),
+    trainingTypeId: pendingCompletion.trainingTypeId,
+    formatId: pendingCompletion.formatId,
+    rating
+  });
+  localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
+  closeModal('difficultyModal');
+  toast('Workout logged — session rated ' + rating + '/5');
+  const sel = document.getElementById('trainingType');
+  if(sel.onchange) sel.onchange();
 }
 
 let pendingHistoryExercise = null;
