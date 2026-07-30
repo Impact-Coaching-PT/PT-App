@@ -81,30 +81,35 @@
 
   <!-- TEST CLIENT PROFILE -->
   <div class="card">
-    <h2><span class="n">1</span>Test Client Profile</h2>
-    <div class="muted">Stand-in for real client data until this hooks into the PT-App. Used to test contraindication filtering, dislikes, equipment access, and anti-repetition scoring.</div>
+    <h2 style="cursor:pointer;justify-content:space-between;" onclick="toggleClientPanel()">
+      <span><span class="n">1</span>Test Client Profile <span class="muted" id="clientSummary"></span></span>
+      <span id="clientPanelArrow">▾</span>
+    </h2>
+    <div id="clientPanelBody">
+      <div class="muted">Stand-in for real client data until this hooks into the PT-App. Used to test contraindication filtering, dislikes, equipment access, and anti-repetition scoring.</div>
 
-    <label>Name (just a label for this test profile)</label>
-    <input type="text" id="clientName" value="Test Client" />
+      <label>Name (just a label for this test profile)</label>
+      <input type="text" id="clientName" value="Test Client" />
 
-    <label>Contraindications (hard-excludes matching exercises)</label>
-    <div class="chips" id="contraChips"></div>
+      <label>Contraindications (hard-excludes matching exercises)</label>
+      <div class="chips" id="contraChips"></div>
 
-    <label>Equipment access (leave all off = no restriction)</label>
-    <div class="chips" id="eqChips"></div>
+      <label>Equipment access (leave all off = no restriction · bodyweight & cable always allowed as a baseline)</label>
+      <div class="chips" id="eqChips"></div>
 
-    <label>Session time budget (minutes, optional — caps total slots)</label>
-    <input type="number" id="timeBudget" placeholder="e.g. 45" />
+      <label>Session time budget (minutes, optional — caps total slots)</label>
+      <input type="number" id="timeBudget" placeholder="e.g. 45" />
 
-    <div class="divider"></div>
-    <label style="margin-top:0;">Exercise dislikes (hard-excluded)</label>
-    <div id="dislikeList" class="muted" style="margin-bottom:6px;">None added</div>
-    <button class="btn btn-sm" onclick="openPicker('dislike')">+ Add dislike</button>
+      <div class="divider"></div>
+      <label style="margin-top:0;">Exercise dislikes (hard-excluded)</label>
+      <div id="dislikeList" class="muted" style="margin-bottom:6px;">None added</div>
+      <button class="btn btn-sm" onclick="openPicker('dislike')">+ Add dislike</button>
 
-    <div class="divider"></div>
-    <label style="margin-top:0;">Training history (used for anti-repetition scoring)</label>
-    <div id="histList" class="muted" style="margin-bottom:6px;">No history logged</div>
-    <button class="btn btn-sm" onclick="openHistoryAdd()">+ Log a past exercise</button>
+      <div class="divider"></div>
+      <label style="margin-top:0;">Training history (used for anti-repetition scoring)</label>
+      <div id="histList" class="muted" style="margin-bottom:6px;">No history logged</div>
+      <button class="btn btn-sm" onclick="openHistoryAdd()">+ Log a past exercise</button>
+    </div>
   </div>
 
   <!-- TRAINING TYPE + FORMAT -->
@@ -257,12 +262,35 @@ async function init(){
   document.getElementById('timeBudget').value = CLIENT.timeBudget || '';
   document.getElementById('clientName').oninput = saveClient;
   document.getElementById('timeBudget').oninput = saveClient;
+  renderClientSummary();
+  if(localStorage.getItem('iwb-panel-collapsed') !== '0'){
+    document.getElementById('clientPanelBody').style.display = 'none';
+    document.getElementById('clientPanelArrow').textContent = '▸';
+  }
 }
 
 function saveClient(){
   CLIENT.name = document.getElementById('clientName').value;
   CLIENT.timeBudget = parseInt(document.getElementById('timeBudget').value) || null;
   localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
+  renderClientSummary();
+}
+
+function renderClientSummary(){
+  const bits = [];
+  if(CLIENT.contraindications.length) bits.push(CLIENT.contraindications.length+' contra');
+  if(CLIENT.equipmentAccess.length) bits.push(CLIENT.equipmentAccess.length+' eq');
+  if(CLIENT.dislikes.length) bits.push(CLIENT.dislikes.length+' dislikes');
+  if(CLIENT.history.length) bits.push(CLIENT.history.length+' history');
+  document.getElementById('clientSummary').textContent = bits.length ? '· '+bits.join(', ') : '';
+}
+
+function toggleClientPanel(){
+  const body = document.getElementById('clientPanelBody');
+  const open = body.style.display !== 'none';
+  body.style.display = open ? 'none' : 'block';
+  document.getElementById('clientPanelArrow').textContent = open ? '▸' : '▾';
+  localStorage.setItem('iwb-panel-collapsed', open ? '1' : '0');
 }
 
 function toast(msg){
@@ -357,7 +385,7 @@ function hardFilter(slot){
     if(slot.movementPattern && e.movementPattern !== slot.movementPattern) return false;
     if(slot.muscleGroup && !e.m.includes(slot.muscleGroup)) return false;
     if(slot.equipment && slot.equipment!=='any' && e.eq !== slot.equipment) return false;
-    if(CLIENT.equipmentAccess.length>0 && !CLIENT.equipmentAccess.includes(e.eq)) return false;
+    if(CLIENT.equipmentAccess.length>0 && e.eq!=='bodyweight' && e.eq!=='cable' && !CLIENT.equipmentAccess.includes(e.eq)) return false;
     if(CLIENT.dislikes.includes(e.id)) return false;
     if(e.contraindications.some(c=>CLIENT.contraindications.includes(c))) return false;
     return true;
