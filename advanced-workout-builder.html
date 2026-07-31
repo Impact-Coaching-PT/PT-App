@@ -167,6 +167,16 @@
     <button class="btn btn-full" style="margin-top:8px;" onclick="openGymBuilder()">+ Add New Gym</button>
   </div>
 
+  <!-- LIVE BACKEND -->
+  <div class="card">
+    <h2><span class="n">·</span>Live Backend</h2>
+    <div class="muted" style="margin-bottom:10px;">Connect to your real PT-App client data (Apps Script backend). Leave blank to keep using test clients only.</div>
+    <label>Apps Script deployment URL</label>
+    <input type="text" id="appScriptUrl" placeholder="https://script.google.com/macros/s/.../exec" oninput="saveAppsScriptUrl()">
+    <button class="btn btn-full" style="margin-top:10px;" onclick="openLiveClientPicker()">Import a Live Client</button>
+    <div class="muted" id="liveBackendStatus" style="margin-top:6px;"></div>
+  </div>
+
   <!-- TEST CLIENT PROFILE -->
   <div class="card">
     <h2 style="cursor:pointer;justify-content:space-between;" onclick="toggleClientPanel()">
@@ -303,6 +313,15 @@
   </div>
 </div>
 
+<!-- LIVE CLIENT PICKER MODAL -->
+<div class="modal-bg" id="liveClientModal">
+  <div class="modal">
+    <h3>Import Live Client<span class="close" onclick="closeModal('liveClientModal')">&times;</span></h3>
+    <div class="muted" style="margin-bottom:10px;">Pulling from your real PT-App data. Their history and stats come in automatically — everything else (contraindications, dislikes, gym) you still set up here as usual.</div>
+    <div id="liveClientList"><div class="empty">Loading…</div></div>
+  </div>
+</div>
+
 <!-- GYM BUILDER MODAL -->
 <div class="modal-bg" id="gymModal">
   <div class="modal">
@@ -323,6 +342,8 @@ let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let GYMS = JSON.parse(localStorage.getItem('iwb-gyms') || '[]');
 GYMS.forEach(g=>{ g.machineTypes = g.machineTypes || []; });
+
+let APPSCRIPT_URL = localStorage.getItem('iwb-appscript-url') || '';
 
 const BLANK_CLIENT = ()=>({
   contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: [], gymId: null, machineTypes: []
@@ -348,6 +369,156 @@ function persistActiveClient(){
   if(idx>-1) CLIENTS[idx] = CLIENT;
   localStorage.setItem('iwb-clients', JSON.stringify(CLIENTS));
   localStorage.setItem('iwb-active-client', activeClientId);
+}
+
+/* ===================== LIVE BACKEND (real PT-App data) ===================== */
+function saveAppsScriptUrl(){
+  APPSCRIPT_URL = document.getElementById('appScriptUrl').value.trim();
+  localStorage.setItem('iwb-appscript-url', APPSCRIPT_URL);
+}
+
+// Real session rows only ever carry the exercise NAME (never an id from this library's
+// exercises.json — confirmed from a real client export). Fuzzy-match by token overlap
+// so recency/muscle-recovery scoring still works against real history. Unmatched rows
+// are skipped for scoring rather than guessed at.
+const NAME_SYNONYMS = {db:'dumbbell', bb:'barbell', kb:'kettlebell', oh:'overhead', ohp:'overhead',
+  curls:'curl', presses:'press', raises:'raise', rows:'row', extensions:'extension'};
+function normTokens(name){
+  const toks = (name||'').toLowerCase().replace(/[()]/g,' ').replace(/[^a-z0-9\s]/g,' ')
+    .split(/\s+/).filter(t=>t && !['the','with','a','on','to','of','and'].includes(t));
+  return toks.map(t=>NAME_SYNONYMS[t]||t);
+}
+function nameSimilarity(a,b){
+  const ta = new Set(normTokens(a)), tb = new Set(normTokens(b));
+  if(ta.size===0 || tb.size===0) return 0;
+  let inter=0; ta.forEach(t=>{ if(tb.has(t)) inter++; });
+  return inter / new Set([...ta,...tb]).size;
+}
+function matchExerciseByName(name){
+  let best=null, bestScore=0;
+  EXERCISES.forEach(e=>{
+    const s = nameSimilarity(name, e.name);
+    if(s>bestScore){ bestScore=s; best=e; }
+  });
+  return bestScore>=0.4 ? best : null;
+}
+
+// Parses a weight out of a real row's `actual` field (or its last set's kg) — real data
+// is freeform text ("590m", "163bpm", "75") so this only extracts when it looks numeric.
+function parseWeightFromRow(row){
+  const raw = row.actual || (row.sets && row.sets.length ? row.sets[row.sets.length-1].kg : null);
+  if(!raw) return null;
+  const n = parseFloat(String(raw).replace(',', '.'));
+  return isNaN(n) ? null : n;
+}
+
+// Converts real sessions (either schema — old rows carry cat/template/week/slot/muscles,
+// new s-prefixed ones carry sets[]/assignedByCoach/loggedBy) into SetSmith's own
+// {date, exerciseId, weight} history shape, so all existing scoring code works unchanged.
+function buildHistoryFromRealSessions(sessions){
+  const history = [];
+  (sessions||[]).forEach(session=>{
+    (session.rows||[]).forEach(row=>{
+      const matched = matchExerciseByName(row.exerciseName);
+      if(!matched) return;
+      const entry = { date: session.date, exerciseId: matched.id };
+      const w = parseWeightFromRow(row);
+      if(w!==null) entry.weight = w;
+      history.push(entry);
+    });
+  });
+  return history;
+}
+
+async function fetchLiveRoster(){
+  if(!APPSCRIPT_URL){ toast('Enter your Apps Script URL first'); return null; }
+  const res = await fetch(APPSCRIPT_URL + '?action=pullAll');
+  const data = await res.json();
+  if(!data.ok) throw new Error(data.error || 'Failed to load roster');
+  return data.clients || [];
+}
+async function fetchLiveClientRecord(id){
+  const res = await fetch(APPSCRIPT_URL + '?action=client&id=' + encodeURIComponent(id));
+  const data = await res.json();
+  if(!data.ok) throw new Error(data.error || 'Client not found');
+  return data.data; // { client, sessions, statsLog, tdeeHistory, messages }
+}
+
+async function openLiveClientPicker(){
+  if(!APPSCRIPT_URL){ toast('Enter your Apps Script URL first'); return; }
+  document.getElementById('liveClientModal').classList.add('open');
+  document.getElementById('liveClientList').innerHTML = '<div class="empty">Loading…</div>';
+  try{
+    const roster = await fetchLiveRoster();
+    const el = document.getElementById('liveClientList');
+    if(roster.length===0){ el.innerHTML = '<div class="empty">No clients found</div>'; return; }
+    el.innerHTML = roster.map(c=>`
+      <div class="ex-item">
+        <div class="info"><b>${c.name}</b><div class="m">${c.trainingCat||''} · ${c.status||'active'}</div></div>
+        <button class="btn btn-sm" onclick="importLiveClient('${c.id}')">Import</button>
+      </div>`).join('');
+  }catch(err){
+    document.getElementById('liveClientList').innerHTML = `<div class="empty">${err.message}</div>`;
+  }
+}
+
+async function importLiveClient(realId){
+  try{
+    const record = await fetchLiveClientRecord(realId);
+    const history = buildHistoryFromRealSessions(record.sessions);
+    const localId = 'live-' + realId;
+    let client = CLIENTS.find(c=>c.id===localId);
+    if(!client){
+      client = { id: localId, name: record.client.name, ...BLANK_CLIENT() };
+      CLIENTS.push(client);
+    }
+    client.name = record.client.name;
+    client.history = history;
+    client.isLiveClient = true;
+    client.realClientId = realId;
+    activeClientId = localId;
+    CLIENT = client;
+    localStorage.setItem('iwb-clients', JSON.stringify(CLIENTS));
+    localStorage.setItem('iwb-active-client', activeClientId);
+    renderClientSelect();
+    refreshClientUI();
+    closeModal('liveClientModal');
+    toast(`Imported ${record.client.name} — ${history.length} history entries matched`);
+  }catch(err){
+    toast('Import failed: ' + err.message);
+  }
+}
+
+// Writes a completed SetSmith workout back to the real backend in the CURRENT session
+// shape (matches the s<timestamp>-id, sets[]/assignedByCoach/loggedBy format — not the
+// older cat/template/week/slot shape, which is legacy). Always re-fetches the client
+// fresh first since saveClient REPLACES the whole sessions array, not appends.
+async function pushSessionToLiveBackend(sessionRows, workoutName){
+  if(!CLIENT.isLiveClient || !APPSCRIPT_URL) return;
+  try{
+    const record = await fetchLiveClientRecord(CLIENT.realClientId);
+    const newSession = {
+      id: 's' + Date.now(),
+      clientId: CLIENT.realClientId,
+      date: new Date().toISOString().slice(0,10),
+      name: workoutName,
+      status: 'completed',
+      rows: sessionRows,
+      assignedByCoach: false,
+      loggedBy: 'coach',
+      coachSeen: true
+    };
+    const updatedSessions = [...(record.sessions||[]), newSession];
+    const res = await fetch(APPSCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action:'saveClient', client: record.client, sessions: updatedSessions, messages: record.messages })
+    });
+    const result = await res.json();
+    if(!result.ok) throw new Error(result.error || 'Save failed');
+    toast('Synced to live client record');
+  }catch(err){
+    toast('Live sync failed: ' + err.message + ' — saved locally only');
+  }
 }
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
@@ -464,6 +635,7 @@ async function init(){
   renderClientSelect();
   refreshClientUI();
   updateCountSuggestion();
+  document.getElementById('appScriptUrl').value = APPSCRIPT_URL;
   if(localStorage.getItem('iwb-panel-collapsed') !== '0'){
     document.getElementById('clientPanelBody').style.display = 'none';
     document.getElementById('clientPanelArrow').textContent = '▸';
@@ -529,6 +701,7 @@ function saveClient(){
 
 function renderClientSummary(){
   const bits = [];
+  if(CLIENT.isLiveClient) bits.push('🔴 LIVE');
   if(CLIENT.contraindications.length) bits.push(CLIENT.contraindications.length+' contra');
   if(CLIENT.equipmentAccess.length) bits.push(CLIENT.equipmentAccess.length+' eq');
   if(CLIENT.dislikes.length) bits.push(CLIENT.dislikes.length+' dislikes');
@@ -1207,15 +1380,32 @@ function pickExercise(id){
 function completeWorkout(){
   if(!currentWorkout) return;
   const today = new Date().toISOString().slice(0,10);
+  const liveRows = [];
   currentWorkout.slots.forEach(s=>{
     if(!s.chosen) return;
     const w = prompt(`Weight used for ${s.chosen.name}? (leave blank to skip)`, '');
     const entry = { date: today, exerciseId: s.chosen.id };
-    if(w && !isNaN(parseFloat(w))) entry.weight = parseFloat(w);
+    const weightNum = (w && !isNaN(parseFloat(w))) ? parseFloat(w) : null;
+    if(weightNum!==null) entry.weight = weightNum;
     CLIENT.history.push(entry);
+
+    // build the row in the real PT-App's current session shape, for live sync
+    const sets = s.setsReps ? s.setsReps.sets : 1;
+    const repsLabel = s.setsReps ? s.setsReps.reps : '';
+    const kgVal = weightNum!==null ? String(weightNum) : '';
+    liveRows.push({
+      exerciseName: s.chosen.name,
+      scheme: `${sets}×${repsLabel}`,
+      target: kgVal,
+      actual: kgVal,
+      sets: Array.from({length: sets}, ()=>({ kg: kgVal, reps: String(repsLabel).split('-')[0] || '' }))
+    });
   });
   saveClient();
   renderClientLists();
+  if(CLIENT.isLiveClient){
+    pushSessionToLiveBackend(liveRows, currentWorkout.formatName);
+  }
   pendingCompletion = { trainingTypeId: currentWorkout.trainingTypeId, formatId: currentWorkout.formatId };
   document.getElementById('difficultyModal').classList.add('open');
 }
