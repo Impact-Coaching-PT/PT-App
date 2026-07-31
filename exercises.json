@@ -13,7 +13,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine (Pin-Loaded)"
  },
  {
   "id": "L02",
@@ -29,7 +30,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine"
  },
  {
   "id": "L03",
@@ -45,7 +47,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hack Squat Machine"
  },
  {
   "id": "L04",
@@ -62,7 +65,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L05",
@@ -78,7 +82,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L06",
@@ -94,7 +99,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Belt Squat Machine"
  },
  {
   "id": "L07",
@@ -158,7 +164,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hip Thrust Machine"
  },
  {
   "id": "L11",
@@ -191,7 +198,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L13",
@@ -335,7 +343,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Extension Machine"
  },
  {
   "id": "L22",
@@ -350,7 +359,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Extension Machine (Plate-Loaded)"
  },
  {
   "id": "L23",
@@ -365,7 +375,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "L24",
@@ -380,7 +391,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Curl Machine (Plate-Loaded)"
  },
  {
   "id": "L25",
@@ -412,7 +424,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L27",
@@ -425,7 +438,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adductor Machine"
  },
  {
   "id": "L28",
@@ -439,7 +453,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Abductor Machine"
  },
  {
   "id": "L29",
@@ -454,7 +469,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Booty Builder / Glute Machine"
  },
  {
   "id": "L30",
@@ -467,7 +483,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L31",
@@ -544,7 +561,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C01",
@@ -642,7 +660,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Chest Press Machine (Plate-Loaded)"
  },
  {
   "id": "C08",
@@ -656,7 +675,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Chest Press Machine"
  },
  {
   "id": "C09",
@@ -670,7 +690,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "C10",
@@ -683,7 +704,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C11",
@@ -709,7 +731,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Fly / Chest Fly Machine"
  },
  {
   "id": "C13",
@@ -722,7 +745,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Incline Press Machine"
  },
  {
   "id": "C14",
@@ -778,7 +802,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B02",
@@ -792,7 +817,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B03",
@@ -806,7 +832,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B04",
@@ -821,7 +848,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B05",
@@ -886,7 +914,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "B09",
@@ -944,7 +973,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B13",
@@ -958,7 +988,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B14",
@@ -972,7 +1003,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B15",
@@ -1028,7 +1060,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Machine"
  },
  {
   "id": "B19",
@@ -1056,7 +1089,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "S01",
@@ -1072,7 +1106,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Shoulder Press Machine"
  },
  {
   "id": "S02",
@@ -1088,7 +1123,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Shoulder Press Machine (Plate-Loaded)"
  },
  {
   "id": "S03",
@@ -1120,7 +1156,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "S05",
@@ -1189,7 +1226,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S10",
@@ -1260,7 +1298,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A04",
@@ -1340,7 +1379,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "A10",
@@ -1367,7 +1407,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Tricep Extension Machine"
  },
  {
   "id": "A12",
@@ -1380,7 +1421,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A13",
@@ -1393,7 +1435,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A14",
@@ -1452,7 +1495,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O02",
@@ -1564,7 +1608,8 @@
   "compound": false,
   "movementPattern": "core",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Ab Crunch Machine"
  },
  {
   "id": "O10",
@@ -1811,7 +1856,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Extension Machine"
  },
  {
   "id": "L37",
@@ -1826,7 +1872,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "L38",
@@ -1842,7 +1889,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine (Pin-Loaded)"
  },
  {
   "id": "L39",
@@ -1858,7 +1906,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine (Pin-Loaded)"
  },
  {
   "id": "L40",
@@ -1874,7 +1923,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine (Pin-Loaded)"
  },
  {
   "id": "L42",
@@ -1889,7 +1939,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Curl Machine (Plate-Loaded)"
  },
  {
   "id": "L43",
@@ -1905,7 +1956,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hip Thrust Machine"
  },
  {
   "id": "L44",
@@ -1920,7 +1972,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hack Squat Machine"
  },
  {
   "id": "L45",
@@ -1936,7 +1989,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hack Squat Machine"
  },
  {
   "id": "L46",
@@ -1952,7 +2006,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Belt Squat Machine"
  },
  {
   "id": "L47",
@@ -2065,7 +2120,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Booty Builder / Glute Machine"
  },
  {
   "id": "L54",
@@ -2080,7 +2136,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Booty Builder / Glute Machine"
  },
  {
   "id": "L55",
@@ -2096,7 +2153,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L56",
@@ -2109,7 +2167,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L57",
@@ -2125,7 +2184,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L58",
@@ -2140,7 +2200,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L59",
@@ -2156,7 +2217,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L60",
@@ -2410,7 +2472,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine"
  },
  {
   "id": "C17",
@@ -2423,7 +2486,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Fly / Chest Fly Machine"
  },
  {
   "id": "C18",
@@ -2437,7 +2501,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Fly / Chest Fly Machine"
  },
  {
   "id": "C19",
@@ -2450,7 +2515,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Fly / Chest Fly Machine"
  },
  {
   "id": "C20",
@@ -2464,7 +2530,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Incline Press Machine"
  },
  {
   "id": "C21",
@@ -2478,7 +2545,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Decline Press Machine"
  },
  {
   "id": "C22",
@@ -2492,7 +2560,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Incline Press Machine"
  },
  {
   "id": "C23",
@@ -2505,7 +2574,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Decline Press Machine"
  },
  {
   "id": "C24",
@@ -2519,7 +2589,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C25",
@@ -2533,7 +2604,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C26",
@@ -2546,7 +2618,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C27",
@@ -2559,7 +2632,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C28",
@@ -2572,7 +2646,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C29",
@@ -2587,7 +2662,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "C30",
@@ -2601,7 +2677,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "C31",
@@ -2615,7 +2692,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "C32",
@@ -2712,7 +2790,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B22",
@@ -2726,7 +2805,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B23",
@@ -2740,7 +2820,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B24",
@@ -2754,7 +2835,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Machine"
  },
  {
   "id": "B25",
@@ -2768,7 +2850,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Machine"
  },
  {
   "id": "B26",
@@ -2782,7 +2865,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Machine"
  },
  {
   "id": "B27",
@@ -2796,7 +2880,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Machine"
  },
  {
   "id": "B28",
@@ -2838,7 +2923,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B32",
@@ -2852,7 +2938,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B33",
@@ -2866,7 +2953,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B34",
@@ -2879,7 +2967,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B35",
@@ -2893,7 +2982,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B36",
@@ -2907,7 +2997,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B37",
@@ -2921,7 +3012,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B38",
@@ -2935,7 +3027,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B39",
@@ -2949,7 +3042,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B40",
@@ -2966,7 +3060,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "B41",
@@ -3108,7 +3203,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Shoulder Press Machine"
  },
  {
   "id": "S13",
@@ -3122,7 +3218,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Fly / Chest Fly Machine"
  },
  {
   "id": "S14",
@@ -3138,7 +3235,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Shoulder Press Machine (Plate-Loaded)"
  },
  {
   "id": "S15",
@@ -3151,7 +3249,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S16",
@@ -3164,7 +3263,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S17",
@@ -3177,7 +3277,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S18",
@@ -3190,7 +3291,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S19",
@@ -3204,7 +3306,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S20",
@@ -3220,7 +3323,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S21",
@@ -3236,7 +3340,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S22",
@@ -3338,7 +3443,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Front Raise Machine (Plate-Loaded)"
  },
  {
   "id": "S29",
@@ -3351,7 +3457,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lateral Raise Machine (Plate-Loaded)"
  },
  {
   "id": "S30",
@@ -3367,7 +3474,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Chest Press Machine (Plate-Loaded)"
  },
  {
   "id": "A17",
@@ -3393,7 +3501,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A19",
@@ -3406,7 +3515,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A20",
@@ -3419,7 +3529,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A21",
@@ -3432,7 +3543,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A22",
@@ -3445,7 +3557,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A23",
@@ -3458,7 +3571,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A24",
@@ -3473,7 +3587,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A25",
@@ -3486,7 +3601,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A26",
@@ -3499,7 +3615,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A27",
@@ -3512,7 +3629,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A28",
@@ -3525,7 +3643,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A29",
@@ -3540,7 +3659,8 @@
   "contraindications": [
    "wrist"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A30",
@@ -3579,7 +3699,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A34",
@@ -3800,7 +3921,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O13",
@@ -3815,7 +3937,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O14",
@@ -3830,7 +3953,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O15",
@@ -3845,7 +3969,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O16",
@@ -3860,7 +3985,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O17",
@@ -3875,7 +4001,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O19",
@@ -5287,7 +5414,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L79",
@@ -5300,7 +5428,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L80",
@@ -5330,7 +5459,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Calf Raise Machine (Plate-Loaded)"
  },
  {
   "id": "L82",
@@ -5345,7 +5475,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Calf Raise Machine (Plate-Loaded)"
  },
  {
   "id": "L83",
@@ -5375,7 +5506,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L85",
@@ -5390,7 +5522,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine"
  },
  {
   "id": "L86",
@@ -5454,7 +5587,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L90",
@@ -5516,7 +5650,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "L94",
@@ -5531,7 +5666,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Hip Thrust Machine"
  },
  {
   "id": "L95",
@@ -5644,7 +5780,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L102",
@@ -5660,7 +5797,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Leg Press Machine"
  },
  {
   "id": "L103",
@@ -5803,7 +5941,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B56",
@@ -5845,7 +5984,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B59",
@@ -5887,7 +6027,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "B62",
@@ -5900,7 +6041,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "B63",
@@ -5928,7 +6070,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lat Pulldown Station"
  },
  {
   "id": "B65",
@@ -5987,7 +6130,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C40",
@@ -6013,7 +6157,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C42",
@@ -6026,7 +6171,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C43",
@@ -6039,7 +6185,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "C44",
@@ -6078,7 +6225,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pec Deck / Fly Machine (Plate-Loaded)"
  },
  {
   "id": "C47",
@@ -6204,7 +6352,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S33",
@@ -6278,7 +6427,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Front Raise Machine (Plate-Loaded)"
  },
  {
   "id": "S38",
@@ -6292,7 +6442,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "S39",
@@ -6394,7 +6545,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A49",
@@ -6472,7 +6624,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A55",
@@ -6511,7 +6664,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A58",
@@ -6608,7 +6762,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "A65",
@@ -6621,7 +6776,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O40",
@@ -6758,7 +6914,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Ab Machine (Plate-Loaded)"
  },
  {
   "id": "O50",
@@ -6896,7 +7053,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Adjustable Cable Pulley / Functional Trainer"
  },
  {
   "id": "O60",
@@ -8295,7 +8453,8 @@
   "compound": true,
   "movementPattern": "combo",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Seated Row Station"
  },
  {
   "id": "L106",
@@ -8312,7 +8471,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L107",
@@ -8328,7 +8488,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L108",
@@ -8344,7 +8505,8 @@
   "contraindications": [
    "knee"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L109",
@@ -8361,7 +8523,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L110",
@@ -8374,7 +8537,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "L111",
@@ -8390,7 +8554,8 @@
   "contraindications": [
    "lower-back"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "B67",
@@ -8403,7 +8568,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "S46",
@@ -8418,7 +8584,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "S47",
@@ -8434,7 +8601,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "A66",
@@ -8448,7 +8616,8 @@
   "compound": true,
   "movementPattern": "push",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Smith Machine"
  },
  {
   "id": "B68",
@@ -8660,7 +8829,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "A68",
@@ -8673,7 +8843,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "A69",
@@ -8687,7 +8858,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Bicep Curl Machine"
  },
  {
   "id": "A70",
@@ -8702,7 +8874,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Tricep Extension Machine"
  },
  {
   "id": "S48",
@@ -8715,7 +8888,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Lateral Raise Machine"
  },
  {
   "id": "S49",
@@ -8728,7 +8902,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Front Raise Machine"
  },
  {
   "id": "B74",
@@ -8742,7 +8917,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B75",
@@ -8756,7 +8932,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B76",
@@ -8770,7 +8947,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Row Machine (Plate-Loaded)"
  },
  {
   "id": "B77",
@@ -8784,7 +8962,8 @@
   "compound": true,
   "movementPattern": "pull",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Pullover Machine"
  },
  {
   "id": "S50",
@@ -8798,7 +8977,8 @@
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Reverse Fly / Rear Delt Machine (Plate-Loaded)"
  },
  {
   "id": "S51",
@@ -8813,7 +8993,8 @@
   "contraindications": [
    "shoulder"
   ],
-  "highImpact": false
+  "highImpact": false,
+  "machineType": "Upright Row Machine (Plate-Loaded)"
  },
  {
   "id": "L119",

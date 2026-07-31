@@ -290,7 +290,7 @@
   <div class="modal">
     <h3>Add New Gym<span class="close" onclick="closeModal('gymModal')">&times;</span></h3>
     <label>Gym name</label>
-    <input type="text" id="gymName" placeholder="e.g. Washington Leisure Centre">
+    <input type="text" id="gymName" placeholder="e.g. gym name">
     <div id="gymEquipGroups"></div>
     <div class="divider"></div>
     <button class="btn btn-primary btn-full" onclick="saveGym()">Save Gym</button>
@@ -304,19 +304,27 @@
 let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let CLIENT = JSON.parse(localStorage.getItem('iwb-test-client') || 'null') || {
-  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: [], gymId: null
+  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: [], gymId: null, machineTypes: []
 };
 let GYMS = JSON.parse(localStorage.getItem('iwb-gyms') || '[]');
+CLIENT.machineTypes = CLIENT.machineTypes || [];
+GYMS.forEach(g=>{ g.machineTypes = g.machineTypes || []; });
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
   "Lats","Upper Back","Biceps","Core","Cardio"];
 const EQUIPMENT = ["barbell","dumbbell","machine_pin","machine_plate","smith","cable","bodyweight","bag_ball","kettlebell","cardio_machine","other"];
-const EQUIPMENT_GROUPS = [
-  { name:"Pin-Loaded Machines", items:["machine_pin","cable"] },
-  { name:"Plate-Loaded Machines", items:["machine_plate","smith"] },
+// Functional/cardio stay simple category-level toggles (a gym either has these or doesn't).
+// Pin/Cable/Plate machines get granular per-machine selection instead — see getMachineTypes() below,
+// computed at runtime from whatever's actually in EXERCISES rather than hardcoded.
+const FUNCTIONAL_CARDIO_GROUPS = [
   { name:"Functional Equipment", items:["dumbbell","barbell","kettlebell","bag_ball","bodyweight","other"] },
   { name:"Cardio Equipment", items:["cardio_machine"] },
 ];
+function getMachineTypes(eqValues){
+  const types = new Set();
+  EXERCISES.filter(e=>eqValues.includes(e.eq) && e.machineType).forEach(e=>types.add(e.machineType));
+  return [...types].sort();
+}
 const CONTRA_TAGS = ["shoulder","lower-back","knee","wrist"];
 
 const TRAINING_TYPES = [
@@ -479,11 +487,10 @@ function toggleContra(t){
 }
 function renderEqReadout(){
   const el = document.getElementById('eqReadout');
-  if(CLIENT.equipmentAccess.length===0){
-    el.textContent = 'No gym selected — no equipment restriction';
-  } else {
-    el.textContent = CLIENT.equipmentAccess.map(e=>e.replace('_',' ')).join(', ') + ' (+ bodyweight & cable baseline)';
-  }
+  const bits = [];
+  if(CLIENT.machineTypes && CLIENT.machineTypes.length>0) bits.push(CLIENT.machineTypes.length + ' machines');
+  if(CLIENT.equipmentAccess.length>0) bits.push(CLIENT.equipmentAccess.map(e=>e.replace('_',' ')).join(', '));
+  el.textContent = bits.length>0 ? bits.join(' · ') + ' (+ bodyweight baseline)' : 'No gym selected — no equipment restriction';
 }
 
 /* ===================== GYM PROFILES ===================== */
@@ -498,21 +505,38 @@ function onGymSelectChange(){
   CLIENT.gymId = id || null;
   const gym = GYMS.find(g=>g.id===id);
   CLIENT.equipmentAccess = gym ? [...gym.equipment] : [];
+  CLIENT.machineTypes = gym ? [...gym.machineTypes] : [];
   localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
   renderEqReadout();
   renderClientSummary();
 }
 
-let gymEquipDraft = [];
+let gymEquipDraft = [];   // functional/cardio simple types
+let gymMachineDraft = []; // specific machine-type selections (pin/cable/plate)
 function openGymBuilder(){
   gymEquipDraft = [];
+  gymMachineDraft = [];
   document.getElementById('gymName').value = '';
   renderGymEquipGroups();
   document.getElementById('gymModal').classList.add('open');
 }
 function renderGymEquipGroups(){
   const el = document.getElementById('gymEquipGroups');
-  el.innerHTML = EQUIPMENT_GROUPS.map(group=>`
+  const machineSections = [
+    { name:"Pin-Loaded Machines", types: getMachineTypes(['machine_pin']) },
+    { name:"Cable Machines", types: getMachineTypes(['cable']) },
+    { name:"Plate-Loaded Machines (incl. Smith)", types: getMachineTypes(['machine_plate','smith']) },
+  ];
+  const machineHtml = machineSections.map(sec=>`
+    <label style="margin-top:14px;">${sec.name}</label>
+    <div class="chips">
+      ${sec.types.map(t=>{
+        const active = gymMachineDraft.includes(t);
+        return `<div class="chip ${active?'active':''}" onclick="toggleGymMachine('${t.replace(/'/g,"\\'")}')">${t}</div>`;
+      }).join('') || '<span class="muted">No exercises tagged for this yet</span>'}
+    </div>
+  `).join('');
+  const funcHtml = FUNCTIONAL_CARDIO_GROUPS.map(group=>`
     <label style="margin-top:14px;">${group.name}</label>
     <div class="chips">
       ${group.items.map(eq=>{
@@ -521,6 +545,12 @@ function renderGymEquipGroups(){
       }).join('')}
     </div>
   `).join('');
+  el.innerHTML = machineHtml + funcHtml;
+}
+function toggleGymMachine(t){
+  const i = gymMachineDraft.indexOf(t);
+  if(i>-1) gymMachineDraft.splice(i,1); else gymMachineDraft.push(t);
+  renderGymEquipGroups();
 }
 function toggleGymEquip(eq){
   const i = gymEquipDraft.indexOf(eq);
@@ -530,7 +560,7 @@ function toggleGymEquip(eq){
 function saveGym(){
   const name = document.getElementById('gymName').value.trim();
   if(!name){ toast('Name the gym first'); return; }
-  const gym = { id: 'gym-'+Date.now(), name, equipment: [...gymEquipDraft] };
+  const gym = { id: 'gym-'+Date.now(), name, equipment: [...gymEquipDraft], machineTypes: [...gymMachineDraft] };
   GYMS.push(gym);
   localStorage.setItem('iwb-gyms', JSON.stringify(GYMS));
   renderGymSelect();
@@ -659,6 +689,7 @@ function lastWeightFor(exerciseId){
 
 let CURRENT_TT = null;
 
+const MACHINE_EQ_TYPES = ['machine_pin','cable','machine_plate','smith'];
 function hardFilter(slot){
   return EXERCISES.filter(e=>{
     if(slot.role==='compound' && !e.compound) return false;
@@ -666,7 +697,15 @@ function hardFilter(slot){
     if(slot.movementPattern && e.movementPattern !== slot.movementPattern) return false;
     if(slot.muscleGroup && !e.m.includes(slot.muscleGroup)) return false;
     if(slot.equipment && slot.equipment!=='any' && e.eq !== slot.equipment) return false;
-    if(CLIENT.equipmentAccess.length>0 && e.eq!=='bodyweight' && e.eq!=='cable' && !CLIENT.equipmentAccess.includes(e.eq)) return false;
+    // gym-driven filtering: once a gym is actively selected, be strict — anything not
+    // ticked for that gym is genuinely unavailable there. No gym selected = no restriction.
+    if(e.eq !== 'bodyweight' && CLIENT.gymId){
+      if(MACHINE_EQ_TYPES.includes(e.eq)){
+        if(!(CLIENT.machineTypes||[]).includes(e.machineType)) return false;
+      } else {
+        if(!(CLIENT.equipmentAccess||[]).includes(e.eq)) return false;
+      }
+    }
     if(CLIENT.dislikes.includes(e.id)) return false;
     if(e.contraindications.some(c=>CLIENT.contraindications.includes(c))) return false;
     if(CURRENT_TT && CURRENT_TT.excludeHighImpact && e.highImpact) return false;
