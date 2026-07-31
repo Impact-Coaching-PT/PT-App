@@ -9,7 +9,7 @@
     --bg:#0e1015; --bg2:#15171e; --panel:#181b23; --panel2:#20242f; --border:#2a2f3b;
     --red:#e33d2d; --red-dark:#ae231c; --red-glow:#e33d2d66; --red-dim:#e33d2d22;
     --text:#f2f3f6; --sub:#8b93a3;
-    --good:#3ae8a0; --bad:#ff5b5b; --accent2:#7d8cff; --accent2-dim:#7d8cff22;
+    --good:#3ae8a0; --bad:#ff5b5b; --warn:#f5b642; --accent2:#7d8cff; --accent2-dim:#7d8cff22;
   }
   *{box-sizing:border-box;}
   body{
@@ -223,8 +223,18 @@
 
   <div class="card" id="formatCard">
     <h2><span class="n">3</span>Format</h2>
-    <div id="formatList"></div>
-    <button class="btn btn-full" style="margin-top:8px;" onclick="openFormatBuilder()">+ Build custom format</button>
+    <div class="chips" style="margin-bottom:10px;">
+      <div class="chip active" id="formatModePreset" onclick="setFormatMode('preset')">Preset Formats</div>
+      <div class="chip" id="formatModeMuscle" onclick="setFormatMode('muscle')">Select by Muscles</div>
+    </div>
+    <div id="presetFormatSection">
+      <div id="formatList"></div>
+      <button class="btn btn-full" style="margin-top:8px;" onclick="openFormatBuilder()">+ Build custom format</button>
+    </div>
+    <div id="muscleFormatSection" style="display:none;">
+      <div class="muted" style="margin-bottom:8px;">Pick the muscles you want to train — the generator builds a workout targeting exactly those.</div>
+      <div class="chips" id="muscleSelectChips"></div>
+    </div>
   </div>
 
   <div class="card">
@@ -358,8 +368,8 @@ const TRAINING_TYPES = [
   { id:"fatloss", name:"Fat Loss", defaultSetsReps:{compound:{sets:3,reps:"10-15"},accessory:{sets:3,reps:"12-15"}},
     restGuidance:"45-60s throughout", restSeconds:{compound:50,accessory:45}, desc:"Higher reps, minimal rest, density-focused." },
   { id:"menopause", name:"Menopause", defaultSetsReps:{compound:{sets:3,reps:"8-10"},accessory:{sets:3,reps:"10-12"}},
-    restGuidance:"90s throughout, joint-friendly tempo", restSeconds:{compound:90,accessory:90}, excludeHighImpact:true,
-    desc:"Resistance-focused, bone-density priority, controlled tempo." },
+    restGuidance:"90s throughout, controlled tempo", restSeconds:{compound:90,accessory:90},
+    desc:"Resistance-focused, bone-density priority. Impact work included by design (current evidence favours supervised high-impact/HiRIT training for postmenopausal bone density) — use client contraindications to exclude for individuals where impact isn't appropriate." },
   { id:"mwl", name:"Medical Weight Loss", defaultSetsReps:{compound:{sets:3,reps:"10-12"},accessory:{sets:3,reps:"12-15"}},
     restGuidance:"60-90s throughout", restSeconds:{compound:75,accessory:75}, excludeHighImpact:true,
     desc:"Sustainable, joint-friendly, consistency-focused." },
@@ -709,6 +719,31 @@ function onCircuitConfigChange(){
   updateCountSuggestion();
 }
 
+let formatMode = 'preset'; // 'preset' | 'muscle'
+let muscleSelectDraft = [];
+function setFormatMode(mode){
+  formatMode = mode;
+  document.getElementById('formatModePreset').classList.toggle('active', mode==='preset');
+  document.getElementById('formatModeMuscle').classList.toggle('active', mode==='muscle');
+  document.getElementById('presetFormatSection').style.display = mode==='preset' ? 'block' : 'none';
+  document.getElementById('muscleFormatSection').style.display = mode==='muscle' ? 'block' : 'none';
+  if(mode==='muscle') renderMuscleSelectChips();
+  updateCountSuggestion();
+}
+function renderMuscleSelectChips(){
+  const el = document.getElementById('muscleSelectChips');
+  el.innerHTML = MUSCLES.filter(m=>m!=='Cardio' && m!=='Full Leg').map(m=>{
+    const active = muscleSelectDraft.includes(m);
+    return `<div class="chip ${active?'active':''}" onclick="toggleMuscleSelect('${m}')">${m}</div>`;
+  }).join('');
+}
+function toggleMuscleSelect(m){
+  const i = muscleSelectDraft.indexOf(m);
+  if(i>-1) muscleSelectDraft.splice(i,1); else muscleSelectDraft.push(m);
+  renderMuscleSelectChips();
+  updateCountSuggestion();
+}
+
 function updateCountSuggestion(){
   const t = getTT();
   const el = document.getElementById('countSuggestion');
@@ -717,6 +752,9 @@ function updateCountSuggestion(){
   if(t.isCircuit){
     const p = getCircuitProtocol();
     suggestedCount = p.suggestedCount; suggestedLabel = p.suggestedLabel;
+  } else if(formatMode==='muscle'){
+    suggestedCount = Math.max(3, muscleSelectDraft.length * 2);
+    suggestedLabel = String(suggestedCount);
   } else {
     const format = allFormats().find(f=>f.id===currentFormatId);
     suggestedCount = format ? format.slots.length : 5;
@@ -822,7 +860,45 @@ function generateWorkout(){
   const tt = getTT();
   CURRENT_TT = tt;
   if(tt.isCircuit) generateCircuitWorkout(tt);
+  else if(formatMode==='muscle') generateMuscleWorkout(tt);
   else generateStandardWorkout(tt);
+}
+
+function generateMuscleWorkout(tt){
+  if(muscleSelectDraft.length===0){ toast('Pick at least one muscle first'); return; }
+  const count = CLIENT.exerciseCount || Math.max(3, muscleSelectDraft.length * 2);
+  let slots = [];
+  for(let i=0;i<count;i++){
+    slots.push({ role: i%2===0 ? 'compound':'accessory', muscleGroup: muscleSelectDraft[i % muscleSelectDraft.length], slotIndex:i });
+  }
+
+  const pickedMuscles = [];
+  const pickedIds = new Set();
+  let estSeconds = 0;
+  const WORK_SECONDS_PER_SET = 40;
+  const builtSlots = slots.map(slot=>{
+    let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
+    if(candidates.length===0) candidates = hardFilter(slot);
+    const ranked = scoreCandidates(candidates, pickedMuscles);
+    const setsReps = tt.defaultSetsReps[slot.role];
+    const restPerSet = tt.restSeconds[slot.role];
+    estSeconds += setsReps.sets * (WORK_SECONDS_PER_SET + restPerSet);
+    if(ranked.length>0){ pickedMuscles.push(...ranked[0].ex.m); pickedIds.add(ranked[0].ex.id); }
+    return {
+      ...slot, ranked, rerollIndex:0,
+      chosen: ranked.length>0 ? ranked[0].ex : null,
+      chosenReasons: ranked.length>0 ? ranked[0].reasons : [],
+      setsReps, manualOverride:false
+    };
+  });
+
+  currentWorkout = {
+    formatId: 'muscle-select', formatName: `Custom: ${muscleSelectDraft.join(', ')}`,
+    style: 'straight', isCircuit:false,
+    trainingTypeId: tt.id, restGuidance: tt.restGuidance, estMinutes: Math.round(estSeconds/60),
+    slots: builtSlots
+  };
+  renderWorkout();
 }
 
 function generateStandardWorkout(tt){
@@ -1004,17 +1080,39 @@ function renderPickerCatChips(){
   el.innerHTML = ['all',...cats].map(c=>`<div class="chip ${el._active===c?'active':''}" onclick="setPickerCat('${c}')">${c}</div>`).join('');
 }
 function setPickerCat(c){ document.getElementById('pickerCatChips')._active = c; renderPickerCatChips(); renderPicker(); }
+function getExerciseStatusBadge(e){
+  const hist = CLIENT.history.filter(h=>h.exerciseId===e.id);
+  let parts = []; let cls = 'good';
+  if(hist.length>0){
+    const mostRecent = hist.map(h=>daysAgo(h.date)).sort((a,b)=>a-b)[0];
+    if(mostRecent<=7){ parts.push(`used ${mostRecent}d ago`); cls='bad'; }
+    else if(mostRecent<=30){ parts.push(`used ${mostRecent}d ago`); cls='warn'; }
+  }
+  const muscleHit = CLIENT.history.some(h=>{
+    if(h.exerciseId===e.id) return false;
+    const histEx = EXERCISES.find(x=>x.id===h.exerciseId);
+    return histEx && histEx.m.some(m=>e.m.includes(m)) && daysAgo(h.date)<=3;
+  });
+  if(muscleHit){ parts.push('shared muscle trained recently'); if(cls!=='bad') cls='warn'; }
+  if(parts.length===0) return null;
+  return { text: parts.join(' · '), cls };
+}
+
 function renderPicker(){
   const q = document.getElementById('pickerSearch').value.toLowerCase();
   const cat = document.getElementById('pickerCatChips')._active || 'all';
   let list = EXERCISES.filter(e=> (cat==='all'||e.cat===cat) && e.name.toLowerCase().includes(q));
   const el = document.getElementById('pickerList');
   if(list.length===0){ el.innerHTML = '<div class="empty">No exercises match</div>'; return; }
-  el.innerHTML = list.slice(0,150).map(e=>`
+  el.innerHTML = list.slice(0,150).map(e=>{
+    const badge = getExerciseStatusBadge(e);
+    const badgeHtml = badge ? `<div style="font-size:11px;color:var(--${badge.cls});margin-top:2px;">⚠ ${badge.text}</div>` : '';
+    return `
     <div class="ex-item">
-      <div class="info"><b>${e.name}</b><div class="m">${e.m.join(', ')} · ${e.eq.replace('_',' ')}</div></div>
+      <div class="info"><b>${e.name}</b><div class="m">${e.m.join(', ')} · ${e.eq.replace('_',' ')}</div>${badgeHtml}</div>
       <button class="btn btn-sm" onclick="pickExercise('${e.id}')">Select</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 function pickExercise(id){
   const ex = EXERCISES.find(e=>e.id===id);
