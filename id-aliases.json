@@ -1,0 +1,8 @@
+{
+  "_purpose": "Exercise IDs that existed in the original live PT-App exercises.json but were removed here as duplicates during library cleanup. If real client history references any key below, remap it to the value before matching against this tool's exercises.json — needed for Phase 5 hookup.",
+  "L41": "L22",
+  "O18": "L61",
+  "A32": "A04",
+  "B30": "B14",
+  "C36": "B56"
+}
