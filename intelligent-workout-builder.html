@@ -162,6 +162,16 @@
 
 <div class="wrap">
 
+  <!-- GYM PROFILE -->
+  <div class="card">
+    <h2><span class="n">0</span>Gym Profile</h2>
+    <div class="muted" style="margin-bottom:10px;">Sets the client's available equipment automatically. No gym selected = no equipment restriction.</div>
+    <select id="gymSelect" onchange="onGymSelectChange()">
+      <option value="">— no gym selected —</option>
+    </select>
+    <button class="btn btn-full" style="margin-top:8px;" onclick="openGymBuilder()">+ Add New Gym</button>
+  </div>
+
   <!-- TEST CLIENT PROFILE -->
   <div class="card">
     <h2 style="cursor:pointer;justify-content:space-between;" onclick="toggleClientPanel()">
@@ -177,8 +187,8 @@
       <label>Contraindications (hard-excludes matching exercises)</label>
       <div class="chips" id="contraChips"></div>
 
-      <label>Equipment access (leave all off = no restriction · bodyweight & cable always allowed as a baseline)</label>
-      <div class="chips" id="eqChips"></div>
+      <label>Equipment access (set by Gym Profile above · bodyweight & cable always allowed as a baseline)</label>
+      <div class="muted" id="eqReadout" style="margin-bottom:6px;">No gym selected — no equipment restriction</div>
 
       <div class="divider"></div>
       <label style="margin-top:0;">Exercise dislikes (hard-excluded)</label>
@@ -275,6 +285,18 @@
   </div>
 </div>
 
+<!-- GYM BUILDER MODAL -->
+<div class="modal-bg" id="gymModal">
+  <div class="modal">
+    <h3>Add New Gym<span class="close" onclick="closeModal('gymModal')">&times;</span></h3>
+    <label>Gym name</label>
+    <input type="text" id="gymName" placeholder="e.g. Washington Leisure Centre">
+    <div id="gymEquipGroups"></div>
+    <div class="divider"></div>
+    <button class="btn btn-primary btn-full" onclick="saveGym()">Save Gym</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -282,12 +304,19 @@
 let EXERCISES = [];
 let CUSTOM_FORMATS = JSON.parse(localStorage.getItem('iwb-custom-formats') || '[]');
 let CLIENT = JSON.parse(localStorage.getItem('iwb-test-client') || 'null') || {
-  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: []
+  contraindications: [], equipmentAccess: [], dislikes: [], history: [], exerciseCount: null, completedSessions: [], gymId: null
 };
+let GYMS = JSON.parse(localStorage.getItem('iwb-gyms') || '[]');
 
 const MUSCLES = ["Quads","Glutes","Hamstrings","Adductors","Abductors","Full Leg","Chest","Triceps","Shoulders",
   "Lats","Upper Back","Biceps","Core","Cardio"];
 const EQUIPMENT = ["barbell","dumbbell","machine_pin","machine_plate","smith","cable","bodyweight","bag_ball","kettlebell","cardio_machine","other"];
+const EQUIPMENT_GROUPS = [
+  { name:"Pin-Loaded Machines", items:["machine_pin","cable"] },
+  { name:"Plate-Loaded Machines", items:["machine_plate","smith"] },
+  { name:"Functional Equipment", items:["dumbbell","barbell","kettlebell","bag_ball","bodyweight","other"] },
+  { name:"Cardio Equipment", items:["cardio_machine"] },
+];
 const CONTRA_TAGS = ["shoulder","lower-back","knee","wrist"];
 
 const TRAINING_TYPES = [
@@ -383,12 +412,14 @@ async function init(){
     EXERCISES = [];
   }
   renderContraChips();
-  renderEqChips();
+  renderGymSelect();
+  renderEqReadout();
   renderTrainingTypes();
   renderFormatList();
   renderClientLists();
   document.getElementById('clientName').value = CLIENT.name || 'Test Client';
   document.getElementById('exerciseCount').value = CLIENT.exerciseCount || '';
+  document.getElementById('gymSelect').value = CLIENT.gymId || '';
   document.getElementById('clientName').oninput = saveClient;
   renderClientSummary();
   updateCountSuggestion();
@@ -446,18 +477,69 @@ function toggleContra(t){
   if(i>-1) CLIENT.contraindications.splice(i,1); else CLIENT.contraindications.push(t);
   saveClient(); renderContraChips();
 }
-function renderEqChips(){
-  const el = document.getElementById('eqChips');
-  el.innerHTML = EQUIPMENT.map(eq=>{
-    const active = CLIENT.equipmentAccess.includes(eq);
-    return `<div class="chip ${active?'active':''}" onclick="toggleEq('${eq}')">${eq.replace('_',' ')}</div>`;
-  }).join('');
+function renderEqReadout(){
+  const el = document.getElementById('eqReadout');
+  if(CLIENT.equipmentAccess.length===0){
+    el.textContent = 'No gym selected — no equipment restriction';
+  } else {
+    el.textContent = CLIENT.equipmentAccess.map(e=>e.replace('_',' ')).join(', ') + ' (+ bodyweight & cable baseline)';
+  }
 }
-function toggleEq(eq){
-  const i = CLIENT.equipmentAccess.indexOf(eq);
-  if(i>-1) CLIENT.equipmentAccess.splice(i,1); else CLIENT.equipmentAccess.push(eq);
-  saveClient(); renderEqChips();
+
+/* ===================== GYM PROFILES ===================== */
+function renderGymSelect(){
+  const sel = document.getElementById('gymSelect');
+  sel.innerHTML = '<option value="">— no gym selected —</option>' +
+    GYMS.map(g=>`<option value="${g.id}">${g.name}</option>`).join('');
+  sel.value = CLIENT.gymId || '';
 }
+function onGymSelectChange(){
+  const id = document.getElementById('gymSelect').value;
+  CLIENT.gymId = id || null;
+  const gym = GYMS.find(g=>g.id===id);
+  CLIENT.equipmentAccess = gym ? [...gym.equipment] : [];
+  localStorage.setItem('iwb-test-client', JSON.stringify(CLIENT));
+  renderEqReadout();
+  renderClientSummary();
+}
+
+let gymEquipDraft = [];
+function openGymBuilder(){
+  gymEquipDraft = [];
+  document.getElementById('gymName').value = '';
+  renderGymEquipGroups();
+  document.getElementById('gymModal').classList.add('open');
+}
+function renderGymEquipGroups(){
+  const el = document.getElementById('gymEquipGroups');
+  el.innerHTML = EQUIPMENT_GROUPS.map(group=>`
+    <label style="margin-top:14px;">${group.name}</label>
+    <div class="chips">
+      ${group.items.map(eq=>{
+        const active = gymEquipDraft.includes(eq);
+        return `<div class="chip ${active?'active':''}" onclick="toggleGymEquip('${eq}')">${eq.replace('_',' ')}</div>`;
+      }).join('')}
+    </div>
+  `).join('');
+}
+function toggleGymEquip(eq){
+  const i = gymEquipDraft.indexOf(eq);
+  if(i>-1) gymEquipDraft.splice(i,1); else gymEquipDraft.push(eq);
+  renderGymEquipGroups();
+}
+function saveGym(){
+  const name = document.getElementById('gymName').value.trim();
+  if(!name){ toast('Name the gym first'); return; }
+  const gym = { id: 'gym-'+Date.now(), name, equipment: [...gymEquipDraft] };
+  GYMS.push(gym);
+  localStorage.setItem('iwb-gyms', JSON.stringify(GYMS));
+  renderGymSelect();
+  document.getElementById('gymSelect').value = gym.id;
+  onGymSelectChange();
+  closeModal('gymModal');
+  toast('Gym saved: ' + name);
+}
+
 function renderClientLists(){
   const dEl = document.getElementById('dislikeList');
   if(CLIENT.dislikes.length===0){ dEl.textContent='None added'; }
