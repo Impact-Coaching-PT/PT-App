@@ -92,6 +92,8 @@
   }
   .slot.slot-compound{border-left-color:var(--red);box-shadow:-2px 0 16px -6px var(--red-glow);}
   .slot.slot-accessory{border-left-color:var(--accent2);box-shadow:-2px 0 16px -6px #7d8cff55;}
+  .slot.slot-finisher{border-left-color:var(--good);box-shadow:-2px 0 16px -6px #3ae8a055;}
+  .slot-role.finisher{background:linear-gradient(135deg,#3ae8a022,#3ae8a033);color:var(--good);}
   .slot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
   .slot-role{font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;padding:4px 8px;border-radius:6px;}
   .slot-role.compound{background:linear-gradient(135deg,var(--red-dim),#e33d2d33);color:#ff8a7a;}
@@ -241,6 +243,10 @@
     <h2><span class="n">4</span>Number of Exercises</h2>
     <div class="muted" id="countSuggestion" style="margin-bottom:6px;"></div>
     <input type="number" id="exerciseCount" placeholder="e.g. 6" oninput="saveExerciseCount()" />
+    <div class="chips" style="margin-top:10px;">
+      <div class="chip" id="cardioFinisherChip" onclick="toggleCardioFinisher()">+ Cardio finisher</div>
+    </div>
+    <div class="muted" id="cardioFinisherHint" style="margin-top:4px;"></div>
   </div>
 
   <button class="btn btn-primary btn-full" style="padding:13px;font-size:15px;" onclick="generateWorkout()">Generate Workout</button>
@@ -698,10 +704,33 @@ function renderTrainingTypes(){
 
     if(isCircuit) onCircuitConfigChange();
     else { renderFormatList(); updateCountSuggestion(); }
+
+    document.getElementById('cardioFinisherChip').style.display = isCircuit ? 'none' : 'inline-block';
+    document.getElementById('cardioFinisherHint').style.display = isCircuit ? 'none' : 'block';
+    if(!isCircuit) applyCardioFinisherDefault(t);
   };
   sel.onchange();
 }
 function getTT(){ return TRAINING_TYPES.find(t=>t.id===document.getElementById('trainingType').value); }
+
+let cardioFinisherOn = false;
+const CARDIO_FINISHER_SUGGESTED_TYPES = ['fatloss','general','mwl'];
+function applyCardioFinisherDefault(t){
+  cardioFinisherOn = CARDIO_FINISHER_SUGGESTED_TYPES.includes(t.id);
+  renderCardioFinisherChip();
+}
+function toggleCardioFinisher(){
+  cardioFinisherOn = !cardioFinisherOn;
+  renderCardioFinisherChip();
+}
+function renderCardioFinisherChip(){
+  document.getElementById('cardioFinisherChip').classList.toggle('active', cardioFinisherOn);
+  const t = getTT();
+  const suggested = t && CARDIO_FINISHER_SUGGESTED_TYPES.includes(t.id);
+  document.getElementById('cardioFinisherHint').textContent = suggested
+    ? 'Suggested for this goal — a short cardio/metabolic finisher added at the end, not interspersed.'
+    : 'A short cardio finisher added at the very end of the session, if you want one.';
+}
 function getCircuitProtocol(){ return CIRCUIT_PROTOCOLS.find(p=>p.id===document.getElementById('circuitProtocol').value); }
 function getAreaFocus(){ return AREA_FOCUS.find(a=>a.id===document.getElementById('circuitArea').value); }
 
@@ -876,7 +905,7 @@ function generateMuscleWorkout(tt){
   const pickedIds = new Set();
   let estSeconds = 0;
   const WORK_SECONDS_PER_SET = 40;
-  const builtSlots = slots.map(slot=>{
+  let builtSlots = slots.map(slot=>{
     let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
     if(candidates.length===0) candidates = hardFilter(slot);
     const ranked = scoreCandidates(candidates, pickedMuscles);
@@ -892,6 +921,10 @@ function generateMuscleWorkout(tt){
     };
   });
 
+  builtSlots = orderCompoundFirst(builtSlots);
+  const finisher = maybeAddCardioFinisher(tt, pickedMuscles, pickedIds);
+  if(finisher){ builtSlots.push(finisher); estSeconds += 90; }
+
   currentWorkout = {
     formatId: 'muscle-select', formatName: `Custom: ${muscleSelectDraft.join(', ')}`,
     style: 'straight', isCircuit:false,
@@ -899,6 +932,35 @@ function generateMuscleWorkout(tt){
     slots: builtSlots
   };
   renderWorkout();
+}
+
+// NSCA sequencing principle: compound/multi-joint exercises before isolation/single-joint,
+// regardless of what order slots were generated/cycled in. Stable sort preserves relative
+// order within each group.
+function orderCompoundFirst(builtSlots){
+  return builtSlots
+    .map((s,i)=>({s,i}))
+    .sort((a,b)=> (roleWeight(a.s.role)-roleWeight(b.s.role)) || (a.i-b.i))
+    .map(x=>x.s);
+}
+function roleWeight(role){ return role==='compound' ? 0 : 1; }
+
+// Adds one cardio-finisher slot at the end for goal-appropriate training types (research-backed:
+// resistance work first, short cardio/metabolic finisher after — not interspersed, not for
+// strength/hypertrophy where it would compromise CNS freshness for the main lifts).
+function maybeAddCardioFinisher(tt, pickedMuscles, pickedIds){
+  if(!cardioFinisherOn) return null;
+  const slot = { role:null, movementPattern:'cardio' };
+  let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
+  if(candidates.length===0) candidates = hardFilter(slot);
+  if(candidates.length===0) return null;
+  const ranked = scoreCandidates(candidates, pickedMuscles);
+  if(ranked.length===0) return null;
+  return {
+    role:'finisher', ranked, rerollIndex:0,
+    chosen: ranked[0].ex, chosenReasons: [...ranked[0].reasons, 'cardio finisher'],
+    setsReps: {sets:1, reps:'60-90s'}, manualOverride:false, isFinisher:true
+  };
 }
 
 function generateStandardWorkout(tt){
@@ -922,7 +984,7 @@ function generateStandardWorkout(tt){
   const pickedIds = new Set();
   let estSeconds = 0;
   const WORK_SECONDS_PER_SET = 40; // rough time to actually perform a set
-  const builtSlots = slots.map(slot=>{
+  let builtSlots = slots.map(slot=>{
     let candidates = hardFilter(slot).filter(e=>!pickedIds.has(e.id));
     if(candidates.length===0) candidates = hardFilter(slot); // fallback: allow a repeat if truly nothing else fits
     const ranked = scoreCandidates(candidates, pickedMuscles);
@@ -937,6 +999,10 @@ function generateStandardWorkout(tt){
       setsReps, manualOverride:false
     };
   });
+
+  builtSlots = orderCompoundFirst(builtSlots);
+  const finisher = maybeAddCardioFinisher(tt, pickedMuscles, pickedIds);
+  if(finisher){ builtSlots.push(finisher); estSeconds += 90; }
 
   currentWorkout = { formatId: format.id, formatName: format.name, style: format.style, isCircuit:false,
     trainingTypeId: tt.id, restGuidance: tt.restGuidance, estMinutes: Math.round(estSeconds/60), slots: builtSlots };
