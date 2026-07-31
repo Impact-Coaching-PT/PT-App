@@ -108,6 +108,17 @@
     display:inline-block;font-size:10px;padding:3px 8px;border-radius:6px;
     background:var(--panel);border:1px solid var(--border);color:var(--sub);margin-left:4px;font-weight:600;
   }
+  .badge-edit{
+    display:inline-flex;align-items:center;gap:3px;font-size:11px;padding:2px 6px;border-radius:6px;
+    background:var(--panel);border:1px solid var(--border);color:var(--sub);margin-left:4px;
+  }
+  .badge-edit input{
+    background:transparent;border:none;color:var(--text);font-size:11px;font-weight:700;padding:1px 0;
+    text-align:center;outline:none;
+  }
+  .badge-edit input[type=number]{width:26px;}
+  .badge-edit input[type=text]{width:44px;}
+  .badge-edit span{color:var(--sub);}
   .modal-bg{display:none;position:fixed;inset:0;background:#000c;z-index:100;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px);}
   .modal-bg.open{display:flex;}
   .modal{
@@ -1285,9 +1296,14 @@ function saveGeneratedAsFormat(){
 
 function renderSlot(s, i){
   const isCircuit = currentWorkout && currentWorkout.isCircuit;
-  const badgeText = isCircuit
-    ? `${currentWorkout.protocol.workSeconds}s / ${currentWorkout.protocol.stationRestSeconds}s`
-    : `${s.setsReps.sets} x ${s.setsReps.reps}`;
+  const isFinisher = s.role==='finisher';
+  const badgeHtml = isCircuit
+    ? `<span class="badge">${currentWorkout.protocol.workSeconds}s / ${currentWorkout.protocol.stationRestSeconds}s</span>`
+    : `<span class="badge-edit">
+         <input type="number" min="1" value="${s.setsReps.sets}" onchange="updateSlotSets(${i}, this.value)">
+         <span>×</span>
+         <input type="text" value="${s.setsReps.reps}" onchange="updateSlotReps(${i}, this.value)">
+       </span>`;
   if(!s.chosen){
     return `<div class="slot slot-${s.role}">
       <span class="slot-role ${s.role}">${s.role}</span>
@@ -1299,10 +1315,15 @@ function renderSlot(s, i){
   const progressionHtml = suggested!==null
     ? `<div class="slot-explain" style="color:var(--accent2);">↑ Suggested weight: ${suggested}kg</div>`
     : (!isCircuit ? `<div class="slot-explain" style="color:var(--sub);">No prior weight — set the starting weight when logging</div>` : '');
+  const reorderHtml = (!isCircuit && !isFinisher) ? `
+    <div class="slot-actions" style="margin-top:6px;">
+      <button class="btn btn-sm btn-ghost" onclick="moveSlot(${i},-1)">↑ Move up</button>
+      <button class="btn btn-sm btn-ghost" onclick="moveSlot(${i},1)">↓ Move down</button>
+    </div>` : '';
   return `<div class="slot slot-${s.role}">
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
-      <span class="badge">${badgeText}</span>
+      ${badgeHtml}
     </div>
     <div class="slot-ex-name">${ex.name}</div>
     <div class="slot-meta">${ex.m.join(', ')} · ${ex.eq.replace('_',' ')}${s.manualOverride?' · manually picked':''}</div>
@@ -1312,7 +1333,24 @@ function renderSlot(s, i){
       <button class="btn btn-sm" onclick="reroll(${i})">↻ Re-roll (${s.rerollIndex+1}/${s.ranked.length||1})</button>
       <button class="btn btn-sm btn-ghost" onclick="openPicker('swap', ${i})">Manual swap</button>
     </div>
+    ${reorderHtml}
   </div>`;
+}
+
+function updateSlotSets(i, val){
+  const n = parseInt(val);
+  if(!isNaN(n) && n>0) currentWorkout.slots[i].setsReps.sets = n;
+}
+function updateSlotReps(i, val){
+  currentWorkout.slots[i].setsReps.reps = val;
+}
+function moveSlot(i, dir){
+  const slots = currentWorkout.slots;
+  const j = i + dir;
+  if(j<0 || j>=slots.length) return;
+  if(slots[i].role==='finisher' || slots[j].role==='finisher') return;
+  [slots[i], slots[j]] = [slots[j], slots[i]];
+  renderWorkout();
 }
 
 function reroll(i){
