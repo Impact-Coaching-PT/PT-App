@@ -2827,20 +2827,6 @@
   "highImpact": false
  },
  {
-  "id": "B30",
-  "name": "Plate Row (Single)",
-  "cat": "back",
-  "m": [
-   "Upper Back",
-   "Biceps"
-  ],
-  "eq": "machine_plate",
-  "compound": true,
-  "movementPattern": "pull",
-  "contraindications": [],
-  "highImpact": false
- },
- {
   "id": "B31",
   "name": "Cable Row (Single)",
   "cat": "back",
@@ -3577,19 +3563,6 @@
    "Biceps"
   ],
   "eq": "barbell",
-  "compound": false,
-  "movementPattern": "isolation",
-  "contraindications": [],
-  "highImpact": false
- },
- {
-  "id": "A32",
-  "name": "Preacher Curl (DB)",
-  "cat": "arms",
-  "m": [
-   "Biceps"
-  ],
-  "eq": "dumbbell",
   "compound": false,
   "movementPattern": "isolation",
   "contraindications": [],
@@ -6192,20 +6165,6 @@
   "highImpact": false
  },
  {
-  "id": "C53",
-  "name": "Smith Flat Bench Press",
-  "cat": "chest",
-  "m": [
-   "Chest",
-   "Triceps"
-  ],
-  "eq": "smith",
-  "compound": true,
-  "movementPattern": "push",
-  "contraindications": [],
-  "highImpact": false
- },
- {
   "id": "C54",
   "name": "Single Arm Landmine Press",
   "cat": "chest",
@@ -8156,21 +8115,6 @@
   "highImpact": false
  },
  {
-  "id": "CB109",
-  "name": "DB Bent Over Row + Reverse Fly Combo",
-  "cat": "combination",
-  "m": [
-   "Lats",
-   "Upper Back",
-   "Shoulders"
-  ],
-  "eq": "dumbbell",
-  "compound": true,
-  "movementPattern": "combo",
-  "contraindications": [],
-  "highImpact": false
- },
- {
   "id": "CB110",
   "name": "DB Curl + Shoulder Press",
   "cat": "combination",
@@ -8350,6 +8294,889 @@
   "eq": "cable",
   "compound": true,
   "movementPattern": "combo",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "L106",
+  "name": "Smith Sumo Squat",
+  "cat": "legs",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Quads"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L107",
+  "name": "Smith Reverse Lunge",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L108",
+  "name": "Smith Bulgarian Split Squat",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L109",
+  "name": "Smith Deadlift",
+  "cat": "legs",
+  "m": [
+   "Hamstrings",
+   "Glutes",
+   "Upper Back"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "hinge",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L110",
+  "name": "Smith Single Leg Calf Raise",
+  "cat": "legs",
+  "m": [
+   "Quads"
+  ],
+  "eq": "smith",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "L111",
+  "name": "Smith Hip Thrust",
+  "cat": "legs",
+  "m": [
+   "Glutes",
+   "Hamstrings"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "hinge",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "B67",
+  "name": "Smith Shrug",
+  "cat": "back",
+  "m": [
+   "Upper Back"
+  ],
+  "eq": "smith",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S46",
+  "name": "Smith Upright Row",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "smith",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S47",
+  "name": "Smith Push Press",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "A66",
+  "name": "Smith Close Grip Bench Press",
+  "cat": "arms",
+  "m": [
+   "Triceps",
+   "Chest"
+  ],
+  "eq": "smith",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B68",
+  "name": "DB Seal Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B69",
+  "name": "DB Yates Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats",
+   "Biceps"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B70",
+  "name": "DB Meadows Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B71",
+  "name": "DB Renegade Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats",
+   "Core"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B72",
+  "name": "DB Gorilla Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B73",
+  "name": "DB Incline Bench Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "L112",
+  "name": "DB Walking Lunge",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L113",
+  "name": "DB Reverse Lunge",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L114",
+  "name": "DB Step Up",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L115",
+  "name": "DB Romanian Deadlift",
+  "cat": "legs",
+  "m": [
+   "Hamstrings",
+   "Glutes"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "hinge",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L116",
+  "name": "DB Sumo Deadlift",
+  "cat": "legs",
+  "m": [
+   "Glutes",
+   "Adductors",
+   "Hamstrings"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "hinge",
+  "contraindications": [
+   "lower-back"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L117",
+  "name": "DB Curtsy Lunge",
+  "cat": "legs",
+  "m": [
+   "Glutes",
+   "Adductors"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L118",
+  "name": "DB Front Squat",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "dumbbell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "A67",
+  "name": "Bicep Curl (Pin)",
+  "cat": "arms",
+  "m": [
+   "Biceps"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A68",
+  "name": "Preacher Curl (Pin)",
+  "cat": "arms",
+  "m": [
+   "Biceps"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A69",
+  "name": "Reverse Curl (Pin)",
+  "cat": "arms",
+  "m": [
+   "Biceps",
+   "Forearms"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A70",
+  "name": "Tricep Extension (Pin) Overhead",
+  "cat": "arms",
+  "m": [
+   "Triceps"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S48",
+  "name": "Lateral Raise (Pin)",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S49",
+  "name": "Front Raise (Pin)",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "machine_pin",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B74",
+  "name": "T-Bar Row (Plate)",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "machine_plate",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B75",
+  "name": "Low Row (Plate)",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "machine_plate",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B76",
+  "name": "High Row (Plate)",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "machine_plate",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B77",
+  "name": "Pullover (Plate)",
+  "cat": "back",
+  "m": [
+   "Lats",
+   "Chest"
+  ],
+  "eq": "machine_plate",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S50",
+  "name": "Reverse Fly (Plate)",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Upper Back"
+  ],
+  "eq": "machine_plate",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S51",
+  "name": "Upright Row (Plate)",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "machine_plate",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L119",
+  "name": "KB Reverse Lunge",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L120",
+  "name": "KB Step Up",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L121",
+  "name": "KB Bulgarian Split Squat",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L122",
+  "name": "KB Front Squat",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "B78",
+  "name": "KB Renegade Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats",
+   "Core"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B79",
+  "name": "KB Single Arm Row",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Lats"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "B80",
+  "name": "KB High Pull",
+  "cat": "back",
+  "m": [
+   "Upper Back",
+   "Shoulders"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "pull",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "C55",
+  "name": "KB Alternating Floor Press",
+  "cat": "chest",
+  "m": [
+   "Chest",
+   "Triceps"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S52",
+  "name": "KB Halo",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Core"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S53",
+  "name": "KB Push Press",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S54",
+  "name": "KB Bottoms-Up Press",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "A71",
+  "name": "KB Hammer Curl",
+  "cat": "arms",
+  "m": [
+   "Biceps"
+  ],
+  "eq": "kettlebell",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A72",
+  "name": "KB Skull Crusher",
+  "cat": "arms",
+  "m": [
+   "Triceps"
+  ],
+  "eq": "kettlebell",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "O65",
+  "name": "KB Windmill",
+  "cat": "core",
+  "m": [
+   "Core",
+   "Shoulders"
+  ],
+  "eq": "kettlebell",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "L123",
+  "name": "Med Ball Squat Toss",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "bag_ball",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L124",
+  "name": "Med Ball Front Squat Hold",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "bag_ball",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "L125",
+  "name": "Med Ball Lunge Pass",
+  "cat": "legs",
+  "m": [
+   "Quads",
+   "Glutes"
+  ],
+  "eq": "bag_ball",
+  "compound": true,
+  "movementPattern": "squat",
+  "contraindications": [
+   "knee"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S55",
+  "name": "Banded Overhead Press",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Triceps"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [
+   "shoulder"
+  ],
+  "highImpact": false
+ },
+ {
+  "id": "S56",
+  "name": "Banded Y-Raise",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders",
+   "Upper Back"
+  ],
+  "eq": "other",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "S57",
+  "name": "Banded External Rotation",
+  "cat": "shoulders",
+  "m": [
+   "Shoulders"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A73",
+  "name": "Banded Curl",
+  "cat": "arms",
+  "m": [
+   "Biceps"
+  ],
+  "eq": "other",
+  "compound": false,
+  "movementPattern": "isolation",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A74",
+  "name": "Banded Tricep Pushdown",
+  "cat": "arms",
+  "m": [
+   "Triceps"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "A75",
+  "name": "TRX Skull Crusher",
+  "cat": "arms",
+  "m": [
+   "Triceps"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "C56",
+  "name": "Banded Push Up",
+  "cat": "chest",
+  "m": [
+   "Chest",
+   "Triceps"
+  ],
+  "eq": "other",
+  "compound": true,
+  "movementPattern": "push",
+  "contraindications": [],
+  "highImpact": false
+ },
+ {
+  "id": "C57",
+  "name": "TRX Chest Fly",
+  "cat": "chest",
+  "m": [
+   "Chest"
+  ],
+  "eq": "other",
+  "compound": false,
+  "movementPattern": "isolation",
   "contraindications": [],
   "highImpact": false
  }
