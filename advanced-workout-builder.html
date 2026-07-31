@@ -298,6 +298,17 @@
   </div>
 </div>
 
+<!-- SESSION RUNNER MODAL -->
+<div class="modal-bg" id="sessionRunnerModal">
+  <div class="modal">
+    <h3>Run Session<span class="close" onclick="closeModal('sessionRunnerModal')">&times;</span></h3>
+    <div class="muted" style="margin-bottom:12px;">Log actual weights and reps live. Swap exercises, add or remove sets — whatever actually happened.</div>
+    <div id="runnerRows"></div>
+    <div class="divider"></div>
+    <button class="btn btn-primary btn-full" onclick="finishSession()">✓ Finish &amp; Log Session</button>
+  </div>
+</div>
+
 <!-- DIFFICULTY RATING MODAL -->
 <div class="modal-bg" id="difficultyModal">
   <div class="modal">
@@ -997,6 +1008,16 @@ function lastWeightFor(exerciseId){
   return entries[0];
 }
 
+// Simple, defensible progressive-overload suggestion: last logged weight + a modest
+// role-based increment (typical smallest plate jump), rounded to the nearest 0.25kg.
+// Returns null when there's no prior weight to progress from — nothing to suggest yet.
+function suggestedWeight(exercise){
+  const last = lastWeightFor(exercise.id);
+  if(!last) return null;
+  const increment = exercise.compound ? 2.5 : 1.25;
+  return Math.round((last.weight + increment) * 4) / 4;
+}
+
 let CURRENT_TT = null;
 
 const MACHINE_EQ_TYPES = ['machine_pin','cable','machine_plate','smith','cardio_machine'];
@@ -1237,7 +1258,7 @@ function renderWorkout(){
       <h2>Generated: ${w.formatName}</h2>
       <div class="muted" style="margin-bottom:10px;">${TRAINING_TYPES.find(t=>t.id===w.trainingTypeId).name} · Rest: ${w.restGuidance} · <b style="color:var(--text);">Est. ~${w.estMinutes} min session</b></div>
       ${w.slots.map((s,i)=>renderSlot(s,i)).join('')}
-      <button class="btn btn-primary btn-full" style="margin-top:6px;" onclick="completeWorkout()">✓ Complete &amp; Log Workout</button>
+      <button class="btn btn-primary btn-full" style="margin-top:6px;" onclick="openSessionRunner()">✓ Complete &amp; Log Workout</button>
       ${saveFormatBtn}
     </div>
   `;
@@ -1274,8 +1295,10 @@ function renderSlot(s, i){
     </div>`;
   }
   const ex = s.chosen;
-  const lastW = !isCircuit ? lastWeightFor(ex.id) : null;
-  const progressionHtml = lastW ? `<div class="slot-explain" style="color:var(--accent2);">↑ Last logged: ${lastW.weight}kg (${lastW.date}) — consider a small increase</div>` : '';
+  const suggested = !isCircuit ? suggestedWeight(ex) : null;
+  const progressionHtml = suggested!==null
+    ? `<div class="slot-explain" style="color:var(--accent2);">↑ Suggested weight: ${suggested}kg</div>`
+    : (!isCircuit ? `<div class="slot-explain" style="color:var(--sub);">No prior weight — set the starting weight when logging</div>` : '');
   return `<div class="slot slot-${s.role}">
     <div class="slot-top">
       <span class="slot-role ${s.role}">${s.role}</span>
@@ -1306,6 +1329,7 @@ function openPicker(mode, slotIndex){
   pickerContext = { mode, slotIndex };
   document.getElementById('pickerTitle').textContent =
     mode==='swap' ? 'Manual swap — pick any exercise' :
+    mode==='runnerSwap' ? 'Swap exercise for this session' :
     mode==='dislike' ? 'Add a dislike' : 'Choose exercise';
   document.getElementById('pickerSearch').value='';
   renderPickerCatChips();
@@ -1365,6 +1389,9 @@ function pickExercise(id){
     s.ranked = scoreCandidates(candidates, pickedMuscles);
     s.rerollIndex = Math.max(0, s.ranked.findIndex(r=>r.ex.id===id));
     renderWorkout();
+  } else if(pickerContext.mode==='runnerSwap'){
+    runnerState[pickerContext.slotIndex].exercise = ex;
+    renderSessionRunner();
   } else if(pickerContext.mode==='dislike'){
     if(!CLIENT.dislikes.includes(id)) CLIENT.dislikes.push(id);
     saveClient(); renderClientLists();
@@ -1377,28 +1404,84 @@ function pickExercise(id){
   closeModal('pickerModal');
 }
 
-function completeWorkout(){
+let runnerState = [];
+
+function openSessionRunner(){
   if(!currentWorkout) return;
+  runnerState = currentWorkout.slots.filter(s=>s.chosen).map(s=>{
+    const suggested = suggestedWeight(s.chosen);
+    const setsCount = s.setsReps ? s.setsReps.sets : 3;
+    const repsLabel = s.setsReps ? String(s.setsReps.reps) : '10';
+    const defaultReps = repsLabel.split('-')[0];
+    return {
+      role: s.role,
+      exercise: s.chosen,
+      sets: Array.from({length:setsCount}, ()=>({ kg: suggested!==null ? String(suggested) : '', reps: defaultReps }))
+    };
+  });
+  renderSessionRunner();
+  document.getElementById('sessionRunnerModal').classList.add('open');
+}
+
+function renderSessionRunner(){
+  const el = document.getElementById('runnerRows');
+  el.innerHTML = runnerState.map((r,i)=>{
+    const suggested = suggestedWeight(r.exercise);
+    const hint = suggested!==null ? `Suggested: ${suggested}kg` : 'No prior weight logged';
+    const setsHtml = r.sets.map((set,si)=>`
+      <div class="row" style="align-items:center;margin-bottom:6px;gap:6px;">
+        <span class="muted" style="width:42px;flex:none;">Set ${si+1}</span>
+        <input type="text" value="${set.kg}" placeholder="kg" oninput="runnerUpdateSet(${i},${si},'kg',this.value)">
+        <input type="text" value="${set.reps}" placeholder="reps" oninput="runnerUpdateSet(${i},${si},'reps',this.value)">
+        <span class="x" onclick="runnerRemoveSet(${i},${si})">×</span>
+      </div>`).join('');
+    return `<div class="slot slot-${r.role}">
+      <div class="slot-top">
+        <span class="slot-role ${r.role}">${r.role}</span>
+        <button class="btn btn-sm btn-ghost" onclick="runnerSwap(${i})">Swap</button>
+      </div>
+      <div class="slot-ex-name">${r.exercise.name}</div>
+      <div class="slot-explain">${hint}</div>
+      <div style="margin-top:10px;">${setsHtml}</div>
+      <button class="btn btn-sm btn-full" style="margin-top:4px;" onclick="runnerAddSet(${i})">+ Add Set</button>
+    </div>`;
+  }).join('');
+}
+
+function runnerUpdateSet(i, si, field, value){
+  runnerState[i].sets[si][field] = value;
+}
+function runnerAddSet(i){
+  const sets = runnerState[i].sets;
+  const last = sets[sets.length-1] || {kg:'',reps:''};
+  sets.push({ kg:last.kg, reps:last.reps });
+  renderSessionRunner();
+}
+function runnerRemoveSet(i, si){
+  if(runnerState[i].sets.length<=1) return;
+  runnerState[i].sets.splice(si,1);
+  renderSessionRunner();
+}
+function runnerSwap(i){
+  openPicker('runnerSwap', i);
+}
+
+function finishSession(){
   const today = new Date().toISOString().slice(0,10);
   const liveRows = [];
-  currentWorkout.slots.forEach(s=>{
-    if(!s.chosen) return;
-    const w = prompt(`Weight used for ${s.chosen.name}? (leave blank to skip)`, '');
-    const entry = { date: today, exerciseId: s.chosen.id };
-    const weightNum = (w && !isNaN(parseFloat(w))) ? parseFloat(w) : null;
+  runnerState.forEach(r=>{
+    const lastSet = r.sets[r.sets.length-1];
+    const weightNum = (lastSet && lastSet.kg && !isNaN(parseFloat(lastSet.kg))) ? parseFloat(lastSet.kg) : null;
+    const entry = { date: today, exerciseId: r.exercise.id };
     if(weightNum!==null) entry.weight = weightNum;
     CLIENT.history.push(entry);
 
-    // build the row in the real PT-App's current session shape, for live sync
-    const sets = s.setsReps ? s.setsReps.sets : 1;
-    const repsLabel = s.setsReps ? s.setsReps.reps : '';
-    const kgVal = weightNum!==null ? String(weightNum) : '';
     liveRows.push({
-      exerciseName: s.chosen.name,
-      scheme: `${sets}×${repsLabel}`,
-      target: kgVal,
-      actual: kgVal,
-      sets: Array.from({length: sets}, ()=>({ kg: kgVal, reps: String(repsLabel).split('-')[0] || '' }))
+      exerciseName: r.exercise.name,
+      scheme: `${r.sets.length}×${r.sets[0] ? r.sets[0].reps : ''}`,
+      target: r.sets[0] ? r.sets[0].kg : '',
+      actual: weightNum!==null ? String(weightNum) : '',
+      sets: r.sets.map(s=>({ kg:s.kg, reps:s.reps }))
     });
   });
   saveClient();
@@ -1406,6 +1489,7 @@ function completeWorkout(){
   if(CLIENT.isLiveClient){
     pushSessionToLiveBackend(liveRows, currentWorkout.formatName);
   }
+  closeModal('sessionRunnerModal');
   pendingCompletion = { trainingTypeId: currentWorkout.trainingTypeId, formatId: currentWorkout.formatId };
   document.getElementById('difficultyModal').classList.add('open');
 }
